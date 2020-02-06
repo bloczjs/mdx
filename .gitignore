@@ -5,3 +5,4 @@ lib/
 .rts2_cache*/
 .cache/
 
+*.log
