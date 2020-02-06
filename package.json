@@ -1,16 +1,17 @@
 {
-  "name": "@blocz/mdx",
-  "workspaces": [
-    "packages/*"
-  ],
-  "version": "0.0.0",
-  "repository": "git@github.com:bloczjs/mdx.git",
-  "author": "Ayc0 <ayc0.benj@gmail.com>",
-  "license": "MIT",
-  "private": true,
-  "devDependencies": {
-    "@types/jest": "25.1.1",
-    "jest": "25.1.0",
-    "ts-jest": "25.2.0"
-  }
+    "name": "@blocz/mdx",
+    "workspaces": [
+        "packages/*"
+    ],
+    "version": "0.0.0",
+    "repository": "git@github.com:bloczjs/mdx.git",
+    "author": "Ayc0 <ayc0.benj@gmail.com>",
+    "license": "MIT",
+    "private": true,
+    "devDependencies": {
+        "@types/jest": "25.1.1",
+        "jest": "25.1.0",
+        "prettier": "1.19.1",
+        "ts-jest": "25.2.0"
+    }
 }
