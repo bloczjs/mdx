@@ -1,9 +1,9 @@
 import { detectImports } from "./detect-imports";
 
 describe("Detect imports in JSX", () => {
-  it("Should detect default imports", () => {
+  it("Should detect default imports", async () => {
     expect(
-      detectImports(`
+      await detectImports(`
                 import A from './a';
                 import B
                     from 'b'
@@ -29,9 +29,9 @@ describe("Detect imports in JSX", () => {
       }
     ]);
   });
-  it("Should detect named imports", () => {
+  it("Should detect named imports", async () => {
     expect(
-      detectImports(`
+      await detectImports(`
                 import { a, A as As } from './a';
                 import { B,
                     b } from 'b'
@@ -65,9 +65,9 @@ describe("Detect imports in JSX", () => {
       }
     ]);
   });
-  it("Should detect both default and named imports", () => {
+  it("Should detect both default and named imports", async () => {
     expect(
-      detectImports(`
+      await detectImports(`
                 import a, { A, As as AS } from './a';
                 import { B,
                     default as Bb,
@@ -110,11 +110,11 @@ describe("Detect imports in JSX", () => {
       }
     ]);
   });
-  it("Should fail", () => {
-    expect(() => {
+  it("Should fail", async () => {
+    expect(
       detectImports(`
                 import b, B from 'b'
-            `);
-    }).toThrowError();
+            `)
+    ).rejects.toThrowError();
   });
 });

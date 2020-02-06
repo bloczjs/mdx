@@ -1,7 +1,11 @@
 import jsx from "acorn-jsx";
-import { Parser } from "acorn";
+import { Parser, Node } from "acorn";
 
-export const fromJSXToAst = (code: string) =>
+interface GeneratedAST extends Node {
+  body: Node[];
+}
+
+export const fromJSXToAst = async (code: string) =>
   Parser.extend(jsx()).parse(code, {
     sourceType: "module"
-  }) as any;
+  }) as GeneratedAST;

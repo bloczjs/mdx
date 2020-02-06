@@ -14,8 +14,8 @@ export interface Declaration {
   imports: Import[];
 }
 
-export const detectImports = (code: string) => {
-  const ast = fromJSXToAst(code);
+export const detectImports = async (code: string) => {
+  const ast = await fromJSXToAst(code);
   const importDeclarations = ast.body.filter(
     (declaration: any) => declaration.type === ImportDeclaration
   );
