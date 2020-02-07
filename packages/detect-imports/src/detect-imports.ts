@@ -4,7 +4,7 @@ const ImportDeclaration = "ImportDeclaration";
 const ImportSpecifier = "ImportSpecifier";
 const ImportDefaultSpecifier = "ImportDefaultSpecifier";
 
-interface Import {
+export interface Import {
     imported: string;
     local: string;
 }
