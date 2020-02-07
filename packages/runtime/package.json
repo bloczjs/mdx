@@ -1,0 +1,27 @@
+{
+    "name": "@blocz/runtime",
+    "version": "0.0.0",
+    "source": "src/index.ts",
+    "main": "lib/index.js",
+    "repository": "git@github.com:bloczjs/mdx.git",
+    "author": "Ayc0 <ayc0.benj@gmail.com>",
+    "license": "MIT",
+    "scripts": {
+        "build": "rm -rf lib/ && microbundle --name $npm_package_name -o lib  && mv lib/runtime/src/* lib/ && rm -rf lib/runtime/",
+        "prepublishOnly": "&& yarn -s build"
+    },
+    "devDependencies": {
+        "@types/buble": "0.19.2",
+        "@types/react": "16.9.19",
+        "microbundle": "0.11.0"
+    },
+    "dependencies": {
+        "@blocz/detect-imports": "0.0.0",
+        "@mdx-js/mdx": "1.5.5",
+        "@mdx-js/react": "1.5.5",
+        "buble-jsx-only": "^0.19.8"
+    },
+    "peerDependencies": {
+        "react": ">=16.8.0"
+    }
+}
