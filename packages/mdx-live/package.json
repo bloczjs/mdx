@@ -11,7 +11,7 @@
     "license": "MIT",
     "scripts": {
         "build": "rm -rf lib/ && microbundle --name $npm_package_name -o lib  && mv lib/mdx-live/src/* lib/ && rm -rf lib/mdx-live/",
-        "prepublishOnly": "&& yarn -s build"
+        "prepublishOnly": "yarn -s build"
     },
     "devDependencies": {
         "@testing-library/react": "9.4.0",
