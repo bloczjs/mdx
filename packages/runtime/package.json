@@ -18,8 +18,8 @@
     "dependencies": {
         "@blocz/detect-imports": "0.0.0",
         "@mdx-js/mdx": "1.5.5",
-        "@mdx-js/react": "1.5.5",
-        "buble-jsx-only": "^0.19.8"
+        "@mdx-js/runtime": "1.5.5",
+        "buble-jsx-only": "0.19.8"
     },
     "peerDependencies": {
         "react": ">=16.8.0"

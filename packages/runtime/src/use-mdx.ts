@@ -1,8 +1,8 @@
 import React from "react";
 
-import { parseMDX } from "./parse-mdx";
 import { Import } from "@blocz/detect-imports";
 
+import { parseMDX } from "./parse-mdx";
 import { resolveConstants, Variables } from "./resolve-constants";
 
 interface Components {
@@ -15,14 +15,14 @@ interface State {
     filteredText: string;
 }
 
-interface UseMDXParams {
+export interface UseMDXParams {
     code: string;
     defaultScope: Components;
     resolveImport: (importStatement: Import) => Promise<any>;
 }
 interface UseMDXOut {
     scope: Variables;
-    components: Variables;
+    components: Components;
     text: string;
 }
 
