@@ -9,10 +9,9 @@ export const resolveConstants = (
     constants: Variables,
 ) => {
     const parsedConstants: Variables = {};
+    const fullScope = { ...variables };
 
     Object.keys(constants).forEach(constantName => {
-        const fullScope = { ...variables, ...parsedConstants };
-
         try {
             const fn = new Function(
                 "_fn",
@@ -22,11 +21,10 @@ export const resolveConstants = (
                 return ${constantName}`,
             );
 
-            parsedConstants[constantName] = fn(
-                {},
-                React,
-                ...Object.values(fullScope),
-            );
+            const value = fn({}, React, ...Object.values(fullScope));
+
+            parsedConstants[constantName] = value;
+            fullScope[constantName] = value;
         } catch (error) {
             console.error(error);
         }

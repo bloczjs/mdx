@@ -45,7 +45,7 @@ export const useMDX = ({
         parseMDX(code)
             .then(async ({ constants, importDeclarations, filteredText }) => {
                 for (const declaration of importDeclarations) {
-                    for (const importStatement of declaration.importDeclarations) {
+                    for (const importStatement of declaration.imports) {
                         if (isCancelled.current) {
                             throw customError;
                         }
@@ -87,6 +87,7 @@ export const useMDX = ({
         ...state.variables,
         ...resolveConstants(state.variables, state.constants),
     };
+
     const scope = { ...components };
     for (const key of Object.keys(scope)) {
         const regex = new RegExp(`<${key}[\\./>\\s]`);
