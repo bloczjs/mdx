@@ -1,7 +1,5 @@
 import React from "react";
 
-import { Import } from "@blocz/detect-imports";
-
 import { parseMDX } from "./parse-mdx";
 import { resolveConstants, Variables } from "./resolve-constants";
 
@@ -17,8 +15,8 @@ interface State {
 
 export interface UseMDXParams {
     code: string;
-    defaultScope: Components;
-    resolveImport: (importStatement: Import) => Promise<any>;
+    defaultScope?: Components;
+    resolveImport?: (path: string, variable: string) => Promise<any>;
 }
 interface UseMDXOut {
     scope: Variables;
@@ -30,8 +28,8 @@ const customError = new Error("fine");
 
 export const useMDX = ({
     code,
-    defaultScope,
-    resolveImport,
+    defaultScope = {},
+    resolveImport = async () => undefined,
 }: UseMDXParams): UseMDXOut => {
     const [state, setState] = React.useState<State>({
         variables: defaultScope,
@@ -49,7 +47,10 @@ export const useMDX = ({
                         if (isCancelled.current) {
                             throw customError;
                         }
-                        const value = await resolveImport(importStatement);
+                        const value = await resolveImport(
+                            declaration.module,
+                            importStatement.imported,
+                        );
                         if (value === undefined) {
                             console.warn(
                                 `Variable "${importStatement.imported}" was not found in module "${declaration.module}"`,

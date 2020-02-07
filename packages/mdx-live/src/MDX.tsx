@@ -1,9 +1,9 @@
 import React from "react";
-import MDX from "@mdx-js/runtime";
+import MDXRuntime from "@mdx-js/runtime";
 
 import { useMDX, UseMDXParams } from "./use-mdx";
 
-export const Runtime: React.FunctionComponent<UseMDXParams> = ({
+export const MDX: React.FunctionComponent<UseMDXParams> = ({
     code,
     defaultScope,
     resolveImport,
@@ -14,8 +14,8 @@ export const Runtime: React.FunctionComponent<UseMDXParams> = ({
         resolveImport,
     });
     return (
-        <MDX scope={scope} components={components}>
+        <MDXRuntime scope={scope} components={components}>
             {text}
-        </MDX>
+        </MDXRuntime>
     );
 };

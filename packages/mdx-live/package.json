@@ -14,6 +14,7 @@
         "prepublishOnly": "&& yarn -s build"
     },
     "devDependencies": {
+        "@testing-library/react": "9.4.0",
         "@types/buble": "0.19.2",
         "@types/react": "16.9.19",
         "microbundle": "0.11.0"

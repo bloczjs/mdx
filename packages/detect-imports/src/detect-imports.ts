@@ -9,7 +9,7 @@ export interface Import {
     local: string;
 }
 
-export interface Declaration {
+export interface ImportDeclaration {
     module: string;
     imports: Import[];
 }
@@ -38,5 +38,5 @@ export const detectImports = async (code: string) => {
                 return null;
             })
             .filter(Boolean),
-    })) as Declaration[];
+    })) as ImportDeclaration[];
 };

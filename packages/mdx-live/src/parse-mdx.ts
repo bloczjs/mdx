@@ -1,4 +1,4 @@
-import { detectImports, Declaration } from "@blocz/detect-imports";
+import { detectImports, ImportDeclaration } from "@blocz/detect-imports";
 
 import { transformMDXToAST } from "./mdx-to-ast";
 import { parseExportStatement } from "./parse-exports";
@@ -6,7 +6,7 @@ import { parseExportStatement } from "./parse-exports";
 type Parse = (
     text: string,
 ) => Promise<{
-    importDeclarations: Declaration[];
+    importDeclarations: ImportDeclaration[];
     constants: Constants;
     filteredText: string;
 }>;
@@ -22,7 +22,7 @@ export const parseMDX: Parse = async inputText => {
         .replace(/(\n|^)import /g, "\n\nimport ");
 
     const constants: Constants = {};
-    let importDeclarations: Declaration[] = [];
+    let importDeclarations: ImportDeclaration[] = [];
     let filteredText = "";
 
     const AST = await transformMDXToAST(text);
