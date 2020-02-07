@@ -1,1 +1,1 @@
-export { detectImports } from "./detect-imports";
+export { detectImports, Declaration } from "./detect-imports";
