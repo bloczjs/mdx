@@ -1,13 +1,16 @@
 {
-    "name": "@blocz/runtime",
+    "name": "@blocz/mdx-live",
     "version": "0.0.0",
     "source": "src/index.ts",
-    "main": "lib/index.js",
+    "main": "lib/mdx-live.js",
+    "umd:main": "lib/mdx-live.umd.js",
+    "module": "lib/mdx-live.es.js",
+    "types": "lib/index.d.ts",
     "repository": "git@github.com:bloczjs/mdx.git",
     "author": "Ayc0 <ayc0.benj@gmail.com>",
     "license": "MIT",
     "scripts": {
-        "build": "rm -rf lib/ && microbundle --name $npm_package_name -o lib  && mv lib/runtime/src/* lib/ && rm -rf lib/runtime/",
+        "build": "rm -rf lib/ && microbundle --name $npm_package_name -o lib  && mv lib/mdx-live/src/* lib/ && rm -rf lib/mdx-live/",
         "prepublishOnly": "&& yarn -s build"
     },
     "devDependencies": {
