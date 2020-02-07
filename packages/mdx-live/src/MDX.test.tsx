@@ -54,6 +54,16 @@ import { Button } from '@blocz/element';
 ${mdxWithoutImportStatement}
 `;
 
+const resolveImport = async (module: string, variable: string) => {
+    if (module !== "@blocz/element") {
+        return undefined;
+    }
+    if (variable !== "Button") {
+        return undefined;
+    }
+    return Button;
+};
+
 const wait = (ms: number) => new Promise(res => setTimeout(res, ms));
 
 describe("Render MDX", () => {
@@ -86,15 +96,7 @@ describe("Render MDX", () => {
             const { container } = await render(
                 <MDX
                     code={mdxWithImportStatement}
-                    resolveImport={async (module, variable) => {
-                        if (module !== "@blocz/element") {
-                            return undefined;
-                        }
-                        if (variable !== "Button") {
-                            return undefined;
-                        }
-                        return Button;
-                    }}
+                    resolveImport={resolveImport}
                 />,
             );
             await wait(10);
