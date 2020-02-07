@@ -1,16 +1,13 @@
 {
     "name": "@blocz/mdx-loader",
     "version": "0.0.0",
-    "source": "src/index.ts",
-    "main": "lib/index.js",
+    "main": "src/loader.js",
     "repository": "git@github.com:bloczjs/mdx.git",
     "author": "Ayc0 <ayc0.benj@gmail.com>",
     "license": "MIT",
-    "scripts": {
-        "build": "microbundle",
-        "prepublishOnly": "rm -rf lib/ && yarn -s build"
-    },
-    "devDependencies": {
-        "microbundle": "0.11.0"
+    "devDependencies": {},
+    "dependencies": {
+        "@mdx-js/mdx": "1.5.5",
+        "loader-utils": "1.2.3"
     }
 }
