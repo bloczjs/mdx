@@ -324,14 +324,6 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@blocz/detect-imports@0.0.0":
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/@blocz/detect-imports/-/detect-imports-0.0.0.tgz#753e4973a4de26be58d2a0ee97a4c2ec854c9620"
-  integrity sha512-VIBeeKADHC5S29RRwR7w6I8k4vax2IL+c00tzwVIr1NVAqJ7WSqd48xU4akqCbzWbRTMCIMLWk1T50FoxpFhqQ==
-  dependencies:
-    acorn "7.1.0"
-    acorn-jsx "5.1.0"
-
 "@cnakazawa/watch@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@cnakazawa/watch/-/watch-1.0.3.tgz#099139eaec7ebf07a27c1786a3ff64f39464d2ef"
