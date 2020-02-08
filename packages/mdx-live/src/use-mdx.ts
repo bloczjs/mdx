@@ -3,7 +3,7 @@ import React from "react";
 import { parseMDX } from "./parse-mdx";
 import { resolveConstants, Variables } from "./resolve-constants";
 
-interface Components {
+export interface Components {
     [key: string]: React.ComponentType<any>;
 }
 
@@ -18,7 +18,7 @@ export interface UseMDXParams {
     defaultScope?: Components;
     resolveImport?: (path: string, variable: string) => Promise<any>;
 }
-interface UseMDXOut {
+export interface UseMDXOut {
     scope: Variables;
     components: Components;
     text: string;
