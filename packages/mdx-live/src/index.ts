@@ -1,2 +1,2 @@
-export { MDX } from "./MDX";
+export { MDX, MDXContextType } from "./MDX";
 export { useMDX } from "./use-mdx";

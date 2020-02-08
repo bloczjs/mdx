@@ -3,13 +3,16 @@ import MDXRuntime from "@mdx-js/runtime";
 
 import { useMDX, UseMDXParams, UseMDXOut } from "./use-mdx";
 
+export type MDXContextType = UseMDXOut;
+
 // @ts-ignore
-const DefaultProvider: React.Provider<UseMDXOut> = ({ value, children }) => (
-    <>{children}</>
-);
+const DefaultProvider: React.Provider<MDXContextType> = ({
+    value,
+    children,
+}) => <>{children}</>;
 
 interface MDXProps extends UseMDXParams {
-    Provider?: React.Provider<UseMDXOut>;
+    Provider?: React.Provider<MDXContextType>;
 }
 
 export const MDX: React.FunctionComponent<MDXProps> = ({
