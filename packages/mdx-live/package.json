@@ -9,6 +9,10 @@
     "repository": "git@github.com:bloczjs/mdx.git",
     "author": "Ayc0 <ayc0.benj@gmail.com>",
     "license": "MIT",
+    "sideEffects": false,
+    "publishConfig": {
+        "access": "public"
+    },
     "scripts": {
         "build": "rm -rf lib/ && microbundle --name $npm_package_name -o lib  && mv lib/mdx-live/src/* lib/ && rm -rf lib/mdx-live/",
         "prepublishOnly": "yarn -s build"

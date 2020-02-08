@@ -6,6 +6,10 @@
     "repository": "git@github.com:bloczjs/mdx.git",
     "author": "Ayc0 <ayc0.benj@gmail.com>",
     "license": "MIT",
+    "sideEffects": false,
+    "publishConfig": {
+        "access": "public"
+    },
     "devDependencies": {},
     "dependencies": {
         "@blocz/detect-imports": "0.0.0",

@@ -1,6 +1,6 @@
 {
     "name": "@blocz/detect-imports",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "source": "src/index.ts",
     "main": "lib/detect-imports.js",
     "umd:main": "lib/detect-imports.umd.js",
@@ -9,6 +9,10 @@
     "repository": "git@github.com:bloczjs/mdx.git",
     "author": "Ayc0 <ayc0.benj@gmail.com>",
     "license": "MIT",
+    "sideEffects": false,
+    "publishConfig": {
+        "access": "public"
+    },
     "scripts": {
         "build": "rm -rf lib/ && microbundle --name $npm_package_name -o lib  && mv lib/detect-imports/src/* lib/ && rm -rf lib/detect-imports/",
         "prepublishOnly": "yarn -s build"
