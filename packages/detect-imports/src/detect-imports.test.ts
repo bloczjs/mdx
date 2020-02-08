@@ -35,6 +35,8 @@ describe("Detect imports in JSX", () => {
                 import { a, A as As } from './a';
                 import { B,
                     b } from 'b'
+
+                const nonImport = 'nonImport';
             `),
         ).toEqual([
             {
