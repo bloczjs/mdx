@@ -21,7 +21,7 @@
         "microbundle": "0.11.0"
     },
     "dependencies": {
-        "acorn": "7.1.0",
+        "acorn": "7.1.1",
         "acorn-jsx": "5.1.0"
     }
 }
