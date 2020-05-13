@@ -1,5 +1,5 @@
 import React from "react";
-import MDXRuntime from "@mdx-js/react";
+import MDXRuntime from "@mdx-js/runtime";
 
 import { useMDX, UseMDXParams, UseMDXOut } from "./use-mdx";
 

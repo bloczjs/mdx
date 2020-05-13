@@ -91,15 +91,9 @@ export const useMDX = ({
 
     const scope = { ...components };
     for (const key of Object.keys(scope)) {
-        const regex = new RegExp(`<${key}(\\.|\\/|>|\\s|$)`);
+        const regex = new RegExp(`<${key}[\\./>\\s]`);
         if (state.filteredText.match(regex)) {
             delete scope[key];
-        } else {
-            delete components[key];
-        }
-        if (key in defaultScope) {
-            delete scope[key];
-            delete components[key];
         }
     }
 
