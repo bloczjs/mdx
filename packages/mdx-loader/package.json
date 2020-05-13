@@ -1,6 +1,6 @@
 {
     "name": "@blocz/mdx-loader",
-    "version": "0.0.5",
+    "version": "0.0.6",
     "main": "src/loader.js",
     "types": "src/types.d.ts",
     "repository": "git@github.com:bloczjs/mdx.git",
@@ -11,7 +11,7 @@
         "access": "public"
     },
     "dependencies": {
-        "@blocz/detect-imports": "^0.0.5",
+        "@blocz/detect-imports": "^0.0.6",
         "@mdx-js/mdx": "1.1.0",
         "loader-utils": "1.2.3"
     }
