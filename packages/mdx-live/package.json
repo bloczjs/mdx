@@ -25,8 +25,8 @@
     },
     "dependencies": {
         "@blocz/detect-imports": "^0.0.5",
-        "@mdx-js/mdx": "1.6.1",
-        "@mdx-js/react": "1.6.1",
+        "@mdx-js/mdx": "1.1.0",
+        "@mdx-js/react": "1.0.27",
         "buble-jsx-only": "0.19.8"
     },
     "peerDependencies": {
