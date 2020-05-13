@@ -1,6 +1,6 @@
 {
     "name": "@blocz/mdx-live",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "source": "src/index.ts",
     "main": "lib/mdx-live.js",
     "umd:main": "lib/mdx-live.umd.js",
@@ -24,7 +24,7 @@
         "microbundle": "0.11.0"
     },
     "dependencies": {
-        "@blocz/detect-imports": "^0.0.4",
+        "@blocz/detect-imports": "^0.0.5",
         "@mdx-js/mdx": "1.6.1",
         "@mdx-js/react": "1.6.1",
         "buble-jsx-only": "0.19.8"
