@@ -14,14 +14,14 @@
         "access": "public"
     },
     "scripts": {
-        "build": "rm -rf lib/ && microbundle --name $npm_package_name -o lib  && mv lib/detect-imports/src/* lib/ && rm -rf lib/detect-imports/",
+        "build": "rm -rf lib/ && microbundle --name $npm_package_name -o lib && mv lib/detect-imports/src/* lib/ && rm -rf lib/detect-imports/",
         "prepublishOnly": "yarn -s build"
     },
     "devDependencies": {
         "microbundle": "0.11.0"
     },
     "dependencies": {
-        "acorn": "7.1.0",
-        "acorn-jsx": "5.1.0"
+        "acorn": "^6.1.1",
+        "acorn-jsx": "^5.0.1"
     }
 }

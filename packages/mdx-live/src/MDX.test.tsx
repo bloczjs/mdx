@@ -64,7 +64,7 @@ const resolveImport = async (module: string, variable: string) => {
     return Button;
 };
 
-const wait = (ms: number) => new Promise(res => setTimeout(res, ms));
+const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 describe("Render MDX", () => {
     it("render simple MD", async () => {

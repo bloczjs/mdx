@@ -7,7 +7,7 @@ import React from 'react'
 import { mdx } from '@mdx-js/react'
 `;
 
-const loader = async function(content) {
+const loader = async function (content) {
     const callback = this.async();
     const options = Object.assign({}, getOptions(this), {
         filepath: this.resourcePath,
@@ -29,12 +29,12 @@ ${result}
 export const importStatements = [
     ${(await detectImports(result))
         .map(
-            declaration => `{
+            (declaration) => `{
         module: "${declaration.module}",
         imports: [
             ${declaration.imports
                 .map(
-                    importStament => `{
+                    (importStament) => `{
                 imported: "${importStament.imported}",
                 local: "${importStament.local}",
                 value: ${importStament.local}

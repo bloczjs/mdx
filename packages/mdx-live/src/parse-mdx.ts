@@ -15,7 +15,7 @@ interface Constants {
     [name: string]: any;
 }
 
-export const parseMDX: Parse = async inputText => {
+export const parseMDX: Parse = async (inputText) => {
     const text = inputText
         // Add line breaks before each imports and exports to help the parsing
         .replace(/(\n|^)export /g, "\n\nexport ")

@@ -75,7 +75,7 @@ describe("MDX loader", () => {
     }
 ]`;
         const call = () =>
-            new Promise(res => {
+            new Promise((res) => {
                 const caller = {
                     async: () => (_, value) => res(value),
                 };

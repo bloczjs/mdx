@@ -11,7 +11,7 @@ export const resolveConstants = (
     const parsedConstants: Variables = {};
     const fullScope = { ...variables };
 
-    Object.keys(constants).forEach(constantName => {
+    Object.keys(constants).forEach((constantName) => {
         try {
             const fn = new Function(
                 "_fn",
