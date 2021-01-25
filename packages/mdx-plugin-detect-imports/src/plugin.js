@@ -1,11 +1,15 @@
 const { detectImports } = require("@blocz/detect-imports");
 const { selectAll } = require("unist-util-select");
 
-module.exports = () => async (tree, file) => {
+module.exports = ({ exportName = "importStatements" } = {}) => async (
+    tree,
+    file,
+) => {
     const imports = selectAll("import", tree);
     const importStatementString = imports.map((i) => i.value).join("\n");
 
     const importStatements = await detectImports(importStatementString);
+    // cannot use JSON.stringify because there are no quotes around `value: <importStatement.local>`
     const exportedArray = importStatements
         .map(
             (declaration) => `{
@@ -13,10 +17,10 @@ module.exports = () => async (tree, file) => {
     imports: [
         ${declaration.imports
             .map(
-                (importStament) => `{
-            imported: "${importStament.imported}",
-            local: "${importStament.local}",
-            value: ${importStament.local}
+                (importStatement) => `{
+            imported: "${importStatement.imported}",
+            local: "${importStatement.local}",
+            value: ${importStatement.local}
         }`,
             )
             .join(", ")}
@@ -26,7 +30,7 @@ module.exports = () => async (tree, file) => {
         .join(", ")
         .replace(/\s+/g, " ");
 
-    const exportTextWithImportStatements = `export const importStatements = [${exportedArray}];`;
+    const exportTextWithImportStatements = `export const ${exportName} = [${exportedArray}];`;
 
     const { line, position } = tree.position.end;
 

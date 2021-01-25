@@ -48,9 +48,7 @@ export const props = {
 </div> -->
 `;
 
-describe("MDX plugin detect imports", () => {
-    it("injects the right importStatements variable", async () => {
-        const importStatements = `
+const defaultImportStatements = `
 export const importStatements = [{
   module: "@blocz/lib",
   imports: [{
@@ -71,9 +69,20 @@ export const importStatements = [{
   }]
 }];
 `;
+
+describe("MDX plugin detect imports", () => {
+    it("injects the right importStatements variable", async () => {
         const jsx = await mdx(mdxText, {
             remarkPlugins: [plugin],
         });
-        expect(jsx).toContain(importStatements);
+        expect(jsx).toContain(defaultImportStatements);
+    });
+    it("allows for otherNames than 'importStatements'", async () => {
+        const jsx = await mdx(mdxText, {
+            remarkPlugins: [[plugin, { exportName: "otherName" }]],
+        });
+        expect(jsx).toContain(
+            defaultImportStatements.replace("importStatements", "otherName"),
+        );
     });
 });
