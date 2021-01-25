@@ -2,6 +2,7 @@
     "name": "@blocz/mdx-plugin-detect-imports",
     "version": "0.0.7",
     "main": "src/plugin.js",
+    "types": "src/types.d.ts",
     "repository": "git@github.com:bloczjs/mdx.git",
     "author": "Ayc0 <ayc0.benj@gmail.com>",
     "license": "MIT",
