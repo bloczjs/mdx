@@ -84,15 +84,16 @@ export const useMDX = ({
         };
     }, [code]);
 
-    const components = {
+    const scope = {
         ...state.variables,
         ...resolveConstants(state.variables, state.constants),
     };
 
-    const scope = { ...components };
+    const components: typeof scope = {};
     for (const key of Object.keys(scope)) {
         const regex = new RegExp(`<${key}[\\./>\\s]`);
         if (state.filteredText.match(regex)) {
+            components[key] = scope[key];
             delete scope[key];
         }
     }

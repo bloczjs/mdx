@@ -6,7 +6,7 @@ declare module "@mdx-js/runtime" {
         [key: string]: any;
     }
     interface Components {
-        [key: string]: React.ComponentType<any>;
+        [key: string]: ComponentType<any>;
     }
     const MDX: FunctionComponent<{
         scope?: Scope;
