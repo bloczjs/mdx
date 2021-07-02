@@ -7,5 +7,6 @@ interface GeneratedAST extends Node {
 
 export const fromJSXToAst = async (code: string) =>
     Parser.extend(jsx()).parse(code, {
+        ecmaVersion: "latest",
         sourceType: "module",
     }) as GeneratedAST;

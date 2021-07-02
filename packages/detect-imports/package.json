@@ -1,6 +1,6 @@
 {
     "name": "@blocz/detect-imports",
-    "version": "0.0.7",
+    "version": "0.0.9",
     "source": "src/index.ts",
     "main": "lib/detect-imports.js",
     "umd:main": "lib/detect-imports.umd.js",
@@ -21,7 +21,7 @@
         "microbundle": "0.11.0"
     },
     "dependencies": {
-        "acorn": "^6.1.1",
-        "acorn-jsx": "^5.0.1"
+        "acorn": "^8.0.0",
+        "acorn-jsx": "^5.3.1"
     }
 }

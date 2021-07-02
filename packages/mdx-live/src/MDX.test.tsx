@@ -3,13 +3,14 @@ import { act, render } from "@testing-library/react";
 import { MDX } from "./MDX";
 
 const Button: React.FunctionComponent<{
+    as?: string | React.ComponentType<any>;
     label: string;
     variant?: string;
     onClick?: React.MouseEventHandler;
-}> = ({ label, variant, onClick }) => (
-    <button data-variant={variant} onClick={onClick}>
+}> = ({ label, variant, onClick, as: As = "button" }) => (
+    <As data-variant={variant} onClick={onClick}>
         {label}
-    </button>
+    </As>
 );
 
 const markdown = `
@@ -40,9 +41,31 @@ export const props = {
     onClick: () => alert('Hello there!')
 }
 
+export const InlineElement = (props) => <div {...props} />
+export const AlternateButton = (props) => <div {...props} />;
+export const AlternateInlineButton = (props) => <div {...props} />;
+
+
 <Button
     // this is a comment
     variant="blue"
+    label={label}
+    {...props}
+/>
+
+<InlineElement>Hello</InlineElement>
+
+<Button
+    as={AlternateButton}
+    variant="red"
+    label={label}
+    {...props}
+/>
+
+<AlternateInlineButton>World</AlternateInlineButton>
+<Button
+    as={AlternateInlineButton}
+    variant="green"
     label={label}
     {...props}
 />
@@ -87,7 +110,7 @@ describe("Render MDX", () => {
             );
             await wait(10);
             expect(container.innerHTML).toBe(
-                '<button data-variant="blue">Click Me!</button>',
+                '<button data-variant="blue">Click Me!</button><div>Hello</div><div data-variant="red">Click Me!</div><div>World</div><div data-variant="green">Click Me!</div>',
             );
         });
     });
@@ -101,7 +124,7 @@ describe("Render MDX", () => {
             );
             await wait(10);
             expect(container.innerHTML).toBe(
-                '<button data-variant="blue">Click Me!</button>',
+                '<button data-variant="blue">Click Me!</button><div>Hello</div><div data-variant="red">Click Me!</div><div>World</div><div data-variant="green">Click Me!</div>',
             );
         });
     });
