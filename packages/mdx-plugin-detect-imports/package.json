@@ -11,7 +11,7 @@
         "access": "public"
     },
     "dependencies": {
-        "@blocz/detect-imports": "^0.0.9",
+        "@blocz/detect-imports": "workspace:^",
         "unist-util-select": "3.0.1"
     },
     "devDependencies": {
