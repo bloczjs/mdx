@@ -1,16 +1,2 @@
 declare module "@mdx-js/mdx";
 declare module "@mdx-js/react";
-declare module "@mdx-js/runtime" {
-    import { ComponentType, FunctionComponent } from "react";
-    interface Scope {
-        [key: string]: any;
-    }
-    interface Components {
-        [key: string]: ComponentType<any>;
-    }
-    const MDX: FunctionComponent<{
-        scope?: Scope;
-        components?: Components;
-    }>;
-    export default MDX;
-}

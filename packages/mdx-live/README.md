@@ -116,3 +116,7 @@ const App = () => {
     return <MDX code={importMDX} resolveImport={resolveImport} />;
 };
 ```
+
+### Plugins
+
+You can use the props `remarkPlugins` and `rehypePlugins` to pass [remark](https://github.com/remarkjs/remark/blob/main/doc/plugins.md#list-of-plugins) (plugins based on the markdown AST) and [rehype](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md#list-of-plugins) (plugins based on the html AST) plugins to the MDX compiler.
