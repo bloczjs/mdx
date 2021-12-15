@@ -22,16 +22,10 @@ jobs:
               run: |
                   yarn install
 
-            - name: Build @blocz/detect-imports
+            - name: Build packages
               run: |
                   yarn build
-              working-directory: ./packages/detect-imports
-
-            - name: Build @blocz/mdx-live
-              run: |
-                  yarn build
-              working-directory: ./packages/mdx-live
 
             - name: Run tests
               run: |
-                  yarn jest
+                  yarn test
