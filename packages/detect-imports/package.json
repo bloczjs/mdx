@@ -1,6 +1,6 @@
 {
     "name": "@blocz/detect-imports",
-    "version": "0.0.9",
+    "version": "0.1.0-beta.0",
     "source": "src/index.ts",
     "main": "lib/detect-imports.js",
     "umd:main": "lib/detect-imports.umd.js",
