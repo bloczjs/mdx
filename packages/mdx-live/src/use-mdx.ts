@@ -3,10 +3,6 @@ import React from "react";
 import { parseMDX } from "./parse-mdx";
 import { resolveConstants, Variables } from "./resolve-constants";
 
-export interface Components {
-    [key: string]: React.ComponentType<any>;
-}
-
 interface State {
     variables: Variables;
     constants: Variables;
@@ -15,12 +11,11 @@ interface State {
 
 export interface UseMDXParams {
     code: string;
-    defaultScope?: Components;
+    defaultScope?: Variables;
     resolveImport?: (path: string, variable: string) => Promise<any>;
 }
 export interface UseMDXOut {
     scope: Variables;
-    components: Components;
     text: string;
 }
 
@@ -84,18 +79,10 @@ export const useMDX = ({
         };
     }, [code]);
 
-    const components = {
+    const scope = {
         ...state.variables,
         ...resolveConstants(state.variables, state.constants),
     };
 
-    const scope = { ...components };
-    for (const key of Object.keys(scope)) {
-        const regex = new RegExp(`<${key}[\\./>\\s]`);
-        if (state.filteredText.match(regex)) {
-            delete scope[key];
-        }
-    }
-
-    return { scope, components, text: state.filteredText };
+    return { scope, text: state.filteredText };
 };
