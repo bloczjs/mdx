@@ -3,13 +3,15 @@
     "workspaces": [
         "packages/*"
     ],
-    "version": "0.0.0",
+    "version": "0.0.9",
     "repository": "git@github.com:bloczjs/mdx.git",
     "author": "Ayc0 <ayc0.benj@gmail.com>",
     "license": "MIT",
     "private": true,
     "scripts": {
-        "test": "jest"
+        "test": "jest",
+        "build": "./build.js",
+        "deploy": "yarn build && yarn test && ./deploy.js"
     },
     "devDependencies": {
         "@types/jest": "26.0.23",

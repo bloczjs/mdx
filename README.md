@@ -2,9 +2,11 @@
 
 ## Commands
 
--   `yarn lerna publish`
--   `yarn test`
--   `yarn lerna run build`
+-   `yarn build`: build all packages in the correct order
+-   `yarn test`: run all tests
+-   `yarn deploy`: deploy all packages
+    -   For `next` version, `yarn deploy -v 0.5.1-beta.3 --tag next`
+    -   For stable version: `yarn deploy -v 0.6.0`
 
 ## ToDo
 
