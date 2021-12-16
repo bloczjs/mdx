@@ -7,6 +7,8 @@
 -   `yarn deploy`: deploy all packages
     -   For `next` version, `yarn deploy -v 0.5.1-beta.3 --tag next`
     -   For stable version: `yarn deploy -v 0.6.0`
+-   `yarn format:check`: to check the format of the code
+-   `yarn format:fix`: to format the code
 
 ## ToDo
 

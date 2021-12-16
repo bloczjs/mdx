@@ -3,9 +3,7 @@ import { detectImports, ImportDeclaration } from "@blocz/detect-imports";
 import { transformMDXToAST } from "./mdx-to-ast";
 import { parseExportStatement } from "./parse-exports";
 
-type Parse = (
-    text: string,
-) => Promise<{
+type Parse = (text: string) => Promise<{
     importDeclarations: ImportDeclaration[];
     constants: Constants;
     filteredText: string;
