@@ -1,6 +1,6 @@
 {
     "name": "@blocz/mdx-plugin-detect-imports",
-    "version": "0.1.0-beta.2",
+    "version": "0.1.0-beta.3",
     "main": "src/plugin.js",
     "types": "src/types.d.ts",
     "repository": "git@github.com:bloczjs/mdx.git",
