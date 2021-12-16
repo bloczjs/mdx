@@ -12,8 +12,8 @@
         "test": "jest",
         "build": "./build.js",
         "deploy": "yarn build && yarn test && ./deploy.js",
-        "lint": "prettier --check .",
-        "lint:fix": "prettier --write ."
+        "format:check": "prettier --check .",
+        "format:fix": "prettier --write ."
     },
     "devDependencies": {
         "@types/jest": "26.0.23",
