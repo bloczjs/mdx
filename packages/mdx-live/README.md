@@ -1,10 +1,14 @@
 # `@blocz/mdx-live`
 
-`@blocz/mdx-live` is a package that allows you to render a MDX string.
+`@blocz/mdx-live` allows you to dynamically render a MDX string.
 
-The difference with `@mdx-js/runtime` is that `@blocz/mdx-live` allows you to resolve import and export statements.
+It understands the import statements, and you can provide how they will get resolved.
 
-## Examples
+Exports statements are also executed. **WARNING:** this allows XSS so be sure to be in a safe environment.
+
+You can also provide a scope for all the variables and components used in the MDX.
+
+## How to use
 
 ### Simple MDX
 
@@ -72,11 +76,7 @@ const Button = ({ label, variant, onClick }) => (
 const exportMDX = `
 export const label = "Click Me!";
 
-<Button
-    variant="blue"
-    label={label}
-    onClick={() => alert('Hello there!')}
-/>
+<Button variant="blue" label={label} />
 `;
 
 const App = () => {
@@ -98,11 +98,7 @@ const Button = ({ label, variant, onClick }) => (
 const importMDX = `
 import { Button } from 'example';
 
-<Button
-    variant="blue"
-    label="Click Me!"
-    onClick={() => alert('Hello there!')}
-/>
+<Button variant="blue" label="Click Me!" />
 `;
 
 const resolveImport = async (module, variable) => {
