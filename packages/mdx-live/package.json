@@ -3,8 +3,7 @@
     "version": "0.1.0-beta.0",
     "source": "src/index.ts",
     "main": "lib/mdx-live.js",
-    "umd:main": "lib/mdx-live.umd.js",
-    "module": "lib/mdx-live.es.js",
+    "module": "lib/mdx-live.module.js",
     "types": "lib/index.d.ts",
     "repository": "git@github.com:bloczjs/mdx.git",
     "author": "Ayc0 <ayc0.benj@gmail.com>",
@@ -14,14 +13,13 @@
         "access": "public"
     },
     "scripts": {
-        "build": "rm -rf lib/ && microbundle --name $npm_package_name -o lib && mv lib/mdx-live/src/* lib/ && rm -rf lib/mdx-live/",
-        "prepublishOnly": "yarn -s build"
+        "build": "rm -rf lib/ && microbundle -f esm,cjs"
     },
     "devDependencies": {
         "@testing-library/react": "12.0.0",
         "@types/buble": "0.20.0",
         "@types/react": "17.0.11",
-        "microbundle": "0.11.0",
+        "microbundle": "^0.14.2",
         "react-dom": "^17.0.2"
     },
     "dependencies": {

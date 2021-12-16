@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 import { parseMDX } from "./parse-mdx";
 import { resolveConstants, Variables } from "./resolve-constants";

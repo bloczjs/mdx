@@ -2,8 +2,11 @@
     "compilerOptions": {
         "module": "esnext",
         "target": "esnext",
-        "lib": ["es2017", "es7", "dom", "esnext.array"],
         "allowJs": false,
+        "declaration": true,
+        "jsx": "react",
+        "jsxFactory": "React.createElement",
+        "jsxFragmentFactory": "React.Fragment",
         "strict": true,
         "noImplicitAny": true,
         "strictNullChecks": true,
@@ -14,10 +17,7 @@
         "noUnusedParameters": true,
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
-        "noEmit": true,
-        "moduleResolution": "node",
-        "esModuleInterop": true,
-        "resolveJsonModule": true,
-        "jsx": "react"
-    }
+        "moduleResolution": "node"
+    },
+    "include": ["src/*"]
 }

@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import * as mdxReact from "@mdx-js/react";
 
 import { useMDX, UseMDXParams, UseMDXOut } from "./use-mdx";
