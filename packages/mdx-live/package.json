@@ -4,7 +4,14 @@
     "source": "src/index.ts",
     "main": "lib/mdx-live.js",
     "module": "lib/mdx-live.module.js",
-    "exports": "./lib/mdx-live.modern.js",
+    "exports": {
+        ".": {
+            "require": "./lib/mdx-live.js",
+            "import": "./lib/mdx-live.modern.js",
+            "browser": "./lib/mdx-live.modern.js"
+        },
+        "./package.json": "./package.json"
+    },
     "types": "lib/index.d.ts",
     "repository": "git@github.com:bloczjs/mdx.git",
     "author": "Ayc0 <ayc0.benj@gmail.com>",

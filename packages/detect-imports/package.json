@@ -4,7 +4,14 @@
     "source": "src/index.ts",
     "main": "lib/detect-imports.js",
     "module": "lib/detect-imports.module.js",
-    "exports": "./lib/detect-imports.modern.js",
+    "exports": {
+        ".": {
+            "require": "./lib/detect-imports.js",
+            "import": "./lib/detect-imports.modern.js",
+            "browser": "./lib/detect-imports.modern.js"
+        },
+        "./package.json": "./package.json"
+    },
     "types": "lib/index.d.ts",
     "repository": "git@github.com:bloczjs/mdx.git",
     "author": "Ayc0 <ayc0.benj@gmail.com>",
