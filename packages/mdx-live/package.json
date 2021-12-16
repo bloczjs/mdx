@@ -13,7 +13,7 @@
         "access": "public"
     },
     "scripts": {
-        "build": "rm -rf lib/ && microbundle -f module,cjs"
+        "build": "rm -rf lib/ && microbundle -f esm,cjs"
     },
     "devDependencies": {
         "@testing-library/react": "12.0.0",
