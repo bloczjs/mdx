@@ -1,0 +1,11 @@
+.DS_Store
+
+node_modules/
+lib/
+.rts2_cache*/
+.cache/
+
+*.log
+
+.pnp.*
+.yarn/
