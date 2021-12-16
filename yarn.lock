@@ -1711,7 +1711,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@blocz/detect-imports@workspace:^, @blocz/detect-imports@workspace:packages/detect-imports":
+"@blocz/detect-imports@workspace:*, @blocz/detect-imports@workspace:packages/detect-imports":
   version: 0.0.0-use.local
   resolution: "@blocz/detect-imports@workspace:packages/detect-imports"
   dependencies:
@@ -1725,7 +1725,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@blocz/mdx-live@workspace:packages/mdx-live"
   dependencies:
-    "@blocz/detect-imports": "workspace:^"
+    "@blocz/detect-imports": "workspace:*"
     "@mdx-js/mdx": 1.6.22
     "@mdx-js/react": 1.6.22
     "@testing-library/react": 12.0.0
@@ -1743,7 +1743,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@blocz/mdx-plugin-detect-imports@workspace:packages/mdx-plugin-detect-imports"
   dependencies:
-    "@blocz/detect-imports": "workspace:^"
+    "@blocz/detect-imports": "workspace:*"
     "@mdx-js/mdx": ^1.6.22
     unist-util-select: 3.0.1
   languageName: unknown
