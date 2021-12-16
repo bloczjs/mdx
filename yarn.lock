@@ -574,7 +574,7 @@ __metadata:
     "@testing-library/react": 12.0.0
     "@types/buble": 0.20.0
     "@types/react": 17.0.11
-    buble-jsx-only: ^0.21.0
+    buble-jsx-only: 0.19.8
     microbundle: 0.11.0
     react-dom: ^17.0.2
   peerDependencies:
@@ -1256,7 +1256,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.2.4, acorn@npm:^8.4.1, acorn@npm:^8.6.0":
+"acorn@npm:^8.2.4, acorn@npm:^8.6.0":
   version: 8.6.0
   resolution: "acorn@npm:8.6.0"
   bin:
@@ -1747,18 +1747,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"buble-jsx-only@npm:^0.21.0":
-  version: 0.21.0
-  resolution: "buble-jsx-only@npm:0.21.0"
+"buble-jsx-only@npm:0.19.8":
+  version: 0.19.8
+  resolution: "buble-jsx-only@npm:0.19.8"
   dependencies:
-    acorn: ^8.4.1
-    acorn-jsx: ^5.3.2
-    chalk: ^4.1.1
-    magic-string: ^0.25.7
-    minimist: ^1.2.5
+    acorn: ^6.1.1
+    acorn-dynamic-import: ^4.0.0
+    acorn-jsx: ^5.0.1
+    chalk: ^2.4.2
+    magic-string: ^0.25.3
+    minimist: ^1.2.0
+    regexpu-core: ^4.5.4
   bin:
-    buble: bin/buble
-  checksum: 1eea53701bfa1c68caca8552ee122acadaa90a41f709ec66127349df735f378f11dc2c6127cf770d3255453e4267d516e97b3a037225ce3a959991fccf599e35
+    buble: ./bin/buble
+  checksum: 27f8b666065ec97f17cbbe5a599931154d99c4ad9bd6be59552ff83432f3f2649da90fa14cb7b690705c86fa38fca102c9031cc14b8c2bc968ac23785c8b8ed3
   languageName: node
   linkType: hard
 
@@ -1962,7 +1964,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chalk@npm:^4.0.0, chalk@npm:^4.1.0, chalk@npm:^4.1.1":
+"chalk@npm:^4.0.0, chalk@npm:^4.1.0":
   version: 4.1.2
   resolution: "chalk@npm:4.1.2"
   dependencies:
@@ -5096,7 +5098,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^0.25.0, magic-string@npm:^0.25.2, magic-string@npm:^0.25.3, magic-string@npm:^0.25.7":
+"magic-string@npm:^0.25.0, magic-string@npm:^0.25.2, magic-string@npm:^0.25.3":
   version: 0.25.7
   resolution: "magic-string@npm:0.25.7"
   dependencies:
