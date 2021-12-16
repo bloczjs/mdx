@@ -4,6 +4,7 @@
     "source": "src/index.ts",
     "main": "lib/detect-imports.js",
     "module": "lib/detect-imports.module.js",
+    "exports": "./lib/detect-imports.modern.js",
     "types": "lib/index.d.ts",
     "repository": "git@github.com:bloczjs/mdx.git",
     "author": "Ayc0 <ayc0.benj@gmail.com>",
@@ -13,7 +14,7 @@
         "access": "public"
     },
     "scripts": {
-        "build": "rm -rf lib/ && microbundle -f esm,cjs"
+        "build": "rm -rf lib/ && microbundle -f modern,esm,cjs"
     },
     "devDependencies": {
         "microbundle": "^0.14.2"

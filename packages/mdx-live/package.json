@@ -4,6 +4,7 @@
     "source": "src/index.ts",
     "main": "lib/mdx-live.js",
     "module": "lib/mdx-live.module.js",
+    "exports": "./lib/mdx-live.modern.js",
     "types": "lib/index.d.ts",
     "repository": "git@github.com:bloczjs/mdx.git",
     "author": "Ayc0 <ayc0.benj@gmail.com>",
@@ -13,7 +14,7 @@
         "access": "public"
     },
     "scripts": {
-        "build": "rm -rf lib/ && microbundle -f esm,cjs"
+        "build": "rm -rf lib/ && microbundle -f modern,esm,cjs"
     },
     "devDependencies": {
         "@testing-library/react": "12.0.0",
