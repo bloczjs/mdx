@@ -40,11 +40,13 @@ export const importStatements = [
         module: "@blocz/elements",
         imports: [
             {
+                kind: "named",
                 imported: "Button",
                 local: "Button",
                 value: this_is_the_value_of_the_variable_Button
             },
             {
+                kind: "named",
                 imported: "Tabs",
                 local: "Tabulations",
                 value: this_is_the_value_of_the_variable_Tabs
@@ -62,7 +64,7 @@ export const importStatements = [
 ### Webpack
 
 ```js
-const detectImportsPlugin = require("@blocz/mdx-plugin-detect-imports");
+import detectImportsPlugin from "@blocz/mdx-plugin-detect-imports";
 
 module.exports = {
     // ...
@@ -93,16 +95,16 @@ And finally:
 ### With MDX
 
 ```js
-const mdx = require("@mdx-js/mdx");
-const detectImportsPlugin = require("@blocz/mdx-plugin-detect-imports");
+import compile from "@mdx-js/mdx";
+import detectImportsPlugin from "@blocz/mdx-plugin-detect-imports";
 
-const jsx = await mdx(mdxText, {
+const vfile = await compile(mdxText, {
     remarkPlugins: [detectImportsPlugin],
 });
 
 // Or if you want to specify a custom name for the exported variable:
 
-const jsx = await mdx(mdxText, {
+const vfile = await compile(mdxText, {
     remarkPlugins: [[detectImportsPlugin, { exportName: "otherName" }]],
 });
 ```
@@ -114,11 +116,19 @@ If you need typings, we provide the following type:
 ```typescript
 interface ImportStatement {
     module: string;
-    imports: Array<{
-        imported: string;
-        local: string;
-        value: any;
-    }>;
+    imports: Array<
+        | {
+              kind: "named";
+              imported: string;
+              local: string;
+              value: any;
+          }
+        | {
+              kind: "namespace" | "default";
+              local: string;
+              value: any;
+          }
+    >;
 }
 ```
 
@@ -133,3 +143,9 @@ declare module "*.mdx" {
     export default MDXComponent;
 }
 ```
+
+## ESM
+
+⚠️ This package is only published as an ESM package, it doesn't provide any CJS exports.
+The reason behind this is because MDX switch to ESM only in their v2 too (see https://mdxjs.com/migrating/v2/#esm).\
+And as you'll also need regular MDX packages to make this one work, we also switched to ESM.
