@@ -1,9 +1,11 @@
-const mdx = require("@mdx-js/mdx");
-const plugin = require("@blocz/mdx-plugin-detect-imports");
+import { compileSync } from "@mdx-js/mdx";
+import plugin from "@blocz/mdx-plugin-detect-imports";
+import test from "ava";
 
 const mdxText = `
-import { useFunction } from '@blocz/lib';
+import hello, { useFunction } from '@blocz/lib';
 import { Tabs, Button } from '@blocz/elements';
+import * as foo from '@blocz/foo';
 
 ### How it works
 
@@ -31,7 +33,6 @@ export const props = {
 }
 
 <Button
-    // this is a comment
     variant="blue"
     label={label}
     {...props}
@@ -42,47 +43,25 @@ export const props = {
         {...props}
     />
 
-
-<!-- <div>
-    I’m a div that’s not rendered
-</div> -->
 `;
 
 const defaultImportStatements = `
-export const importStatements = [{
-  module: "@blocz/lib",
-  imports: [{
-    imported: "useFunction",
-    local: "useFunction",
-    value: useFunction
-  }]
-}, {
-  module: "@blocz/elements",
-  imports: [{
-    imported: "Tabs",
-    local: "Tabs",
-    value: Tabs
-  }, {
-    imported: "Button",
-    local: "Button",
-    value: Button
-  }]
-}];
+export const importStatements = [{ module: "@blocz/lib", imports: [{ kind: "default", local: "hello", value: hello }, { kind: "named", local: "useFunction", value: useFunction }] }, { module: "@blocz/elements", imports: [{ kind: "named", local: "Tabs", value: Tabs }, { kind: "named", local: "Button", value: Button }] }, { module: "@blocz/foo", imports: [{ kind: "namespace", local: "foo", value: foo }] }];
 `;
 
-describe("MDX plugin detect imports", () => {
-    it("injects the right importStatements variable", async () => {
-        const jsx = await mdx(mdxText, {
-            remarkPlugins: [plugin],
-        });
-        expect(jsx).toContain(defaultImportStatements);
-    });
-    it("allows for otherNames than 'importStatements'", async () => {
-        const jsx = await mdx(mdxText, {
-            remarkPlugins: [[plugin, { exportName: "otherName" }]],
-        });
-        expect(jsx).toContain(
+test("injects the right importStatements variable", (t) => {
+    const jsx = compileSync(mdxText, {
+        remarkPlugins: [plugin],
+    }).toString();
+    t.truthy(jsx.includes(defaultImportStatements));
+});
+test("allows for otherNames than 'importStatements'", (t) => {
+    const jsx = compileSync(mdxText, {
+        remarkPlugins: [[plugin, { exportName: "otherName" }]],
+    }).toString();
+    t.truthy(
+        jsx.includes(
             defaultImportStatements.replace("importStatements", "otherName"),
-        );
-    });
+        ),
+    );
 });

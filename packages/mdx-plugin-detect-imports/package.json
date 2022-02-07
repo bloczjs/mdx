@@ -7,14 +7,15 @@
     "author": "Ayc0 <ayc0.benj@gmail.com>",
     "license": "MIT",
     "sideEffects": false,
+    "type": "module",
     "publishConfig": {
         "access": "public"
     },
     "dependencies": {
-        "@blocz/detect-imports": "workspace:*",
-        "unist-util-select": "3.0.1"
+        "unist-util-select": "^4.0.1"
     },
     "devDependencies": {
-        "@mdx-js/mdx": "^1.6.22"
+        "@mdx-js/mdx": "^2.0.0",
+        "ava": "^4.0.1"
     }
 }
