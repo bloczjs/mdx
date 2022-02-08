@@ -4,6 +4,7 @@
     "source": "src/index.ts",
     "main": "lib/mdx-live.js",
     "module": "lib/mdx-live.module.js",
+    "type": "module",
     "exports": {
         ".": {
             "require": "./lib/mdx-live.js",
@@ -24,17 +25,29 @@
         "build": "rm -rf lib/ && microbundle -f modern,esm,cjs"
     },
     "devDependencies": {
-        "@testing-library/react": "12.0.0",
-        "@types/buble": "0.20.0",
+        "@happy-dom/global-registrator": "^2.31.1",
+        "@testing-library/react-hooks": "^7.0.2",
         "@types/react": "17.0.11",
+        "ava": "^4.0.1",
         "microbundle": "^0.14.2",
-        "react-dom": "^17.0.2"
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
+        "ts-node": "^10.5.0"
     },
     "dependencies": {
-        "@blocz/detect-imports": "workspace:*",
-        "@mdx-js/mdx": "1.6.22",
-        "@mdx-js/react": "1.6.22",
-        "buble-jsx-only": "0.19.8"
+        "@mdx-js/mdx": "^2.0.0",
+        "@mdx-js/react": "^2.0.0",
+        "@types/estree": "^0.0.51",
+        "unist-util-select": "^4.0.1",
+        "vfile": "^5.3.0"
+    },
+    "ava": {
+        "extensions": {
+            "ts": "module"
+        },
+        "nodeArguments": [
+            "--loader=ts-node/esm/transpile-only"
+        ]
     },
     "peerDependencies": {
         "react": ">=16.8.0"
