@@ -8,6 +8,14 @@ import { renderHook } from "@testing-library/react-hooks";
 import { useMDX } from "./use-mdx.js";
 
 test("it properly detects imports", async (t) => {
+    const resolveImport: Parameters<typeof useMDX>[0]["resolveImport"] = async (
+        option,
+    ) => {
+        if (option.kind === "named") {
+            return `named-${option.variable}`;
+        }
+        return option.kind;
+    };
     const { result, waitFor } = renderHook(() => {
         return useMDX({
             code: `
@@ -18,12 +26,7 @@ import G from 'g';
 export const h = 1;
 
 `,
-            resolveImport: async (option) => {
-                if (option.kind === "named") {
-                    return `named-${option.variable}`;
-                }
-                return option.kind;
-            },
+            resolveImport,
         });
     });
 
@@ -43,6 +46,8 @@ export const h = 1;
 
     t.snapshot(result.current.text, "Text result");
     t.true(result.current.text.includes("\nconst h = 1;\n"));
+
+    t.is(3, result.all.length); // 3 because: initial, compilation of the file, resolving of imports
 });
 
 test("it merges defaultScope and detected scope", async (t) => {
@@ -67,15 +72,16 @@ import A from 'a';
 });
 
 test("it keeps detected scope instead of defaultScope during conflicts", async (t) => {
+    const resolveImport = async () => {
+        return "detected";
+    };
     const { result, waitFor } = renderHook(() =>
         useMDX({
             code: `
 import A from 'a';
 `,
             defaultScope: { A: "default-scope" },
-            resolveImport: async () => {
-                return "detected";
-            },
+            resolveImport,
         }),
     );
 
@@ -87,4 +93,42 @@ import A from 'a';
         } as Record<string, any>,
         result.current.scope,
     );
+});
+
+test("it uses the most up-to-date resolveImport", async (t) => {
+    let resolveImport = async () => {
+        return "initial";
+    };
+    const { result, waitFor, rerender, waitForValueToChange } = renderHook(() =>
+        useMDX({
+            code: `
+import A from 'a';
+`,
+            resolveImport,
+        }),
+    );
+
+    await waitFor(() => result.current.text !== "");
+
+    t.deepEqual(
+        {
+            A: "initial",
+        } as Record<string, any>,
+        result.current.scope,
+    );
+
+    resolveImport = async () => {
+        return "updated";
+    };
+    rerender();
+    t.is(4, result.all.length);
+    await waitForValueToChange(() => result.current.scope);
+
+    t.deepEqual(
+        {
+            A: "updated",
+        } as Record<string, any>,
+        result.current.scope,
+    );
+    t.is(5, result.all.length); // switches from 4 to 5 so no useless re-renders
 });

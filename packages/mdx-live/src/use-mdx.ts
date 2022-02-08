@@ -11,18 +11,21 @@ export interface Variables {
     [key: string]: any;
 }
 
-export interface UseMDXParams
-    extends Pick<
-        CompileOptions,
-        "recmaPlugins" | "rehypePlugins" | "remarkPlugins"
-    > {
+export interface UseMDXParams {
     code: string;
     defaultScope?: Variables;
+    /** **Needs to be memoized** */
     resolveImport?: (
         option:
             | { kind: "named"; path: string; variable: string }
             | { kind: "namespace" | "default"; path: string },
     ) => Promise<any>;
+    /** **Needs to be memoized** */
+    recmaPlugins?: CompileOptions["recmaPlugins"];
+    /** **Needs to be memoized** */
+    rehypePlugins?: CompileOptions["rehypePlugins"];
+    /** **Needs to be memoized** */
+    remarkPlugins?: CompileOptions["remarkPlugins"];
 }
 export interface UseMDXOut {
     scope: Variables;
@@ -41,9 +44,9 @@ export const useMDX = ({
     rehypePlugins,
     remarkPlugins,
 }: UseMDXParams): UseMDXOut => {
-    const [scope, setScope] = React.useState<Variables>({});
-
-    const [vfile, setVFile] = React.useState<VFile | undefined>(undefined);
+    const [parsedFile, setParsedFile] = React.useState<
+        readonly [VFile, ImportDeclaration[]] | undefined
+    >(undefined);
     const computingQueueRef = React.useRef<
         Parameters<typeof compileCode>[0] | null
     >(null);
@@ -55,52 +58,21 @@ export const useMDX = ({
         };
     }, []);
 
-    const resolveImportRef = React.useRef(resolveImport);
-    resolveImportRef.current = resolveImport;
-
     const callCompileCode = React.useCallback(() => {
         if (!computingQueueRef.current) {
             return;
         }
+
         const computingParams = computingQueueRef.current;
         computingQueueRef.current = null;
-        const newScope: Variables = {};
-        compileCode(computingParams, async (node) => {
-            thisSpecifierMark: for (const specifier of node.specifiers) {
-                let value;
-                switch (specifier.type) {
-                    case "ImportNamespaceSpecifier":
-                        value = await resolveImportRef.current({
-                            kind: "namespace",
-                            path: node.source.value as string,
-                        });
-                        break;
-                    case "ImportDefaultSpecifier":
-                        value = await resolveImportRef.current({
-                            kind: "default",
-                            path: node.source.value as string,
-                        });
-                        break;
-                    case "ImportSpecifier":
-                        value = await resolveImportRef.current({
-                            kind: "named",
-                            path: node.source.value as string,
-                            variable: specifier.imported.name,
-                        });
-                        break;
-                    default:
-                        continue thisSpecifierMark;
-                }
-                newScope[specifier.local.name] = value;
-            }
-        })
+
+        compileCode(computingParams)
             .then((value) => {
                 if (isUnmountedRef.current) {
                     // Avoid calling `setVFile` when unmounted
                     return;
                 }
-                setScope(newScope);
-                setVFile(value);
+                setParsedFile(value);
             })
             .catch(() => {}) // TODO: handle error
             .then(() => {
@@ -129,25 +101,78 @@ export const useMDX = ({
         }
     }, [code, recmaPlugins, rehypePlugins, remarkPlugins]);
 
-    if (!vfile) {
+    const [scope, setScope] = React.useState<Variables>({});
+    React.useEffect(() => {
+        if (!parsedFile) {
+            return;
+        }
+
+        let isOutdated = false;
+
+        const generateScope = async () => {
+            const newScope: Variables = {};
+            for (const node of parsedFile[1]) {
+                for (const specifier of node.specifiers) {
+                    switch (specifier.type) {
+                        case "ImportNamespaceSpecifier":
+                            newScope[specifier.local.name] =
+                                await resolveImport({
+                                    kind: "namespace",
+                                    path: node.source.value as string,
+                                });
+                            break;
+                        case "ImportDefaultSpecifier":
+                            newScope[specifier.local.name] =
+                                await resolveImport({
+                                    kind: "default",
+                                    path: node.source.value as string,
+                                });
+                            break;
+                        case "ImportSpecifier":
+                            newScope[specifier.local.name] =
+                                await resolveImport({
+                                    kind: "named",
+                                    path: node.source.value as string,
+                                    variable: specifier.imported.name,
+                                });
+                            break;
+                    }
+                }
+            }
+
+            if (isOutdated) {
+                return;
+            }
+            setScope(newScope);
+        };
+
+        generateScope();
+
+        return () => {
+            isOutdated = true;
+        };
+    }, [resolveImport, parsedFile]);
+
+    if (!parsedFile) {
         return { scope: {}, text: "" };
     }
 
-    return { scope: { ...defaultScope, ...scope }, text: vfile.toString() };
+    return {
+        scope: { ...defaultScope, ...scope },
+        text: parsedFile[0].toString(),
+    };
 };
 
-function compileCode(
-    {
-        code,
-        recmaPlugins,
-        rehypePlugins,
-        remarkPlugins,
-    }: Pick<
-        UseMDXParams,
-        "code" | "recmaPlugins" | "rehypePlugins" | "remarkPlugins"
-    >,
-    handleImports: (importNode: ImportDeclaration) => Promise<void>,
-) {
+function compileCode({
+    code,
+    recmaPlugins,
+    rehypePlugins,
+    remarkPlugins,
+}: Pick<
+    UseMDXParams,
+    "code" | "recmaPlugins" | "rehypePlugins" | "remarkPlugins"
+>) {
+    const importDeclarations: ImportDeclaration[] = [];
     return compile(code, {
         outputFormat: "function-body",
         recmaPlugins,
@@ -155,7 +180,6 @@ function compileCode(
         remarkPlugins: [
             ...(remarkPlugins || []),
             () => async (tree) => {
-                const promises: Array<Promise<any>> = [];
                 const mdxjsEsms = selectAll("mdxjsEsm", tree);
                 for (const mdxjsEsm of mdxjsEsms) {
                     // @ts-expect-error
@@ -172,12 +196,12 @@ function compileCode(
                                 (mdxjsEsm.value as string).substring(
                                     node.range[1] - 1, // range starts at 1
                                 );
-                            promises.push(handleImports(node));
+
+                            importDeclarations.push(node);
                         }
                     }
                 }
-                await Promise.all(promises);
             },
         ],
-    });
+    }).then((vfile) => [vfile, importDeclarations] as const);
 }
