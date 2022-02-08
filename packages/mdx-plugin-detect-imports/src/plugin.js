@@ -24,23 +24,23 @@ const generateImportStatements = (tree) => {
                         local: "${specifier.local.name}",
                         value: ${specifier.local.name}
                     }`);
-                    continue;
+                    break;
                 case "ImportDefaultSpecifier":
                     imports.push(`{
                         kind: "default",
                         local: "${specifier.local.name}",
                         value: ${specifier.local.name}
                     }`);
-                    continue;
+                    break;
                 case "ImportSpecifier":
                     imports.push(`{
                         kind: "named",
                         local: "${specifier.local.name}",
                         value: ${specifier.imported.name}
                     }`);
-                    continue;
+                    break;
                 default:
-                    continue;
+                    break;
             }
         }
         //
