@@ -6,6 +6,7 @@ GlobalRegistrator.register();
 import { renderHook } from "@testing-library/react-hooks";
 
 import { useMDX } from "./use-mdx.js";
+import type { UseMDXOut } from "./use-mdx.js";
 
 test("it properly detects imports", async (t) => {
     const resolveImport: Parameters<typeof useMDX>[0]["resolveImport"] = async (
@@ -131,4 +132,33 @@ import A from 'a';
         result.current.scope,
     );
     t.is(5, result.all.length); // switches from 4 to 5 so no useless re-renders
+});
+
+test("it doesn’t recompile at each change, but in batches", async (t) => {
+    let code = `export const A = 'A';`;
+    const { result, rerender, waitFor } = renderHook(() =>
+        useMDX({
+            code,
+        }),
+    );
+
+    code = `export const B = 'B';`;
+    rerender();
+
+    code = `export const C = 'C';`;
+    rerender();
+
+    code = `export const D = 'D';`;
+    rerender();
+
+    t.is(4, result.all.length);
+
+    await waitFor(() => result.current.text.includes("const D = 'D';"));
+
+    t.is(8, result.all.length); // only 3 renders were added: the parsing of A, the parsing of D, and the resolutions of the scope (twice)
+    t.is("", (result.all[3] as UseMDXOut).text);
+    t.true((result.all[4] as UseMDXOut).text.includes("const A = 'A'"));
+    t.true((result.all[5] as UseMDXOut).text.includes("const A = 'A'"));
+    t.true((result.all[6] as UseMDXOut).text.includes("const D = 'D'"));
+    t.true((result.all[7] as UseMDXOut).text.includes("const D = 'D'"));
 });

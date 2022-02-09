@@ -64,7 +64,6 @@ export const useMDX = ({
         }
 
         const computingParams = computingQueueRef.current;
-        computingQueueRef.current = null;
 
         compileCode(computingParams)
             .then((value) => {
@@ -76,6 +75,11 @@ export const useMDX = ({
             })
             .catch(() => {}) // TODO: handle error
             .then(() => {
+                // Only reset once it's done
+                if (computingQueueRef.current === computingParams) {
+                    computingQueueRef.current = null;
+                }
+
                 if (isUnmountedRef.current) {
                     // Avoid creating a loop when unmounted
                     return;
@@ -188,11 +192,14 @@ function compileCode({
                         const node = body[index];
                         if (node.type === "ImportDeclaration") {
                             body.splice(index, 1);
+                            // @ts-expect-error
                             mdxjsEsm.value =
+                                // @ts-expect-error
                                 (mdxjsEsm.value as string).substring(
                                     0,
                                     node.range[0] - 1, // range starts at 1
                                 ) +
+                                // @ts-expect-error
                                 (mdxjsEsm.value as string).substring(
                                     node.range[1] - 1, // range starts at 1
                                 );
