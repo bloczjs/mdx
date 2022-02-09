@@ -3,11 +3,10 @@
     "version": "0.1.0",
     "source": "src/index.ts",
     "main": "lib/mdx-live.js",
-    "module": "lib/mdx-live.module.js",
+    "module": "lib/mdx-live.js",
     "type": "module",
     "exports": {
         ".": {
-            "require": "./lib/mdx-live.js",
             "import": "./lib/mdx-live.modern.js",
             "browser": "./lib/mdx-live.modern.js"
         },
@@ -22,7 +21,7 @@
         "access": "public"
     },
     "scripts": {
-        "build": "rm -rf lib/ && microbundle -f modern,esm,cjs",
+        "build": "rm -rf lib/ && microbundle -f modern,esm",
         "test": "ava"
     },
     "devDependencies": {
