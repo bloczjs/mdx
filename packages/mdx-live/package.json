@@ -26,6 +26,7 @@
     },
     "devDependencies": {
         "@happy-dom/global-registrator": "^2.31.1",
+        "@testing-library/react": "^12.1.2",
         "@testing-library/react-hooks": "^7.0.2",
         "@types/react": "17.0.11",
         "ava": "^4.0.1",
@@ -43,7 +44,8 @@
     },
     "ava": {
         "extensions": {
-            "ts": "module"
+            "ts": "module",
+            "tsx": "module"
         },
         "nodeArguments": [
             "--loader=ts-node/esm/transpile-only"
