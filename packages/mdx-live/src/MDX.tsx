@@ -1,5 +1,4 @@
 import * as React from "react";
-// import * as mdxReact from "@mdx-js/react";
 
 import * as ReactRuntime from "react/jsx-runtime.js";
 
