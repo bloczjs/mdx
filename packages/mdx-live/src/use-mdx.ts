@@ -11,15 +11,17 @@ export interface Variables {
     [key: string]: any;
 }
 
+export type ResolveImport = (
+    option:
+        | { kind: "named"; path: string; variable: string }
+        | { kind: "namespace" | "default"; path: string },
+) => Promise<any>;
+
 export interface UseMDXParams {
     code: string;
     defaultScope?: Variables;
     /** **Needs to be memoized** */
-    resolveImport?: (
-        option:
-            | { kind: "named"; path: string; variable: string }
-            | { kind: "namespace" | "default"; path: string },
-    ) => Promise<any>;
+    resolveImport?: ResolveImport;
     /** **Needs to be memoized** */
     recmaPlugins?: CompileOptions["recmaPlugins"];
     /** **Needs to be memoized** */
@@ -73,7 +75,10 @@ export const useMDX = ({
                 }
                 setParsedFile(value);
             })
-            .catch(() => {}) // TODO: handle error
+            .catch((error) => {
+                // TODO: better handle error
+                console.error(error);
+            })
             .then(() => {
                 // Only reset once it's done
                 if (computingQueueRef.current === computingParams) {

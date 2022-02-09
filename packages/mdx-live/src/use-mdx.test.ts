@@ -6,12 +6,10 @@ GlobalRegistrator.register();
 import { renderHook } from "@testing-library/react-hooks";
 
 import { useMDX } from "./use-mdx.js";
-import type { UseMDXOut } from "./use-mdx.js";
+import type { UseMDXOut, ResolveImport } from "./use-mdx";
 
 test("it properly detects imports", async (t) => {
-    const resolveImport: Parameters<typeof useMDX>[0]["resolveImport"] = async (
-        option,
-    ) => {
+    const resolveImport: ResolveImport = async (option) => {
         if (option.kind === "named") {
             return `named-${option.variable}`;
         }
