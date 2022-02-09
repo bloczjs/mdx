@@ -1,4 +1,4 @@
-import { selectAll } from "unist-util-select";
+const { selectAll } = require("unist-util-select");
 
 const exportLength = "export ".length;
 const exportConstLength = "export const ".length;
@@ -203,7 +203,8 @@ const getExportStatement = ({ line, offset, variableName, value }) => {
     };
 };
 
-export default ({ exportName = "importStatements" } = {}) =>
+module.exports =
+    ({ exportName = "importStatements" } = {}) =>
     (tree, file) => {
         const importStatements = generateImportStatements(tree);
         const injectedNode = getExportStatement({
