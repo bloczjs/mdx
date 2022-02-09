@@ -28,18 +28,18 @@
         "@happy-dom/global-registrator": "^2.31.1",
         "@testing-library/react": "^12.1.2",
         "@testing-library/react-hooks": "^7.0.2",
+        "@types/estree": "^0.0.51",
         "@types/react": "17.0.11",
         "ava": "^4.0.1",
         "microbundle": "^0.14.2",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
-        "ts-node": "^10.5.0"
+        "ts-node": "^10.5.0",
+        "vfile": "^5.3.0"
     },
     "dependencies": {
         "@mdx-js/mdx": "^2.0.0",
-        "@types/estree": "^0.0.51",
-        "unist-util-select": "^4.0.1",
-        "vfile": "^5.3.0"
+        "unist-util-select": "^4.0.1"
     },
     "ava": {
         "extensions": {
