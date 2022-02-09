@@ -14,7 +14,7 @@ const DefaultProvider: React.Provider<MDXContextType> = ({ children }) => (
     <>{children}</>
 );
 
-class DefaultErrorBoundary extends React.Component<{}, { error?: Error }> {
+class ErrorBoundary extends React.Component<{}, { error?: Error }> {
     state: { error?: Error } = {};
 
     static getDerivedStateFromError(error: Error) {
@@ -31,7 +31,17 @@ class DefaultErrorBoundary extends React.Component<{}, { error?: Error }> {
     render() {
         const { error } = this.state;
         if (error) {
-            return null;
+            // When the import resolution via `resolveImport` is getting done,
+            // the variables aren't available yet. So it's making the whole tree crash.
+            // We are only catching those errors, the others will bubble up regular errors.
+            if (
+                error.message.match(
+                    /Expected component `[^`]*?` to be defined: you likely forgot to import, pass, or provide it\./,
+                )
+            ) {
+                return null;
+            }
+            throw error;
         }
         return this.props.children;
     }
@@ -44,7 +54,6 @@ interface MDXProps extends UseMDXParams {
 
 export const MDX: React.FunctionComponent<MDXProps> = ({
     Provider = DefaultProvider,
-    ErrorBoundary = DefaultErrorBoundary,
     code,
     defaultScope,
     resolveImport,
