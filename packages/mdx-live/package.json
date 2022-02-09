@@ -22,7 +22,8 @@
         "access": "public"
     },
     "scripts": {
-        "build": "rm -rf lib/ && microbundle -f modern,esm,cjs"
+        "build": "rm -rf lib/ && microbundle -f modern,esm,cjs",
+        "test": "ava"
     },
     "devDependencies": {
         "@happy-dom/global-registrator": "^2.31.1",

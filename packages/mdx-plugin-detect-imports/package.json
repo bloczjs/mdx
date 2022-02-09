@@ -11,6 +11,9 @@
     "publishConfig": {
         "access": "public"
     },
+    "scripts": {
+        "test": "ava"
+    },
     "dependencies": {
         "unist-util-select": "^4.0.1"
     },
