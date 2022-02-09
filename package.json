@@ -3,7 +3,7 @@
     "workspaces": [
         "packages/*"
     ],
-    "version": "0.2.0-beta.1",
+    "version": "0.2.0-beta.2",
     "repository": "git@github.com:bloczjs/mdx.git",
     "author": "Ayc0 <ayc0.benj@gmail.com>",
     "license": "MIT",
