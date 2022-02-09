@@ -32,9 +32,8 @@ export interface UseMDXParams {
 export interface UseMDXOut {
     scope: Variables;
     text: string;
+    isReady: boolean;
 }
-
-// const customError = new Error("fine");
 
 const voidAsync = async () => {};
 
@@ -110,6 +109,12 @@ export const useMDX = ({
         }
     }, [code, recmaPlugins, rehypePlugins, remarkPlugins]);
 
+    const scopeForParsedFileRef =
+        React.useRef<WeakSet<Exclude<typeof parsedFile, undefined>>>();
+    if (!scopeForParsedFileRef.current) {
+        scopeForParsedFileRef.current = new WeakSet(); // Only compute it once
+    }
+
     const [scope, setScope] = React.useState<Variables>({});
     React.useEffect(() => {
         if (!parsedFile) {
@@ -152,6 +157,7 @@ export const useMDX = ({
             if (isOutdated) {
                 return;
             }
+            scopeForParsedFileRef.current!.add(parsedFile);
             setScope(newScope);
         };
 
@@ -159,16 +165,18 @@ export const useMDX = ({
 
         return () => {
             isOutdated = true;
+            // TODO: maybe add `scopeForParsedFileRef.current.delete(parsedFile);`
         };
     }, [resolveImport, parsedFile]);
 
     if (!parsedFile) {
-        return { scope: {}, text: "" };
+        return { scope: {}, text: "", isReady: false };
     }
 
     return {
         scope: { ...defaultScope, ...scope },
         text: parsedFile[0].toString(),
+        isReady: scopeForParsedFileRef.current.has(parsedFile),
     };
 };
 
