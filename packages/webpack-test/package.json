@@ -1,0 +1,21 @@
+{
+    "name": "@blocz/webpack-test",
+    "version": "0.0.0",
+    "private": true,
+    "author": "Ayc0 <ayc0.benj@gmail.com>",
+    "license": "MIT",
+    "sideEffects": false,
+    "type": "commonjs",
+    "scripts": {
+        "test": "ava"
+    },
+    "dependencies": {
+        "@blocz/mdx-plugin-detect-imports": "workspace:*",
+        "@mdx-js/loader": "^2.0.0",
+        "memfs": "^3.4.7",
+        "webpack": "^5.73.0"
+    },
+    "devDependencies": {
+        "ava": "^4.0.1"
+    }
+}
