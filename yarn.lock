@@ -1436,6 +1436,17 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@blocz/rollup-test@workspace:tests/rollup-test":
+  version: 0.0.0-use.local
+  resolution: "@blocz/rollup-test@workspace:tests/rollup-test"
+  dependencies:
+    "@blocz/mdx-plugin-detect-imports": "workspace:*"
+    "@mdx-js/rollup": ^2.1.2
+    ava: ^4.3.1
+    rollup: ^2.76.0
+  languageName: unknown
+  linkType: soft
+
 "@blocz/webpack-test@workspace:tests/webpack-test":
   version: 0.0.0-use.local
   resolution: "@blocz/webpack-test@workspace:tests/webpack-test"
@@ -1620,6 +1631,20 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@mdx-js/rollup@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "@mdx-js/rollup@npm:2.1.2"
+  dependencies:
+    "@mdx-js/mdx": ^2.0.0
+    "@rollup/pluginutils": ^4.0.0
+    source-map: ^0.7.0
+    vfile: ^5.0.0
+  peerDependencies:
+    rollup: ">=2"
+  checksum: 3a4454f58f26553918295002113f253b11ed63660f2e90ba8dd087b410c8c15af772a3325167ab8fb9108e095dc8acde60eb8f71b4b08bc0c4544c83c2a93c05
+  languageName: node
+  linkType: hard
+
 "@nodelib/fs.scandir@npm:2.1.5":
   version: 2.1.5
   resolution: "@nodelib/fs.scandir@npm:2.1.5"
@@ -1749,6 +1774,16 @@ __metadata:
   peerDependencies:
     rollup: ^1.20.0||^2.0.0
   checksum: 8be16e27863c219edbb25a4e6ec2fe0e1e451d9e917b6a43cf2ae5bc025a6b8faaa40f82a6e53b66d0de37b58ff472c6c3d57a83037ae635041f8df959d6d9aa
+  languageName: node
+  linkType: hard
+
+"@rollup/pluginutils@npm:^4.0.0":
+  version: 4.2.1
+  resolution: "@rollup/pluginutils@npm:4.2.1"
+  dependencies:
+    estree-walker: ^2.0.1
+    picomatch: ^2.2.2
+  checksum: 6bc41f22b1a0f1efec3043899e4d3b6b1497b3dea4d94292d8f83b4cf07a1073ecbaedd562a22d11913ff7659f459677b01b09e9598a98936e746780ecc93a12
   languageName: node
   linkType: hard
 
@@ -7592,6 +7627,20 @@ __metadata:
   bin:
     rollup: dist/bin/rollup
   checksum: 4320927ae9d42abf0a72ccdfd14303f7b6d6908ec94be953900a41bd4c0bbba3131887c3925dec65361a3e394cb572a4fa8e1f1be4db587a775068ad71d42acd
+  languageName: node
+  linkType: hard
+
+"rollup@npm:^2.76.0":
+  version: 2.76.0
+  resolution: "rollup@npm:2.76.0"
+  dependencies:
+    fsevents: ~2.3.2
+  dependenciesMeta:
+    fsevents:
+      optional: true
+  bin:
+    rollup: dist/bin/rollup
+  checksum: 58293e1c63c11d4afcfcf619601d5c5136dd3d0c9d3bd6a0b6141fede32027edc1eb53873bbb9a9c1e95e86c67f6ad66185720031b6eadf325972174d1d8fbcb
   languageName: node
   linkType: hard
 
