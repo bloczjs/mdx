@@ -16,11 +16,7 @@ import { Tabs, Button } from "@blocz/elements";
 1. First item
 2. Second item
 
-<Button
-    // this is a comment
-    variant="blue"
-    label="Label"
-/>
+<Button variant="blue" label="Label" />
 ```
 
 This plugin will transform this file into:
@@ -64,7 +60,7 @@ export const importStatements = [
 ### Webpack
 
 ```js
-import detectImportsPlugin from "@blocz/mdx-plugin-detect-imports";
+const detectImportsPlugin = require("@blocz/mdx-plugin-detect-imports");
 
 module.exports = {
     // ...
@@ -98,13 +94,13 @@ And finally:
 import compile from "@mdx-js/mdx";
 import detectImportsPlugin from "@blocz/mdx-plugin-detect-imports";
 
-const vfile = await compile(mdxText, {
+const vFile = await compile(mdxText, {
     remarkPlugins: [detectImportsPlugin],
 });
 
 // Or if you want to specify a custom name for the exported variable:
 
-const vfile = await compile(mdxText, {
+const vFile = await compile(mdxText, {
     remarkPlugins: [[detectImportsPlugin, { exportName: "otherName" }]],
 });
 ```
