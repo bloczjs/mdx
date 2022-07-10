@@ -5,6 +5,15 @@
     "main": "lib/mdx-live.js",
     "module": "lib/mdx-live.js",
     "type": "module",
+    "keywords": [
+        "mdx",
+        "markdown",
+        "jsx",
+        "remark",
+        "mdxast",
+        "react",
+        "repl"
+    ],
     "exports": {
         ".": {
             "import": "./lib/mdx-live.modern.js",
