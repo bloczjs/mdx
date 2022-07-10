@@ -8,6 +8,14 @@
     "license": "MIT",
     "sideEffects": false,
     "type": "commonjs",
+    "keywords": [
+        "mdx",
+        "markdown",
+        "jsx",
+        "remark",
+        "mdxast",
+        "plugin"
+    ],
     "publishConfig": {
         "access": "public"
     },
