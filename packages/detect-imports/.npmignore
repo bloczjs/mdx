@@ -1,9 +1,0 @@
-.DS_Store
-
-node_modules/
-src/
-.rts2_cache*/
-.cache/
-
-*.log
-*.test.*

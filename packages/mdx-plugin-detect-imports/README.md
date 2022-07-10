@@ -1,8 +1,10 @@
 # `@blocz/mdx-plugin-detect-imports`
 
-# TL;DR
-
 MDX plugin to detect the list of every imports done in a MDX file.
+
+## MDX 2
+
+Since the v0.2.0, it's based on MDX v2. It you want to use it with MDX v1, you can look at the [v0.1.0](https://github.com/bloczjs/mdx/tree/v0.1.0).
 
 ## What does it do?
 
@@ -16,11 +18,7 @@ import { Tabs, Button } from "@blocz/elements";
 1. First item
 2. Second item
 
-<Button
-    // this is a comment
-    variant="blue"
-    label="Label"
-/>
+<Button variant="blue" label="Label" />
 ```
 
 This plugin will transform this file into:
@@ -40,11 +38,13 @@ export const importStatements = [
         module: "@blocz/elements",
         imports: [
             {
+                kind: "named",
                 imported: "Button",
                 local: "Button",
                 value: this_is_the_value_of_the_variable_Button
             },
             {
+                kind: "named",
                 imported: "Tabs",
                 local: "Tabulations",
                 value: this_is_the_value_of_the_variable_Tabs
@@ -93,16 +93,16 @@ And finally:
 ### With MDX
 
 ```js
-const mdx = require("@mdx-js/mdx");
-const detectImportsPlugin = require("@blocz/mdx-plugin-detect-imports");
+import compile from "@mdx-js/mdx";
+import detectImportsPlugin from "@blocz/mdx-plugin-detect-imports";
 
-const jsx = await mdx(mdxText, {
+const vFile = await compile(mdxText, {
     remarkPlugins: [detectImportsPlugin],
 });
 
 // Or if you want to specify a custom name for the exported variable:
 
-const jsx = await mdx(mdxText, {
+const vFile = await compile(mdxText, {
     remarkPlugins: [[detectImportsPlugin, { exportName: "otherName" }]],
 });
 ```
@@ -114,11 +114,19 @@ If you need typings, we provide the following type:
 ```typescript
 interface ImportStatement {
     module: string;
-    imports: Array<{
-        imported: string;
-        local: string;
-        value: any;
-    }>;
+    imports: Array<
+        | {
+              kind: "named";
+              imported: string;
+              local: string;
+              value: any;
+          }
+        | {
+              kind: "namespace" | "default";
+              local: string;
+              value: any;
+          }
+    >;
 }
 ```
 

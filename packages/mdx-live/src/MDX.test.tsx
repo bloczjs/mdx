@@ -1,6 +1,12 @@
-import React from "react";
+import * as React from "react";
 import { act, render } from "@testing-library/react";
-import { MDX } from "./MDX";
+import { MDX } from "./MDX.js";
+import type { ResolveImport } from "./MDX";
+import test from "ava";
+
+import { GlobalRegistrator } from "@happy-dom/global-registrator";
+
+GlobalRegistrator.register();
 
 const Button: React.FunctionComponent<{
     as?: string | React.ComponentType<any>;
@@ -47,7 +53,6 @@ export const AlternateInlineButton = (props) => <div {...props} />;
 
 
 <Button
-    // this is a comment
     variant="blue"
     label={label}
     {...props}
@@ -77,55 +82,61 @@ import { Button } from '@blocz/element';
 ${mdxWithoutImportStatement}
 `;
 
-const resolveImport = async (module: string, variable: string) => {
-    if (module !== "@blocz/element") {
-        return undefined;
+const resolveImport: ResolveImport = async (option) => {
+    if (
+        option.kind === "named" &&
+        option.path === "@blocz/element" &&
+        option.variable === "Button"
+    ) {
+        return Button;
     }
-    if (variable !== "Button") {
-        return undefined;
-    }
+
     return Button;
 };
 
 const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
-describe("Render MDX", () => {
-    it("render simple MD", async () => {
-        await act(async () => {
-            const { getAllByRole } = await render(<MDX code={markdown} />);
-            await wait(10);
-            expect(getAllByRole("heading")).toHaveLength(2);
-            expect(getAllByRole("separator")).toHaveLength(2);
-            expect(getAllByRole("listitem")).toHaveLength(8);
-            expect(getAllByRole("list")).toHaveLength(3);
-        });
+test("render simple MD", async (t) => {
+    await act(async () => {
+        const { getAllByRole } = await render(<MDX code={markdown} />);
+        await wait(10);
+        t.is(2, getAllByRole("heading").length);
+        t.is(2, getAllByRole("separator").length);
+        t.is(8, getAllByRole("listitem").length);
+        t.is(3, getAllByRole("list").length);
     });
-    it("render MDX with export statement", async () => {
-        await act(async () => {
-            const { container } = await render(
-                <MDX
-                    code={mdxWithoutImportStatement}
-                    defaultScope={{ Button }}
-                />,
-            );
-            await wait(10);
-            expect(container.innerHTML).toBe(
-                '<button data-variant="blue">Click Me!</button><div>Hello</div><div data-variant="red">Click Me!</div><div>World</div><div data-variant="green">Click Me!</div>',
-            );
-        });
+});
+
+test("render MDX with export statement", async (t) => {
+    await act(async () => {
+        const { container } = await render(
+            <MDX code={mdxWithoutImportStatement} defaultScope={{ Button }} />,
+        );
+        await wait(10);
+        t.is(
+            `<button data-variant="blue">Click Me!</button>
+<div>Hello</div>
+<div data-variant="red">Click Me!</div>
+<div>World</div>
+<div data-variant="green">Click Me!</div>`,
+            container.innerHTML,
+        );
     });
-    it("render MDX with import statement", async () => {
-        await act(async () => {
-            const { container } = await render(
-                <MDX
-                    code={mdxWithImportStatement}
-                    resolveImport={resolveImport}
-                />,
-            );
-            await wait(10);
-            expect(container.innerHTML).toBe(
-                '<button data-variant="blue">Click Me!</button><div>Hello</div><div data-variant="red">Click Me!</div><div>World</div><div data-variant="green">Click Me!</div>',
-            );
-        });
+});
+
+test("render MDX with import statement", async (t) => {
+    await act(async () => {
+        const { container } = await render(
+            <MDX code={mdxWithImportStatement} resolveImport={resolveImport} />,
+        );
+        await wait(10);
+        t.is(
+            `<button data-variant="blue">Click Me!</button>
+<div>Hello</div>
+<div data-variant="red">Click Me!</div>
+<div>World</div>
+<div data-variant="green">Click Me!</div>`,
+            container.innerHTML,
+        );
     });
 });

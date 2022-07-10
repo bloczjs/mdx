@@ -8,6 +8,16 @@ Exports statements are also executed. **WARNING:** this allows XSS so be sure to
 
 You can also provide a scope for all the variables and components used in the MDX.
 
+## MDX 2
+
+Since the v0.2.0, it's based on MDX v2. It you want to use it with MDX v1, you can look at the [v0.1.0](https://github.com/bloczjs/mdx/tree/v0.1.0).
+
+## ESM
+
+⚠️ This package is only published as an ESM package, it doesn't provide any CJS exports.
+The reason behind this is because MDX switch to ESM only in their v2 too (see https://mdxjs.com/migrating/v2/#esm).\
+And as you'll also need regular MDX packages to make this one work, we also switched to ESM.
+
 ## How to use
 
 ### Simple MDX
@@ -101,10 +111,15 @@ import { Button } from 'example';
 <Button variant="blue" label="Click Me!" />
 `;
 
-const resolveImport = async (module, variable) => {
-    if (module === "example" && variable === "Button") {
+const resolveImport = async (option) => {
+    if (
+        option.kind === "named" &&
+        option.path === "example" &&
+        option.variable === "Button"
+    ) {
         return Button;
     }
+
     return undefined;
 };
 
@@ -113,6 +128,16 @@ const App = () => {
 };
 ```
 
+```ts
+export type ResolveImport = (
+    option:
+        | { kind: "named"; path: string; variable: string }
+        | { kind: "namespace" | "default"; path: string },
+) => Promise<any>;
+```
+
 ### Plugins
 
-You can use the props `remarkPlugins` and `rehypePlugins` to pass [remark](https://github.com/remarkjs/remark/blob/main/doc/plugins.md#list-of-plugins) (plugins based on the markdown AST) and [rehype](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md#list-of-plugins) (plugins based on the html AST) plugins to the MDX compiler.
+You can use the props `recmaPlugins`, `rehypePlugins`, and `remarkPlugins` to pass [remark](https://github.com/remarkjs/remark/blob/main/doc/plugins.md#list-of-plugins) (plugins based on the markdown AST), [rehype](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md#list-of-plugins) (plugins based on the html AST), and recma (plugins based on the JS AST) plugins to the MDX compiler.
+
+See https://mdxjs.com/packages/mdx/#optionsremarkplugins for more information.

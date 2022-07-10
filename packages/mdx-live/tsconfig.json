@@ -18,6 +18,5 @@
         "noImplicitReturns": true,
         "noFallthroughCasesInSwitch": true,
         "moduleResolution": "node"
-    },
-    "include": ["src/*"]
+    }
 }

@@ -1,26 +1,23 @@
 {
     "name": "@blocz/mdx",
     "workspaces": [
-        "packages/*"
+        "packages/*",
+        "tests/*"
     ],
-    "version": "0.1.0",
+    "version": "0.2.0-beta.4",
     "repository": "git@github.com:bloczjs/mdx.git",
     "author": "Ayc0 <ayc0.benj@gmail.com>",
     "license": "MIT",
     "private": true,
     "scripts": {
-        "test": "jest",
+        "test": "./test.js",
         "build": "./build.js",
         "deploy": "yarn build && yarn test && ./deploy.js",
         "format:check": "prettier --check .",
         "format:fix": "prettier --write ."
     },
     "devDependencies": {
-        "@types/jest": "26.0.23",
-        "jest": "^27.4.7",
-        "prettier": "^2.5.1",
-        "react": "^17.0.2",
-        "ts-jest": "^27.1.3"
+        "prettier": "^2.5.1"
     },
-    "packageManager": "yarn@3.1.1"
+    "packageManager": "yarn@3.2.1"
 }

@@ -17,7 +17,6 @@ const version = argv[versionIndex + 1];
 argv.splice(versionIndex, 2);
 
 updateAllVersions(version);
-deploy("@blocz/detect-imports");
 deploy("@blocz/mdx-plugin-detect-imports");
 deploy("@blocz/mdx-live");
 commit(version);

@@ -1,61 +1,21 @@
 import * as React from "react";
-import * as mdxReact from "@mdx-js/react";
 
-import { useMDX, UseMDXParams, UseMDXOut } from "./use-mdx";
-import { compileMDX } from "./compile-mdx";
-import { Variables } from "./resolve-constants";
+import * as ReactRuntime from "react/jsx-runtime.js";
+
+import { useMDX } from "./use-mdx.js";
+import type { UseMDXParams, UseMDXOut, ResolveImport } from "./use-mdx";
 
 export type MDXContextType = UseMDXOut;
+export type { ResolveImport };
 
-// @ts-ignore
+// @ts-expect-error
 const DefaultProvider: React.Provider<MDXContextType> = ({ children }) => (
     <>{children}</>
 );
 
-const Runtime: React.FunctionComponent<{
-    scope: Variables;
-    remarkPlugins?: any[];
-    rehypePlugins?: any[];
-    code: string;
-}> = ({
-    scope = {},
-    remarkPlugins = [],
-    rehypePlugins = [],
-    code,
-    ...props
-}) => {
-    const fullScope = {
-        ...scope,
-        mdx: mdxReact.mdx,
-        MDXProvider: mdxReact.MDXProvider,
-        components: scope,
-        props,
-    };
-
-    const compiledCode = compileMDX({
-        code,
-        scope,
-        remarkPlugins: remarkPlugins,
-        rehypePlugins: rehypePlugins,
-    });
-
-    const keys = Object.keys(fullScope);
-    const values = Object.values(fullScope);
-
-    var fn = new Function(
-        "_fn",
-        "React",
-        ...keys,
-        `${compiledCode}\n\n    return React.createElement(MDXProvider, { components },\n      React.createElement(MDXContent, props)\n    );`,
-    );
-
-    return fn({}, React, ...values);
-};
-
 interface MDXProps extends UseMDXParams {
     Provider?: React.Provider<MDXContextType>;
-    remarkPlugins?: any[];
-    rehypePlugins?: any[];
+    ErrorBoundary?: React.ComponentType<{}>;
 }
 
 export const MDX: React.FunctionComponent<MDXProps> = ({
@@ -63,23 +23,34 @@ export const MDX: React.FunctionComponent<MDXProps> = ({
     code,
     defaultScope,
     resolveImport,
-    remarkPlugins,
+    recmaPlugins,
     rehypePlugins,
+    remarkPlugins,
 }) => {
-    const { scope, text } = useMDX({
+    const { scope, text, isReady } = useMDX({
         code,
         defaultScope,
         resolveImport,
+        recmaPlugins,
+        rehypePlugins,
+        remarkPlugins,
     });
 
+    const Runtime = React.useMemo(() => {
+        if (!text) {
+            return () => null;
+        }
+        const fn = new Function(text);
+        return fn(ReactRuntime).default;
+    }, [text]);
+
+    if (!isReady) {
+        return null;
+    }
+
     return (
-        <Provider value={{ scope, text }}>
-            <Runtime
-                scope={scope}
-                code={text}
-                remarkPlugins={remarkPlugins}
-                rehypePlugins={rehypePlugins}
-            />
+        <Provider value={{ scope, text, isReady }}>
+            <Runtime components={scope} />
         </Provider>
     );
 };
