@@ -25,20 +25,20 @@
         "test": "ava"
     },
     "devDependencies": {
-        "@happy-dom/global-registrator": "^2.31.1",
-        "@testing-library/react": "^12.1.2",
-        "@testing-library/react-hooks": "^7.0.2",
-        "@types/estree": "^0.0.51",
-        "@types/react": "17.0.11",
-        "ava": "^4.0.1",
+        "@happy-dom/global-registrator": "^6.0.2",
+        "@testing-library/react": "^12.1.5",
+        "@testing-library/react-hooks": "^8.0.1",
+        "@types/estree": "^0.0.52",
+        "@types/react": "17.0.47",
+        "ava": "^4.3.1",
         "microbundle": "^0.14.2",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",
-        "ts-node": "^10.5.0",
-        "vfile": "^5.3.0"
+        "ts-node": "^10.8.2",
+        "vfile": "^5.3.4"
     },
     "dependencies": {
-        "@mdx-js/mdx": "^2.0.0",
+        "@mdx-js/mdx": "^2.1.2",
         "unist-util-select": "^4.0.1"
     },
     "ava": {
