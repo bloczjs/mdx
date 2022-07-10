@@ -1430,7 +1430,7 @@ __metadata:
   resolution: "@blocz/webpack-test@workspace:tests/webpack-test"
   dependencies:
     "@blocz/mdx-plugin-detect-imports": "workspace:*"
-    "@mdx-js/loader": ^2.0.0
+    "@mdx-js/loader": ^2.1.2
     ava: ^4.3.1
     memfs: ^3.4.7
     webpack: ^5.73.0
@@ -1534,7 +1534,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdx-js/loader@npm:^2.0.0":
+"@mdx-js/loader@npm:^2.1.2":
   version: 2.1.2
   resolution: "@mdx-js/loader@npm:2.1.2"
   dependencies:
