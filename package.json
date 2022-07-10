@@ -1,7 +1,8 @@
 {
     "name": "@blocz/mdx",
     "workspaces": [
-        "packages/*"
+        "packages/*",
+        "tests/*"
     ],
     "version": "0.2.0-beta.4",
     "repository": "git@github.com:bloczjs/mdx.git",
