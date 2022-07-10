@@ -1,18 +1,21 @@
 # @blocz/mdx
 
-## Commands
+This repository contains a few utils around MDX
 
--   `yarn build`: build all packages in the correct order
--   `yarn test`: run all tests
--   `yarn deploy`: deploy all packages
-    -   For `next` version, `yarn deploy -v 0.2.0-beta.3 --tag next`
-    -   For stable version: `yarn deploy -v 0.2.0`
-    -   For both of those operations, you need to be logged in with `yarn npm login`
--   `yarn format:check`: to check the format of the code
--   `yarn format:fix`: to format the code
+## Packages
 
-## ToDo
+### `@blocz/mdx-live`
 
--   [x] detect import statements
--   [x] create a MDX loader that parse the content, detect the imports and add them to a scope
--   [x] create a runtime tool that parse, render it's content, load imports based on a given scope and load export statements
+`@blocz/mdx-live` allows you to dynamically render a MDX string.
+
+It lives in [mdx-live](https://github.com/bloczjs/mdx/tree/main/packages/mdx-live).
+
+### `@blocz/mdx-plugin-detect-imports`
+
+MDX plugin to detect the list of every imports done in a MDX file.
+
+It lives in [mdx-plugin-detect-imports](https://github.com/bloczjs/mdx/tree/main/packages/mdx-plugin-detect-imports).
+
+## Contributing
+
+[Read more about how to develop and contribute](./CONTRIBUTING.md)
