@@ -10,9 +10,9 @@
     "license": "MIT",
     "private": true,
     "scripts": {
-        "test": "./test.js",
-        "build": "./build.js",
-        "deploy": "yarn build && yarn test && ./deploy.js",
+        "test": "./scripts/test.js",
+        "build": "./scripts/build.js",
+        "deploy": "yarn build && yarn test && ./scripts/deploy.js",
         "format:check": "prettier --check .",
         "format:fix": "prettier --write ."
     },
