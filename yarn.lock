@@ -1375,6 +1375,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@blocz/mdx-js-test@workspace:packages/mdx-js-test":
+  version: 0.0.0-use.local
+  resolution: "@blocz/mdx-js-test@workspace:packages/mdx-js-test"
+  dependencies:
+    "@blocz/mdx-plugin-detect-imports": "workspace:*"
+    "@mdx-js/mdx": ^2.0.0
+    ava: ^4.0.1
+  languageName: unknown
+  linkType: soft
+
 "@blocz/mdx-live@workspace:packages/mdx-live":
   version: 0.0.0-use.local
   resolution: "@blocz/mdx-live@workspace:packages/mdx-live"
