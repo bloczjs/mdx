@@ -1389,7 +1389,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@blocz/mdx-live@workspace:packages/mdx-live"
   dependencies:
-    "@happy-dom/global-registrator": ^2.31.1
+    "@happy-dom/global-registrator": ^6.0.2
     "@mdx-js/mdx": ^2.1.2
     "@testing-library/react": ^12.1.2
     "@testing-library/react-hooks": ^7.0.2
@@ -1453,12 +1453,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@happy-dom/global-registrator@npm:^2.31.1":
-  version: 2.31.1
-  resolution: "@happy-dom/global-registrator@npm:2.31.1"
+"@happy-dom/global-registrator@npm:^6.0.2":
+  version: 6.0.2
+  resolution: "@happy-dom/global-registrator@npm:6.0.2"
   dependencies:
-    happy-dom: ^2.31.1
-  checksum: 05b4d056a25ece2764c2757f5ced1f05ae8e84f6552a57467f50900188f1d2b38a4b94aa9bfb7160ec4c35901b9599630f3dede089771f53bacba594b5dfca11
+    happy-dom: ^6.0.2
+  checksum: 6b78498526d314740e805a9f7ab26a4c6f7b5ae0c00e4b1c024ad653ce5fdd34e089fda023b293b4b40cd39319eb3a440e9469b6fa184944146851acbce627f7
   languageName: node
   linkType: hard
 
@@ -3319,6 +3319,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"css.escape@npm:^1.5.1":
+  version: 1.5.1
+  resolution: "css.escape@npm:1.5.1"
+  checksum: f6d38088d870a961794a2580b2b2af1027731bb43261cfdce14f19238a88664b351cc8978abc20f06cc6bbde725699dec8deb6fe9816b139fc3f2af28719e774
+  languageName: node
+  linkType: hard
+
 "cssesc@npm:^3.0.0":
   version: 3.0.0
   resolution: "cssesc@npm:3.0.0"
@@ -4292,17 +4299,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"happy-dom@npm:^2.31.1":
-  version: 2.31.1
-  resolution: "happy-dom@npm:2.31.1"
+"happy-dom@npm:^6.0.2":
+  version: 6.0.2
+  resolution: "happy-dom@npm:6.0.2"
   dependencies:
-    he: ^1.1.1
-    node-fetch: ^2.6.1
+    css.escape: ^1.5.1
+    he: ^1.2.0
+    node-fetch: ^2.x.x
     sync-request: ^6.1.0
     webidl-conversions: ^7.0.0
-    whatwg-encoding: ^1.0.5
-    whatwg-mimetype: ^2.3.0
-  checksum: 59a534d5e69911b71a02e0019827a563c6d6275edf0708b48b072c0276d34d038e1931519b1d124e7511ab454be62733b37d3e274b8a2b864c20599d2ddaf255
+    whatwg-encoding: ^2.0.0
+    whatwg-mimetype: ^3.0.0
+  checksum: 03c29de7c3d7568121340de34a81e45b4d0864af4af5e781fb8418cecaf1d4faf06f23f21e9453d90d612e1735d5160cea7c1e3209715279e454873aafcbbce7
   languageName: node
   linkType: hard
 
@@ -4397,7 +4405,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"he@npm:^1.1.1":
+"he@npm:^1.2.0":
   version: 1.2.0
   resolution: "he@npm:1.2.0"
   bin:
@@ -4464,16 +4472,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"iconv-lite@npm:0.4.24":
-  version: 0.4.24
-  resolution: "iconv-lite@npm:0.4.24"
-  dependencies:
-    safer-buffer: ">= 2.1.2 < 3"
-  checksum: bd9f120f5a5b306f0bc0b9ae1edeb1577161503f5f8252a20f1a9e56ef8775c9959fd01c55f2d3a39d9a8abaf3e30c1abeb1895f367dcbbe0a8fd1c9ca01c4f6
-  languageName: node
-  linkType: hard
-
-"iconv-lite@npm:^0.6.2":
+"iconv-lite@npm:0.6.3, iconv-lite@npm:^0.6.2":
   version: 0.6.3
   resolution: "iconv-lite@npm:0.6.3"
   dependencies:
@@ -6009,7 +6008,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"node-fetch@npm:^2.6.1":
+"node-fetch@npm:^2.x.x":
   version: 2.6.7
   resolution: "node-fetch@npm:2.6.7"
   dependencies:
@@ -7368,7 +7367,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"safer-buffer@npm:>= 2.1.2 < 3, safer-buffer@npm:>= 2.1.2 < 3.0.0":
+"safer-buffer@npm:>= 2.1.2 < 3.0.0":
   version: 2.1.2
   resolution: "safer-buffer@npm:2.1.2"
   checksum: cab8f25ae6f1434abee8d80023d7e72b598cf1327164ddab31003c51215526801e40b66c5e65d658a0af1e9d6478cadcb4c745f4bd6751f97d8644786c0978b0
@@ -8463,19 +8462,19 @@ __metadata:
   languageName: node
   linkType: hard
 
-"whatwg-encoding@npm:^1.0.5":
-  version: 1.0.5
-  resolution: "whatwg-encoding@npm:1.0.5"
+"whatwg-encoding@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "whatwg-encoding@npm:2.0.0"
   dependencies:
-    iconv-lite: 0.4.24
-  checksum: 5be4efe111dce29ddee3448d3915477fcc3b28f991d9cf1300b4e50d6d189010d47bca2f51140a844cf9b726e8f066f4aee72a04d687bfe4f2ee2767b2f5b1e6
+    iconv-lite: 0.6.3
+  checksum: 7087810c410aa9b689cbd6af8773341a53cdc1f3aae2a882c163bd5522ec8ca4cdfc269aef417a5792f411807d5d77d50df4c24e3abb00bb60192858a40cc675
   languageName: node
   linkType: hard
 
-"whatwg-mimetype@npm:^2.3.0":
-  version: 2.3.0
-  resolution: "whatwg-mimetype@npm:2.3.0"
-  checksum: 23eb885940bcbcca4ff841c40a78e9cbb893ec42743993a42bf7aed16085b048b44b06f3402018931687153550f9a32d259dfa524e4f03577ab898b6965e5383
+"whatwg-mimetype@npm:^3.0.0":
+  version: 3.0.0
+  resolution: "whatwg-mimetype@npm:3.0.0"
+  checksum: ce08bbb36b6aaf64f3a84da89707e3e6a31e5ab1c1a2379fd68df79ba712a4ab090904f0b50e6693b0dafc8e6343a6157e40bf18fdffd26e513cf95ee2a59824
   languageName: node
   linkType: hard
 

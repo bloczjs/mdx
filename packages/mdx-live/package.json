@@ -25,7 +25,7 @@
         "test": "ava"
     },
     "devDependencies": {
-        "@happy-dom/global-registrator": "^2.31.1",
+        "@happy-dom/global-registrator": "^6.0.2",
         "@testing-library/react": "^12.1.2",
         "@testing-library/react-hooks": "^7.0.2",
         "@types/estree": "^0.0.51",
