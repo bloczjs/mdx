@@ -1,0 +1,20 @@
+{
+    "name": "@blocz/esbuild-test",
+    "version": "0.2.0-rc",
+    "private": true,
+    "author": "Ayc0 <ayc0.benj@gmail.com>",
+    "license": "MIT",
+    "sideEffects": false,
+    "type": "commonjs",
+    "scripts": {
+        "test": "ava"
+    },
+    "dependencies": {
+        "@blocz/mdx-plugin-detect-imports": "workspace:*",
+        "@mdx-js/esbuild": "^2.1.2",
+        "esbuild": "^0.14.49"
+    },
+    "devDependencies": {
+        "ava": "^4.3.1"
+    }
+}
