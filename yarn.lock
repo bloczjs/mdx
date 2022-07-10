@@ -1380,7 +1380,7 @@ __metadata:
   resolution: "@blocz/mdx-js-test@workspace:tests/mdx-js-test"
   dependencies:
     "@blocz/mdx-plugin-detect-imports": "workspace:*"
-    "@mdx-js/mdx": ^2.0.0
+    "@mdx-js/mdx": ^2.1.2
     ava: ^4.3.1
   languageName: unknown
   linkType: soft
@@ -1390,7 +1390,7 @@ __metadata:
   resolution: "@blocz/mdx-live@workspace:packages/mdx-live"
   dependencies:
     "@happy-dom/global-registrator": ^2.31.1
-    "@mdx-js/mdx": ^2.0.0
+    "@mdx-js/mdx": ^2.1.2
     "@testing-library/react": ^12.1.2
     "@testing-library/react-hooks": ^7.0.2
     "@types/estree": ^0.0.51
@@ -1411,7 +1411,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "@blocz/mdx-plugin-detect-imports@workspace:packages/mdx-plugin-detect-imports"
   dependencies:
-    "@mdx-js/mdx": ^2.0.0
+    "@mdx-js/mdx": ^2.1.2
     ava: ^4.3.1
     unist-util-select: ^3.0.4
   languageName: unknown
@@ -1565,6 +1565,31 @@ __metadata:
     unist-util-visit: ^4.0.0
     vfile: ^5.0.0
   checksum: b97f91aba46556163f8284fa06e370c762303b4b4279afcd700277920e7c54230a2ace88927c4f03d4b5a81579440e4753f7b47d0ad5d32291c683ce70385528
+  languageName: node
+  linkType: hard
+
+"@mdx-js/mdx@npm:^2.1.2":
+  version: 2.1.2
+  resolution: "@mdx-js/mdx@npm:2.1.2"
+  dependencies:
+    "@types/estree-jsx": ^0.0.1
+    "@types/mdx": ^2.0.0
+    astring: ^1.6.0
+    estree-util-build-jsx: ^2.0.0
+    estree-util-is-identifier-name: ^2.0.0
+    estree-walker: ^3.0.0
+    hast-util-to-estree: ^2.0.0
+    markdown-extensions: ^1.0.0
+    periscopic: ^3.0.0
+    remark-mdx: ^2.0.0
+    remark-parse: ^10.0.0
+    remark-rehype: ^10.0.0
+    unified: ^10.0.0
+    unist-util-position-from-estree: ^1.0.0
+    unist-util-stringify-position: ^3.0.0
+    unist-util-visit: ^4.0.0
+    vfile: ^5.0.0
+  checksum: ca4de4ea018a0af9e4bdd9fcd944654eeb7c4fd9c8abf6e239c681162d4f8d2252a0d2c140789ca95bd1323976df5b86ecd34d93a25c6411d99e8f8355f3be01
   languageName: node
   linkType: hard
 
