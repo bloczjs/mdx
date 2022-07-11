@@ -32,6 +32,7 @@ function* listAllWorkspaces() {
     for (const workspace of workspaces) {
         const packageJsonPath = path.join(
             __dirname,
+            "..",
             workspace.location,
             "package.json",
         );
