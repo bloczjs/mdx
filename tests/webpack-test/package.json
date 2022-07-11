@@ -1,6 +1,6 @@
 {
     "name": "@blocz/webpack-test",
-    "version": "0.2.0-rc",
+    "version": "0.2.0-rc.1",
     "private": true,
     "author": "Ayc0 <ayc0.benj@gmail.com>",
     "license": "MIT",
