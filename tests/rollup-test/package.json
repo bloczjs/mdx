@@ -1,0 +1,20 @@
+{
+    "name": "@blocz/rollup-test",
+    "version": "0.2.0-rc",
+    "private": true,
+    "author": "Ayc0 <ayc0.benj@gmail.com>",
+    "license": "MIT",
+    "sideEffects": false,
+    "type": "commonjs",
+    "scripts": {
+        "test": "ava"
+    },
+    "dependencies": {
+        "@blocz/mdx-plugin-detect-imports": "workspace:*",
+        "@mdx-js/rollup": "^2.1.2",
+        "rollup": "^2.76.0"
+    },
+    "devDependencies": {
+        "ava": "^4.3.1"
+    }
+}
