@@ -6,12 +6,13 @@
 
 ### `@blocz/mdx-live`
 
--   Upgrade for MDX 2:
--   Switch to ESM only (it depends on `@mdx-js/mdx` that also switched to ESM only)
--   Add peer dependency on `@mdx-js/mdx`
+-   Upgrade for MDX 2 **BREAKING CHANGE**
+-   Switch to ESM only (it depends on `@mdx-js/mdx` that also switched to ESM only) **BREAKING CHANGE**
+-   Add peer dependency on `@mdx-js/mdx` **BREAKING CHANGE**
 -   Add support for `recmaPlugins` in addition to `rehypePlugins` and `remarkPlugins` in `MDX` props
 -   `useMDX` can accept all kind of plugins
 -   Add `isReady` in `useMDX` return object
+-   Bundle size was reduced from [1.6 MB](https://bundlephobia.com/package/@blocz/mdx-live@0.1.0) to [23.7 kB](https://bundlephobia.com/package/@blocz/mdx-live@0.2.0-rc.2) (-98.5%)
 
 ### `@blocz/mdx-plugin-detect-imports`
 
