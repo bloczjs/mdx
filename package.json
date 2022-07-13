@@ -4,7 +4,7 @@
         "packages/*",
         "tests/*"
     ],
-    "version": "0.2.0-rc.1",
+    "version": "0.2.0-rc.2",
     "repository": "git@github.com:bloczjs/mdx.git",
     "author": "Ayc0 <ayc0.benj@gmail.com>",
     "license": "MIT",
