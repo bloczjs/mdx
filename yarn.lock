@@ -1414,6 +1414,7 @@ __metadata:
     unist-util-select: ^4.0.1
     vfile: ^5.3.4
   peerDependencies:
+    "@mdx-js/mdx": ^2.0.0
     react: ">=16.8.0"
   languageName: unknown
   linkType: soft

@@ -33,8 +33,16 @@
         "build": "rm -rf lib/ && microbundle -f modern,esm",
         "test": "ava"
     },
+    "dependencies": {
+        "unist-util-select": "^4.0.1"
+    },
+    "peerDependencies": {
+        "@mdx-js/mdx": "^2.0.0",
+        "react": ">=16.8.0"
+    },
     "devDependencies": {
         "@happy-dom/global-registrator": "^6.0.2",
+        "@mdx-js/mdx": "^2.1.2",
         "@testing-library/react": "^12.1.5",
         "@testing-library/react-hooks": "^8.0.1",
         "@types/estree": "^0.0.52",
@@ -46,10 +54,6 @@
         "ts-node": "^10.8.2",
         "vfile": "^5.3.4"
     },
-    "dependencies": {
-        "@mdx-js/mdx": "^2.1.2",
-        "unist-util-select": "^4.0.1"
-    },
     "ava": {
         "extensions": {
             "ts": "module",
@@ -60,8 +64,5 @@
         "nodeArguments": [
             "--loader=ts-node/esm/transpile-only"
         ]
-    },
-    "peerDependencies": {
-        "react": ">=16.8.0"
     }
 }
