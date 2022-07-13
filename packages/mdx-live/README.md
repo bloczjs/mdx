@@ -12,6 +12,12 @@ You can also provide a scope for all the variables and components used in the MD
 
 Since the v0.2.0, it's based on MDX v2. It you want to use it with MDX v1, you can look at the [v0.1.0](https://github.com/bloczjs/mdx/tree/v0.1.0).
 
+This package requires you to also install `@mdx-js/mdx`:
+
+```bash
+yarn add @mdx-js/mdx @blocz/mdx-live
+```
+
 ## ESM
 
 ⚠️ This package is only published as an ESM package, it doesn't provide any CJS exports.
