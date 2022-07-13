@@ -53,7 +53,9 @@
     "ava": {
         "extensions": {
             "ts": "module",
-            "tsx": "module"
+            "tsx": "module",
+            "mjs": true,
+            "cjs": true
         },
         "nodeArguments": [
             "--loader=ts-node/esm/transpile-only"
