@@ -12,7 +12,6 @@
 -   Add support for `recmaPlugins` in addition to `rehypePlugins` and `remarkPlugins` in `MDX` props
 -   `useMDX` can accept all kind of plugins
 -   Add `isReady` in `useMDX` return object
--
 
 ### `@blocz/mdx-plugin-detect-imports`
 
@@ -67,10 +66,10 @@ Removed because already fully covered by the recommended `@mdx-js/loader` + `@bl
 -   Add support for node 18 in addition to node 16
 -   Add a few e2e tests
 
+**Full changelog**: https://github.com/bloczjs/mdx/compare/v0.1.0...v0.2.0
+
 <details>
   <summary>See detailed changelog</summary>
-
-**Full Changelog**: https://github.com/bloczjs/mdx/compare/v0.1.0...v0.2.0
 
 #### 0.2.0-rc.2
 
@@ -78,7 +77,7 @@ Removed because already fully covered by the recommended `@mdx-js/loader` + `@bl
 -   Update GH actions & add support for node 18 in https://github.com/bloczjs/mdx/pull/33
 -   Mark `@mdx-js/mdx` as peer dependency in https://github.com/bloczjs/mdx/pull/34
 
-**Full Changelog**: https://github.com/bloczjs/mdx/compare/v0.2.0-rc.1...v0.2.0-rc.2
+**Changelog**: https://github.com/bloczjs/mdx/compare/v0.2.0-rc.1...v0.2.0-rc.2
 
 #### 0.2.0-rc.1
 
@@ -90,7 +89,7 @@ Removed because already fully covered by the recommended `@mdx-js/loader` + `@bl
 -   Add tests for `esbuild` in https://github.com/bloczjs/mdx/pull/28
 -   Add tests for `rollup` in https://github.com/bloczjs/mdx/pull/31
 
-**Full Changelog**: https://github.com/bloczjs/mdx/compare/v0.2.0-rc...v0.2.0-rc.1
+**Changelog**: https://github.com/bloczjs/mdx/compare/v0.2.0-rc...v0.2.0-rc.1
 
 #### 0.2.0-rc.0
 
@@ -112,6 +111,6 @@ Also:
 -   minor: regenerate yarn.lock in https://github.com/bloczjs/mdx/pull/19
 -   minor: upgrade to yarn `v3.2.1` in https://github.com/bloczjs/mdx/pull/20
 
-**Full Changelog**: https://github.com/bloczjs/mdx/compare/v0.1.0...v0.2.0-rc
+**Changelog**: https://github.com/bloczjs/mdx/compare/v0.1.0...v0.2.0-rc
 
 </details>
