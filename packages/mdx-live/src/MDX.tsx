@@ -15,7 +15,6 @@ const DefaultProvider: React.Provider<MDXContextType> = ({ children }) => (
 
 interface MDXProps extends UseMDXParams {
     Provider?: React.Provider<MDXContextType>;
-    ErrorBoundary?: React.ComponentType<{}>;
 }
 
 export const MDX: React.FunctionComponent<MDXProps> = ({
