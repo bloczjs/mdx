@@ -1,4 +1,4 @@
-# `@blocz/mdx-live`
+# `@blocz/mdx-live` <!-- omit in toc -->
 
 `@blocz/mdx-live` allows you to dynamically render a MDX string.
 
@@ -7,6 +7,17 @@ It understands the import statements, and you can provide how they will get reso
 Exports statements are also executed. **WARNING:** this allows XSS so be sure to be in a safe environment.
 
 You can also provide a scope for all the variables and components used in the MDX.
+
+-   [MDX 2](#mdx-2)
+-   [ESM](#esm)
+-   [How to use](#how-to-use)
+    -   [Simple MDX](#simple-mdx)
+    -   [With scope](#with-scope)
+    -   [With export statement](#with-export-statement)
+    -   [With import statement](#with-import-statement)
+    -   [Plugins](#plugins)
+    -   [Provider](#provider)
+    -   [`useMDX` hook](#usemdx-hook)
 
 ## MDX 2
 
@@ -147,3 +158,52 @@ export type ResolveImport = (
 You can use the props `recmaPlugins`, `rehypePlugins`, and `remarkPlugins` to pass [remark](https://github.com/remarkjs/remark/blob/main/doc/plugins.md#list-of-plugins) (plugins based on the markdown AST), [rehype](https://github.com/rehypejs/rehype/blob/main/doc/plugins.md#list-of-plugins) (plugins based on the html AST), and recma (plugins based on the JS AST) plugins to the MDX compiler.
 
 See https://mdxjs.com/packages/mdx/#optionsremarkplugins for more information.
+
+### Provider
+
+If you need to have access to more information in a custom renderer (like for instance a custom code block renderer), you can provide a `Provider` to `MDX`.
+
+The `Provider` will be provided the same data what [`useMDX`](#usemdx-hook) returns: `scope`, `text`, and `isReady`.
+
+### `useMDX` hook
+
+Except for `Provider`, all of the other props available on `MDX` are also available as a param on the `useMDX` hook:
+
+```jsx
+import { useMDX } from "@blocz/mdx-live";
+
+const Button = ({ label, variant, onClick }) => (
+    <button data-variant={variant} onClick={onClick}>
+        {label}
+    </button>
+);
+
+const importMDX = `
+import { Button } from 'example';
+
+<Button variant="blue" label="Click Me!" />
+`;
+
+const resolveImport = async (option) => {
+    if (
+        option.kind === "named" &&
+        option.path === "example" &&
+        option.variable === "Button"
+    ) {
+        return Button;
+    }
+
+    return undefined;
+};
+
+const App = () => {
+    const { scope, text, isReady } = useMDX({
+        code: importMDX,
+        resolveImport,
+    });
+
+    // scope = Object containing all the top-level variables used in the MDX code (all imports & exports, in this case there is only `Button`)
+    // text = parsed version of the MDX code without MDX nor JSX, aka plain code that can be executed
+    // isReady: boolean representing if the code sample has been fully parsed yet or if it's still getting parsed
+};
+```
