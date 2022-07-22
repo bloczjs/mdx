@@ -40,7 +40,18 @@ test("it works with rollup", async (t) => {
     t.truthy(content.match(/Button, {\s*variant: "blue",\s*label: "Label"/));
     t.truthy(
         content.includes(
-            `const importStatements = [{ module: "./elements", imports: [{ kind: "named", local: "Tabs", value: Tabs }, { kind: "named", local: "Button", value: Button }] }];`,
+            `const importStatements = [{
+  module: "./elements",
+  imports: [{
+    kind: "named",
+    local: "Tabs",
+    value: Tabs
+  }, {
+    kind: "named",
+    local: "Button",
+    value: Button
+  }]
+}];`,
         ),
     );
 });
@@ -56,7 +67,18 @@ test("it works with rollup and a custom name", async (t) => {
     t.truthy(content.match(/Button, {\s*variant: "blue",\s*label: "Label"/));
     t.truthy(
         content.includes(
-            `const otherName = [{ module: "./elements", imports: [{ kind: "named", local: "Tabs", value: Tabs }, { kind: "named", local: "Button", value: Button }] }];`,
+            `const otherName = [{
+  module: "./elements",
+  imports: [{
+    kind: "named",
+    local: "Tabs",
+    value: Tabs
+  }, {
+    kind: "named",
+    local: "Button",
+    value: Button
+  }]
+}];`,
         ),
     );
 });
