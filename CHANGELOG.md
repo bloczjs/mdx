@@ -16,7 +16,8 @@
 
 ### `@blocz/mdx-plugin-detect-imports`
 
--   Update for MDX 2 (but still in CJS)
+-   Update for MDX 2 (but still in CJS, and compatible in ESM)
+-   Can only be used in MDX async function (like `compile`) but not the sync ones (like `compileSync`)
 -   Change format of `ImportStatement` to better represent named vs default exports:
 
     In v0.1.0:
@@ -71,6 +72,12 @@ Removed because already fully covered by the recommended `@mdx-js/loader` + `@bl
 
 <details>
   <summary>See detailed changelog</summary>
+
+#### 0.2.0-rc.3
+
+-   switch `@blocz/mdx-plugin-detect-imports` to a mix of CJS + ESM which makes it async
+    and so it now cannot be used anymore with `mdx.compileSync`, only `await mdx.compile` **BREAKING CHANGE**
+-   `@blocz/mdx-plugin-detect-imports` generates a proper AST for the exported variable
 
 #### 0.2.0-rc.2
 
