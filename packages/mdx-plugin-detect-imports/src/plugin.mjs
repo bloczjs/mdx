@@ -42,7 +42,7 @@ const generateImportStatements = (tree) => {
                     break;
             }
         }
-        //
+
         const importStatement = `{
             module: "${importDeclaration.source.value}",
             imports: [${imports.join(", ")}]
@@ -88,6 +88,7 @@ const getExportStatement = ({ line, offset, variableName, value }) => {
 };
 
 export default ({ exportName = "importStatements" } = {}) =>
+    // The async here isn't technically required, but otherwise this file and plugin.cjs don't have the same signature
     async (tree, file) => {
         const importStatements = generateImportStatements(tree);
         const injectedNode = getExportStatement({
