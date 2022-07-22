@@ -84,6 +84,7 @@ test("injects the right importStatements variable", async (t) => {
             remarkPlugins: [plugin],
         })
     ).value;
+    t.snapshot(jsx);
     t.truthy(jsx.includes(defaultImportStatements));
 });
 test("allows for otherNames than 'importStatements'", async (t) => {
