@@ -1,4 +1,4 @@
-import { compileSync } from "@mdx-js/mdx";
+import { compile } from "@mdx-js/mdx";
 import plugin from "@blocz/mdx-plugin-detect-imports";
 import test from "ava";
 
@@ -46,19 +46,53 @@ export const props = {
 `;
 
 const defaultImportStatements = `
-export const importStatements = [{ module: "@blocz/lib", imports: [{ kind: "default", local: "hello", value: hello }, { kind: "named", local: "useFunction", value: useFunction }] }, { module: "@blocz/elements", imports: [{ kind: "named", local: "Tabs", value: Tabs }, { kind: "named", local: "Button", value: Button }] }, { module: "@blocz/foo", imports: [{ kind: "namespace", local: "foo", value: foo }] }];
+export const importStatements = [{
+  module: "@blocz/lib",
+  imports: [{
+    kind: "default",
+    local: "hello",
+    value: hello
+  }, {
+    kind: "named",
+    local: "useFunction",
+    value: useFunction
+  }]
+}, {
+  module: "@blocz/elements",
+  imports: [{
+    kind: "named",
+    local: "Tabs",
+    value: Tabs
+  }, {
+    kind: "named",
+    local: "Button",
+    value: Button
+  }]
+}, {
+  module: "@blocz/foo",
+  imports: [{
+    kind: "namespace",
+    local: "foo",
+    value: foo
+  }]
+}];
 `;
 
-test("injects the right importStatements variable", (t) => {
-    const jsx = compileSync(mdxText, {
-        remarkPlugins: [plugin],
-    }).toString();
+test("injects the right importStatements variable", async (t) => {
+    const jsx = (
+        await compile(mdxText, {
+            remarkPlugins: [plugin],
+        })
+    ).value;
+    t.snapshot(jsx);
     t.truthy(jsx.includes(defaultImportStatements));
 });
-test("allows for otherNames than 'importStatements'", (t) => {
-    const jsx = compileSync(mdxText, {
-        remarkPlugins: [[plugin, { exportName: "otherName" }]],
-    }).toString();
+test("allows for otherNames than 'importStatements'", async (t) => {
+    const jsx = (
+        await compile(mdxText, {
+            remarkPlugins: [[plugin, { exportName: "otherName" }]],
+        })
+    ).value;
     t.truthy(
         jsx.includes(
             defaultImportStatements.replace("importStatements", "otherName"),

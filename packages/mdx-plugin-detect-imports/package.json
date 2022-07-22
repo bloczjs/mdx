@@ -1,7 +1,15 @@
 {
     "name": "@blocz/mdx-plugin-detect-imports",
     "version": "0.2.0-rc.2",
-    "main": "src/plugin.js",
+    "main": "src/plugin.cjs",
+    "module": "src/plugin.mjs",
+    "exports": {
+        ".": {
+            "require": "./src/plugin.cjs",
+            "import": "./src/plugin.mjs"
+        },
+        "./package.json": "./package.json"
+    },
     "types": "src/types.d.ts",
     "repository": "git@github.com:bloczjs/mdx.git",
     "author": "Ayc0 <ayc0.benj@gmail.com>",
@@ -23,7 +31,9 @@
         "test": "ava"
     },
     "dependencies": {
-        "unist-util-select": "^3.0.4"
+        "acorn": "^8.0.0",
+        "estree-util-visit": "^1.0.0",
+        "unist-util-select": "^4.0.0"
     },
     "devDependencies": {
         "@mdx-js/mdx": "^2.1.2",
