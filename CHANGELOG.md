@@ -73,6 +73,10 @@ Removed because already fully covered by the recommended `@mdx-js/loader` + `@bl
 <details>
   <summary>See detailed changelog</summary>
 
+#### 0.2.0-rc.4
+
+-   Use proper loc / position / range in generated AST
+
 #### 0.2.0-rc.3
 
 -   switch `@blocz/mdx-plugin-detect-imports` to a mix of CJS + ESM which makes it async
