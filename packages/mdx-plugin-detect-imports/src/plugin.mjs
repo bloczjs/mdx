@@ -58,14 +58,25 @@ const getExportStatement = ({ line, offset, variableName, value }) => {
     const ast = parse(rawCode, {
         sourceType: "module",
         ecmaVersion: "latest",
-        locations: false,
+        locations: true,
+        ranges: true,
     });
 
     const length = ast.end - ast.start;
+    const initialAstLoc = {
+        start: { ...ast.loc.start },
+        end: { ...ast.loc.end },
+    };
 
     visit(ast, (node) => {
-        node.start += offset;
-        node.end += offset;
+        if ("start" in node) node.start += offset;
+        if ("end" in node) node.end += offset;
+        if ("range" in node)
+            node.range = [node.range[0] + offset, node.range[1] + offset];
+        if ("loc" in node) {
+            node.loc.start.line += line;
+            node.loc.end.line += line;
+        }
     });
 
     return {
@@ -73,11 +84,13 @@ const getExportStatement = ({ line, offset, variableName, value }) => {
         value: rawCode,
         position: {
             start: {
-                line,
-                offset: offset,
+                line: line + initialAstLoc.start.line - 1,
+                column: initialAstLoc.start.column + 1, // For some reasons, mdast's column starts at 1, but esast's column starts at 0
+                offset: offset, // Also for some reasons, mdast's position has an offset, but asast's loc doesn't
             },
             end: {
-                line,
+                line: line + initialAstLoc.end.line - 1,
+                column: initialAstLoc.end.column + 1,
                 offset: offset + length,
             },
         },
