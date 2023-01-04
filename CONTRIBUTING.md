@@ -55,7 +55,7 @@ yarn format:check
 To auto fix all formatting issues
 
 ```bash
-yarn format:check
+yarn format:fix
 ```
 
 ### Deploy
