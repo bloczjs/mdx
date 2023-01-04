@@ -44,11 +44,13 @@ test("it works with rollup", async (t) => {
   module: "./elements",
   imports: [{
     kind: "named",
+    imported: "Tabs",
     local: "Tabs",
     value: Tabs
   }, {
     kind: "named",
-    local: "Button",
+    imported: "Button",
+    local: "ButtonElement",
     value: Button
   }]
 }];`,
@@ -71,11 +73,13 @@ test("it works with rollup and a custom name", async (t) => {
   module: "./elements",
   imports: [{
     kind: "named",
+    imported: "Tabs",
     local: "Tabs",
     value: Tabs
   }, {
     kind: "named",
-    local: "Button",
+    imported: "Button",
+    local: "ButtonElement",
     value: Button
   }]
 }];`,

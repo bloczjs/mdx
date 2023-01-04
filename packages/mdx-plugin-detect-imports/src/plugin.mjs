@@ -34,8 +34,9 @@ const generateImportStatements = (tree) => {
                 case "ImportSpecifier":
                     imports.push(`{
                         kind: "named",
+                        imported: "${specifier.imported.name}",
                         local: "${specifier.local.name}",
-                        value: ${specifier.imported.name}
+                        value: ${specifier.local.name}
                     }`);
                     break;
                 default:

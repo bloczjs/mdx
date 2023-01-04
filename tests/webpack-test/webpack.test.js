@@ -57,7 +57,7 @@ test("it works with webpack", (t) => {
                 t.truthy(content.includes("importStatements"));
                 t.truthy(
                     content.includes(
-                        '[{module:"./elements",imports:[{kind:"named",local:"Tabs",value:t.Tabs},{kind:"named",local:"Button",value:t.Button}]}]',
+                        '[{module:"./elements",imports:[{kind:"named",imported:"Tabs",local:"Tabs",value:t.Tabs},{kind:"named",imported:"Button",local:"ButtonElement",value:t.Button}]}]',
                     ),
                 );
                 res();
@@ -125,7 +125,7 @@ test("it works with webpack and a custom name", (t) => {
                 t.truthy(content.includes("otherName"));
                 t.truthy(
                     content.includes(
-                        '[{module:"./elements",imports:[{kind:"named",local:"Tabs",value:t.Tabs},{kind:"named",local:"Button",value:t.Button}]}]',
+                        '[{module:"./elements",imports:[{kind:"named",imported:"Tabs",local:"Tabs",value:t.Tabs},{kind:"named",imported:"Button",local:"ButtonElement",value:t.Button}]}]',
                     ),
                 );
                 res();
@@ -188,7 +188,7 @@ test("it works with webpack and require.resolve", (t) => {
                 t.truthy(content.includes("importStatements"));
                 t.truthy(
                     content.includes(
-                        '[{module:"./elements",imports:[{kind:"named",local:"Tabs",value:t.Tabs},{kind:"named",local:"Button",value:t.Button}]}]',
+                        '[{module:"./elements",imports:[{kind:"named",imported:"Tabs",local:"Tabs",value:t.Tabs},{kind:"named",imported:"Button",local:"ButtonElement",value:t.Button}]}]',
                     ),
                 );
                 res();
