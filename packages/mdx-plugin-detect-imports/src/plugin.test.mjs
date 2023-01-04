@@ -4,7 +4,7 @@ import test from "ava";
 
 const mdxText = `
 import hello, { useFunction } from '@blocz/lib';
-import { Tabs, Button } from '@blocz/elements';
+import { Tabs, Button as ButtonElement } from '@blocz/elements';
 import * as foo from '@blocz/foo';
 
 ### How it works
@@ -32,13 +32,13 @@ export const props = {
     onClick: () => alert('Hello there!')
 }
 
-<Button
+<ButtonElement
     variant="blue"
     label={label}
     {...props}
 />
 
-    <Button
+    <ButtonElement
         label={label}
         {...props}
     />
@@ -54,6 +54,7 @@ export const importStatements = [{
     value: hello
   }, {
     kind: "named",
+    imported: "useFunction",
     local: "useFunction",
     value: useFunction
   }]
@@ -61,12 +62,14 @@ export const importStatements = [{
   module: "@blocz/elements",
   imports: [{
     kind: "named",
+    imported: "Tabs",
     local: "Tabs",
     value: Tabs
   }, {
     kind: "named",
-    local: "Button",
-    value: Button
+    imported: "Button",
+    local: "ButtonElement",
+    value: ButtonElement
   }]
 }, {
   module: "@blocz/foo",
