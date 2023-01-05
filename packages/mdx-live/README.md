@@ -31,9 +31,9 @@ yarn add @mdx-js/mdx @blocz/mdx-live
 
 ## ESM
 
-⚠️ This package is only published as an ESM package, it doesn't provide any CJS exports.
-The reason behind this is because MDX switch to ESM only in their v2 too (see https://mdxjs.com/migrating/v2/#esm).\
-And as you'll also need regular MDX packages to make this one work, we also switched to ESM.
+> **Warning**<br/>
+> This package is only published as an ESM package, it doesn't provide any CJS exports.<br/>
+> MDX also switched to ESM only in their v2 (see https://mdxjs.com/migrating/v2/#esm).
 
 ## How to use
 
