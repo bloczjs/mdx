@@ -47,7 +47,7 @@
         "@testing-library/react-hooks": "^8.0.1",
         "@types/estree": "^0.0.52",
         "@types/react": "17.0.47",
-        "ava": "^4.3.1",
+        "ava": "^5.1.0",
         "microbundle": "^0.15.0",
         "react": "^17.0.2",
         "react-dom": "^17.0.2",

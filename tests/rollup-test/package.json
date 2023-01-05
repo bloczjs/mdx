@@ -15,6 +15,6 @@
         "rollup": "^2.76.0"
     },
     "devDependencies": {
-        "ava": "^4.3.1"
+        "ava": "^5.1.0"
     }
 }

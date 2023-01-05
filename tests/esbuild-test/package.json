@@ -15,6 +15,6 @@
         "esbuild": "^0.14.49"
     },
     "devDependencies": {
-        "ava": "^4.3.1"
+        "ava": "^5.1.0"
     }
 }
