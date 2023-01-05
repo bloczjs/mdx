@@ -1457,8 +1457,8 @@ __metadata:
     "@blocz/mdx-plugin-detect-imports": "workspace:*"
     "@mdx-js/loader": ^2.1.2
     ava: ^5.1.0
-    memfs: ^3.4.7
-    webpack: ^5.73.0
+    memfs: ^3.4.12
+    webpack: ^5.75.0
   languageName: unknown
   linkType: soft
 
@@ -2503,7 +2503,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"acorn@npm:^8.8.1":
+"acorn@npm:^8.7.1, acorn@npm:^8.8.1":
   version: 8.8.1
   resolution: "acorn@npm:8.8.1"
   bin:
@@ -3905,13 +3905,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"enhanced-resolve@npm:^5.9.3":
-  version: 5.10.0
-  resolution: "enhanced-resolve@npm:5.10.0"
+"enhanced-resolve@npm:^5.10.0":
+  version: 5.12.0
+  resolution: "enhanced-resolve@npm:5.12.0"
   dependencies:
     graceful-fs: ^4.2.4
     tapable: ^2.2.0
-  checksum: 0bb9830704db271610f900e8d79d70a740ea16f251263362b0c91af545576d09fe50103496606c1300a05e588372d6f9780a9bc2e30ce8ef9b827ec8f44687ff
+  checksum: bf3f787facaf4ce3439bef59d148646344e372bef5557f0d37ea8aa02c51f50a925cd1f07b8d338f18992c29f544ec235a8c64bcdb56030196c48832a5494174
   languageName: node
   linkType: hard
 
@@ -5744,12 +5744,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"memfs@npm:^3.4.7":
-  version: 3.4.7
-  resolution: "memfs@npm:3.4.7"
+"memfs@npm:^3.4.12":
+  version: 3.4.12
+  resolution: "memfs@npm:3.4.12"
   dependencies:
     fs-monkey: ^1.0.3
-  checksum: fab88266dc576dc4999e38bdf531d703fb798affac2e0dd3fc17470878486844027b2766008ba80c0103b443f52cf9068a5c00f4e1ecf04106f4b29c11855822
+  checksum: dab8dec1ae0b2a92e4d563ac86846047cd7aeb17cde4ad51da85cff6e580c32d12b886354527788e36eb75f733dd8edbaf174476b7cea73fed9c5a0e45a6b428
   languageName: node
   linkType: hard
 
@@ -8779,7 +8779,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"watchpack@npm:^2.3.1":
+"watchpack@npm:^2.4.0":
   version: 2.4.0
   resolution: "watchpack@npm:2.4.0"
   dependencies:
@@ -8817,20 +8817,20 @@ __metadata:
   languageName: node
   linkType: hard
 
-"webpack@npm:^5.73.0":
-  version: 5.73.0
-  resolution: "webpack@npm:5.73.0"
+"webpack@npm:^5.75.0":
+  version: 5.75.0
+  resolution: "webpack@npm:5.75.0"
   dependencies:
     "@types/eslint-scope": ^3.7.3
     "@types/estree": ^0.0.51
     "@webassemblyjs/ast": 1.11.1
     "@webassemblyjs/wasm-edit": 1.11.1
     "@webassemblyjs/wasm-parser": 1.11.1
-    acorn: ^8.4.1
+    acorn: ^8.7.1
     acorn-import-assertions: ^1.7.6
     browserslist: ^4.14.5
     chrome-trace-event: ^1.0.2
-    enhanced-resolve: ^5.9.3
+    enhanced-resolve: ^5.10.0
     es-module-lexer: ^0.9.0
     eslint-scope: 5.1.1
     events: ^3.2.0
@@ -8843,14 +8843,14 @@ __metadata:
     schema-utils: ^3.1.0
     tapable: ^2.1.1
     terser-webpack-plugin: ^5.1.3
-    watchpack: ^2.3.1
+    watchpack: ^2.4.0
     webpack-sources: ^3.2.3
   peerDependenciesMeta:
     webpack-cli:
       optional: true
   bin:
     webpack: bin/webpack.js
-  checksum: aa434a241bad6176b68e1bf0feb1972da4dcbf27cb3d94ae24f6eb31acc37dceb9c4aae55e068edca75817bfe91f13cd20b023ac55d9b1b2f8b66a4037c9468f
+  checksum: 2bcc5f3c195f375944e8af2f00bf2feea39cb9fda5f763b0d1b00077f1c51783db25c94d3fae96a07dead9fa085e6ae7474417e5ab31719c9776ea5969ceb83a
   languageName: node
   linkType: hard
 

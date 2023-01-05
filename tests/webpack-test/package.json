@@ -12,8 +12,8 @@
     "dependencies": {
         "@blocz/mdx-plugin-detect-imports": "workspace:*",
         "@mdx-js/loader": "^2.1.2",
-        "memfs": "^3.4.7",
-        "webpack": "^5.73.0"
+        "memfs": "^3.4.12",
+        "webpack": "^5.75.0"
     },
     "devDependencies": {
         "ava": "^5.1.0"
