@@ -21,7 +21,8 @@ You can also provide a scope for all the variables and components used in the MD
 
 ## MDX 2
 
-Since the v0.2.0, it's based on MDX v2. It you want to use it with MDX v1, you can look at the [v0.1.0](https://github.com/bloczjs/mdx/tree/v0.1.0).
+Since the v0.2.0, it's based on MDX v2. It you want to use it with MDX v1, you can look at the [v0.1.0](https://github.com/bloczjs/mdx/tree/v0.1.0).<br/>
+If you’re looking to upgrade to the v0.2.0, [the list of breaking changes is listed here](https://github.com/bloczjs/mdx/releases/tag/v0.2.0).
 
 This package requires you to also install `@mdx-js/mdx`:
 
