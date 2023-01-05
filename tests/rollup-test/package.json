@@ -12,7 +12,7 @@
     "dependencies": {
         "@blocz/mdx-plugin-detect-imports": "workspace:*",
         "@mdx-js/rollup": "^2.1.2",
-        "rollup": "^2.76.0"
+        "rollup": "^3.9.1"
     },
     "devDependencies": {
         "ava": "^5.1.0"
