@@ -34,7 +34,7 @@
         "test": "ava"
     },
     "dependencies": {
-        "unist-util-select": "^4.0.1"
+        "unist-util-select": "^4.0.0"
     },
     "peerDependencies": {
         "@mdx-js/mdx": "^2.0.0",

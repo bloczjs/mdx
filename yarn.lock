@@ -1411,7 +1411,7 @@ __metadata:
     react: ^17.0.2
     react-dom: ^17.0.2
     ts-node: ^10.9.1
-    unist-util-select: ^4.0.1
+    unist-util-select: ^4.0.0
     vfile: ^5.3.4
   peerDependencies:
     "@mdx-js/mdx": ^2.0.0
@@ -8623,7 +8623,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"unist-util-select@npm:^4.0.0, unist-util-select@npm:^4.0.1":
+"unist-util-select@npm:^4.0.0":
   version: 4.0.1
   resolution: "unist-util-select@npm:4.0.1"
   dependencies:
