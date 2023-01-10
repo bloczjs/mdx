@@ -160,6 +160,24 @@ You can use the props `recmaPlugins`, `rehypePlugins`, and `remarkPlugins` to pa
 
 See https://mdxjs.com/packages/mdx/#optionsremarkplugins for more information.
 
+### Custom renderers
+
+If you want to use custom renderers, you’ll have to use `@mdx-js/react` and the prop `useMDXComponents`:
+
+```jsx
+import { useMDXComponents, MDXProvider } from "@mdx-js/react";
+import { MDX } from "@blocz/mdx-live";
+
+<MDXProvider components={{ h3: () => <p>I am a custom h3</p> }}>
+    <MDX
+        useMDXComponents={useMDXComponents}
+        code={`
+### This header will be replaced
+`}
+    />
+</MDXProvider>;
+```
+
 ### Provider
 
 If you need to have access to more information in a custom renderer (like for instance a custom code block renderer), you can provide a `Provider` to `MDX`.
@@ -201,7 +219,8 @@ The `Provider` will be called with a `scope` of:
 
 ### `useMDX` hook
 
-Except for `Provider`, all of the other props available on `MDX` are also available as a param on the `useMDX` hook:
+Just like `MDX`, the `useMDX` hook accepts those arguments: `code`, `resolveImport`, `recmaPlugins`, `rehypePlugins`, `remarkPlugins`.
+But in addition to those, it also accepts `@mdx-js/mdx`’s [`providerImportSource`](https://mdxjs.com/packages/mdx/#optionsproviderimportsource).
 
 ```jsx
 import { useMDX } from "@blocz/mdx-live";

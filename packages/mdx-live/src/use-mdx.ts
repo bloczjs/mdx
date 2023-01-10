@@ -27,6 +27,7 @@ export interface UseMDXParams {
     rehypePlugins?: CompileOptions["rehypePlugins"];
     /** **Needs to be memoized** */
     remarkPlugins?: CompileOptions["remarkPlugins"];
+    providerImportSource?: CompileOptions["providerImportSource"];
 }
 export interface UseMDXOut {
     resolvedImports: Variables;
@@ -42,6 +43,7 @@ export const useMDX = ({
     recmaPlugins,
     rehypePlugins,
     remarkPlugins,
+    providerImportSource,
 }: UseMDXParams): UseMDXOut => {
     const [parsedFile, setParsedFile] = React.useState<
         readonly [VFile, ImportDeclaration[]] | undefined
@@ -98,6 +100,7 @@ export const useMDX = ({
             recmaPlugins,
             rehypePlugins,
             remarkPlugins,
+            providerImportSource,
         };
 
         if (isQueueEmpty) {
@@ -183,13 +186,19 @@ function compileCode({
     recmaPlugins,
     rehypePlugins,
     remarkPlugins,
+    providerImportSource,
 }: Pick<
     UseMDXParams,
-    "code" | "recmaPlugins" | "rehypePlugins" | "remarkPlugins"
+    | "code"
+    | "recmaPlugins"
+    | "rehypePlugins"
+    | "remarkPlugins"
+    | "providerImportSource"
 >) {
     const importDeclarations: ImportDeclaration[] = [];
     return compile(code, {
         outputFormat: "function-body",
+        providerImportSource: providerImportSource,
         recmaPlugins,
         rehypePlugins,
         remarkPlugins: [

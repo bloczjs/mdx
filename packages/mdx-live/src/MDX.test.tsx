@@ -1,5 +1,6 @@
 import * as React from "react";
-import { act, render } from "@testing-library/react";
+import { render, cleanup } from "@testing-library/react";
+import { useMDXComponents, MDXProvider } from "@mdx-js/react";
 import { MDX } from "./MDX.js";
 import type { ResolveImport } from "./MDX";
 import test from "ava";
@@ -7,6 +8,10 @@ import test from "ava";
 import { GlobalRegistrator } from "@happy-dom/global-registrator";
 
 GlobalRegistrator.register();
+
+test.afterEach.always("wipe out DOM", () => {
+    cleanup();
+});
 
 const Button: React.FunctionComponent<{
     as?: string | React.ComponentType<any>;
@@ -96,69 +101,79 @@ const resolveImport: ResolveImport = async (option) => {
 
 const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
-test("render simple MD", async (t) => {
-    await act(async () => {
-        const { getAllByRole } = await render(<MDX code={markdown} />);
-        await wait(10);
-        t.is(2, getAllByRole("heading").length);
-        t.is(2, getAllByRole("separator").length);
-        t.is(8, getAllByRole("listitem").length);
-        t.is(3, getAllByRole("list").length);
-    });
+test.serial("render simple MD", async (t) => {
+    const { getAllByRole } = render(<MDX code={markdown} />);
+    await wait(0);
+    t.is(2, getAllByRole("heading").length);
+    t.is(2, getAllByRole("separator").length);
+    t.is(8, getAllByRole("listitem").length);
+    t.is(3, getAllByRole("list").length);
 });
 
-test("render MDX with export statement", async (t) => {
-    await act(async () => {
-        const { container } = await render(
-            <MDX code={mdxWithoutImportStatement} defaultScope={{ Button }} />,
+test.serial(
+    "it enables the flag `providerImportSource` when `useMDXComponents` is passed",
+    async (t) => {
+        const { queryAllByRole, getAllByText } = render(
+            <MDXProvider components={{ h3: () => <p>I AM A HEADER</p> }}>
+                <MDX useMDXComponents={useMDXComponents} code={markdown} />
+            </MDXProvider>,
         );
-        await wait(10);
-        t.is(
-            `<button data-variant="blue">Click Me!</button>
+        await wait(0);
+
+        t.is(0, queryAllByRole("heading").length);
+        t.is(2, getAllByText("I AM A HEADER").length);
+    },
+);
+
+test.serial("render MDX with export statement", async (t) => {
+    const { container } = render(
+        <MDX code={mdxWithoutImportStatement} defaultScope={{ Button }} />,
+    );
+    await wait(0);
+    t.is(
+        `<button data-variant="blue">Click Me!</button>
 <div>Hello</div>
 <div data-variant="red">Click Me!</div>
 <div>World</div>
 <div data-variant="green">Click Me!</div>`,
-            container.innerHTML,
-        );
-    });
+        container.innerHTML,
+    );
 });
 
-test("render MDX with import statement", async (t) => {
-    await act(async () => {
-        const { container } = await render(
-            <MDX code={mdxWithImportStatement} resolveImport={resolveImport} />,
-        );
-        await wait(10);
-        t.is(
-            `<button data-variant="blue">Click Me!</button>
+test.serial("render MDX with import statement", async (t) => {
+    const { container } = render(
+        <MDX code={mdxWithImportStatement} resolveImport={resolveImport} />,
+    );
+    await wait(0);
+    t.is(
+        `<button data-variant="blue">Click Me!</button>
 <div>Hello</div>
 <div data-variant="red">Click Me!</div>
 <div>World</div>
 <div data-variant="green">Click Me!</div>`,
-            container.innerHTML,
-        );
-    });
+        container.innerHTML,
+    );
 });
 
-test("the Provider receives all imports and exports in its scope", async (t) => {
-    const Context = React.createContext<any>({});
+test.serial(
+    "the Provider receives all imports and exports in its scope",
+    async (t) => {
+        const Context = React.createContext<any>({});
 
-    const calls: any[] = [];
-    const Provider = (({ children, ...args }) => {
-        calls.push(args);
-        return <Context.Provider {...args}>{children}</Context.Provider>;
-    }) as typeof Context.Provider;
+        const calls: any[] = [];
+        const Provider = (({ children, ...args }) => {
+            calls.push(args);
+            return <Context.Provider {...args}>{children}</Context.Provider>;
+        }) as typeof Context.Provider;
 
-    await act(async () => {
-        await render(
+        render(
             <MDX
                 code={mdxWithImportStatement}
                 resolveImport={resolveImport}
                 Provider={Provider}
             />,
         );
-        await wait(10);
+        await wait(0);
         t.is(1, calls.length);
 
         t.is(true, calls[0].value.isReady);
@@ -180,23 +195,24 @@ test("the Provider receives all imports and exports in its scope", async (t) => 
         // Check some of the variables
         t.is("Click Me!", calls[0].value.scope.label);
         t.is(Button, calls[0].value.scope.Button);
-    });
-});
+    },
+);
 
-test("it properly merges defaultScope and detected imports in the Provider scope", async (t) => {
-    const Context = React.createContext<any>({});
+test.serial(
+    "it properly merges defaultScope and detected imports in the Provider scope",
+    async (t) => {
+        const Context = React.createContext<any>({});
 
-    const calls: any[] = [];
-    const Provider = (({ children, ...args }) => {
-        calls.push(args);
-        return <Context.Provider {...args}>{children}</Context.Provider>;
-    }) as typeof Context.Provider;
+        const calls: any[] = [];
+        const Provider = (({ children, ...args }) => {
+            calls.push(args);
+            return <Context.Provider {...args}>{children}</Context.Provider>;
+        }) as typeof Context.Provider;
 
-    await act(async () => {
         const resolveImport = async () => {
             return "detected";
         };
-        await render(
+        render(
             <MDX
                 code={`
 import A from 'a';
@@ -206,7 +222,7 @@ import A from 'a';
                 Provider={Provider}
             />,
         );
-        await wait(10);
+        await wait(0);
         t.deepEqual(
             {
                 A: "detected", // A is "detected" and not "A" like in the defaultScope
@@ -214,10 +230,10 @@ import A from 'a';
             } as Record<string, any>,
             calls[0].value.scope,
         );
-    });
-});
+    },
+);
 
-test("kitchen sink", async (t) => {
+test.serial("kitchen sink", async (t) => {
     const Context = React.createContext<any>({});
 
     const calls: any[] = [];
@@ -226,29 +242,27 @@ test("kitchen sink", async (t) => {
         return <Context.Provider {...args}>{children}</Context.Provider>;
     }) as typeof Context.Provider;
 
-    await act(async () => {
-        await render(
-            <MDX
-                Provider={Provider}
-                defaultScope={{ variant: "blue", Button: () => null }}
-                code={`
+    render(
+        <MDX
+            Provider={Provider}
+            defaultScope={{ variant: "blue", Button: () => null }}
+            code={`
 import { Button } from '@blocz/element';
 
 export const label = "Click Me!";
 
 <Button variant={variant} label={label} />
 `}
-                resolveImport={resolveImport}
-            />,
-        );
-        await wait(10);
-        t.deepEqual(
-            {
-                Button: Button,
-                label: "Click Me!",
-                variant: "blue",
-            } as Record<string, any>,
-            calls[0].value.scope,
-        );
-    });
+            resolveImport={resolveImport}
+        />,
+    );
+    await wait(0);
+    t.deepEqual(
+        {
+            Button: Button,
+            label: "Click Me!",
+            variant: "blue",
+        } as Record<string, any>,
+        calls[0].value.scope,
+    );
 });

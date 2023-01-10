@@ -17,16 +17,24 @@ const DefaultProvider: React.Provider<MDXContextType> = ({ children }) => (
     <>{children}</>
 );
 
-interface MDXProps extends UseMDXParams {
+type Components = import("mdx/types").MDXComponents;
+type MergeComponents = (currentComponents: Components) => Components;
+type UseMDXComponents = (
+    components?: Components | MergeComponents | undefined,
+) => Components;
+
+interface MDXProps extends Omit<UseMDXParams, "providerImportSource"> {
     /** **Needs to be memoized** */
     defaultScope?: Variables;
     Provider?: React.Provider<MDXContextType>;
+    useMDXComponents?: UseMDXComponents;
 }
 
 export const MDX: React.FunctionComponent<MDXProps> = ({
     Provider = DefaultProvider,
     code,
     defaultScope,
+    useMDXComponents,
     resolveImport,
     recmaPlugins,
     rehypePlugins,
@@ -35,6 +43,9 @@ export const MDX: React.FunctionComponent<MDXProps> = ({
     const { resolvedImports, text, isReady } = useMDX({
         code,
         resolveImport,
+        providerImportSource: useMDXComponents
+            ? "something different than empty string"
+            : undefined,
         recmaPlugins,
         rehypePlugins,
         remarkPlugins,
@@ -50,8 +61,15 @@ export const MDX: React.FunctionComponent<MDXProps> = ({
         if (!text) {
             return () => null;
         }
-        const fn = new Function("React", ...Object.keys(scope), text);
-        return fn(ReactRuntime, ...Object.values(scope));
+        const fn = new Function(
+            "__first_argument__",
+            ...Object.keys(scope),
+            text,
+        );
+        return fn(
+            { ...ReactRuntime, useMDXComponents },
+            ...Object.values(scope),
+        );
     }, [text, scope]);
 
     if (!isReady) {
