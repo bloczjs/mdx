@@ -198,12 +198,12 @@ const resolveImport = async (option) => {
 };
 
 const App = () => {
-    const { scope, text, isReady } = useMDX({
+    const { resolvedImports, text, isReady } = useMDX({
         code: importMDX,
         resolveImport,
     });
 
-    // scope = Object containing all the top-level variables used in the MDX code (all imports & exports, in this case there is only `Button`)
+    // resolvedImports = Object containing all the resolved imports (in this case there is only `Button`)
     // text = parsed version of the MDX code without MDX nor JSX, aka plain code that can be executed
     // isReady: boolean representing if the code sample has been fully parsed yet or if it's still getting parsed
 };
