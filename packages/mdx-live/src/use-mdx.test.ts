@@ -40,58 +40,13 @@ export const h = 1;
             F: "default",
             G: "default",
         } as Record<string, any>,
-        result.current.scope,
+        result.current.resolvedImports,
     );
 
     t.snapshot(result.current.text, "Text result");
     t.true(result.current.text.includes("\nconst h = 1;\n"));
 
     t.is(3, result.all.length); // 3 because: initial, compilation of the file, resolving of imports
-});
-
-test("it merges defaultScope and detected scope", async (t) => {
-    const { result, waitFor } = renderHook(() =>
-        useMDX({
-            code: `
-import A from 'a';
-`,
-            defaultScope: { b: "b" },
-        }),
-    );
-
-    await waitFor(() => result.current.text !== "");
-
-    t.deepEqual(
-        {
-            A: undefined,
-            b: "b",
-        } as Record<string, any>,
-        result.current.scope,
-    );
-});
-
-test("it keeps detected scope instead of defaultScope during conflicts", async (t) => {
-    const resolveImport = async () => {
-        return "detected";
-    };
-    const { result, waitFor } = renderHook(() =>
-        useMDX({
-            code: `
-import A from 'a';
-`,
-            defaultScope: { A: "default-scope" },
-            resolveImport,
-        }),
-    );
-
-    await waitFor(() => result.current.text !== "");
-
-    t.deepEqual(
-        {
-            A: "detected",
-        } as Record<string, any>,
-        result.current.scope,
-    );
 });
 
 test("it uses the most up-to-date resolveImport", async (t) => {
@@ -113,7 +68,7 @@ import A from 'a';
         {
             A: "initial",
         } as Record<string, any>,
-        result.current.scope,
+        result.current.resolvedImports,
     );
 
     resolveImport = async () => {
@@ -121,13 +76,13 @@ import A from 'a';
     };
     rerender();
     t.is(4, result.all.length);
-    await waitForValueToChange(() => result.current.scope);
+    await waitForValueToChange(() => result.current.resolvedImports);
 
     t.deepEqual(
         {
             A: "updated",
         } as Record<string, any>,
-        result.current.scope,
+        result.current.resolvedImports,
     );
     t.is(5, result.all.length); // switches from 4 to 5 so no useless re-renders
 });

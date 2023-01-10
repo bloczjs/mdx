@@ -19,7 +19,6 @@ export type ResolveImport = (
 
 export interface UseMDXParams {
     code: string;
-    defaultScope?: Variables;
     /** **Needs to be memoized** */
     resolveImport?: ResolveImport;
     /** **Needs to be memoized** */
@@ -30,7 +29,7 @@ export interface UseMDXParams {
     remarkPlugins?: CompileOptions["remarkPlugins"];
 }
 export interface UseMDXOut {
-    scope: Variables;
+    resolvedImports: Variables;
     text: string;
     isReady: boolean;
 }
@@ -39,7 +38,6 @@ const voidAsync = async () => {};
 
 export const useMDX = ({
     code,
-    defaultScope = {},
     resolveImport = voidAsync,
     recmaPlugins,
     rehypePlugins,
@@ -115,7 +113,7 @@ export const useMDX = ({
         scopeForParsedFileRef.current = new WeakSet(); // Only compute it once
     }
 
-    const [scope, setScope] = React.useState<Variables>({});
+    const [resolvedImports, setResolvedImports] = React.useState<Variables>({});
     React.useEffect(() => {
         if (!parsedFile) {
             return;
@@ -124,26 +122,26 @@ export const useMDX = ({
         let isOutdated = false;
 
         const generateScope = async () => {
-            const newScope: Variables = {};
+            const newResolvedImports: Variables = {};
             for (const node of parsedFile[1]) {
                 for (const specifier of node.specifiers) {
                     switch (specifier.type) {
                         case "ImportNamespaceSpecifier":
-                            newScope[specifier.local.name] =
+                            newResolvedImports[specifier.local.name] =
                                 await resolveImport({
                                     kind: "namespace",
                                     path: node.source.value as string,
                                 });
                             break;
                         case "ImportDefaultSpecifier":
-                            newScope[specifier.local.name] =
+                            newResolvedImports[specifier.local.name] =
                                 await resolveImport({
                                     kind: "default",
                                     path: node.source.value as string,
                                 });
                             break;
                         case "ImportSpecifier":
-                            newScope[specifier.local.name] =
+                            newResolvedImports[specifier.local.name] =
                                 await resolveImport({
                                     kind: "named",
                                     path: node.source.value as string,
@@ -158,7 +156,7 @@ export const useMDX = ({
                 return;
             }
             scopeForParsedFileRef.current!.add(parsedFile);
-            setScope(newScope);
+            setResolvedImports(newResolvedImports);
         };
 
         generateScope();
@@ -170,11 +168,11 @@ export const useMDX = ({
     }, [resolveImport, parsedFile]);
 
     if (!parsedFile) {
-        return { scope: {}, text: "", isReady: false };
+        return { resolvedImports: {}, text: "", isReady: false };
     }
 
     return {
-        scope: { ...defaultScope, ...scope },
+        resolvedImports,
         text: parsedFile[0].toString(),
         isReady: scopeForParsedFileRef.current.has(parsedFile),
     };

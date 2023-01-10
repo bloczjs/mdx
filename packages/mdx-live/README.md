@@ -164,7 +164,40 @@ See https://mdxjs.com/packages/mdx/#optionsremarkplugins for more information.
 
 If you need to have access to more information in a custom renderer (like for instance a custom code block renderer), you can provide a `Provider` to `MDX`.
 
-The `Provider` will be provided the same data what [`useMDX`](#usemdx-hook) returns: `scope`, `text`, and `isReady`.
+`Provider` will be provided an object with:
+
+-   `text` and `isReady`, like [`useMDX`](#usemdx-hook)’s returned value,
+-   a `scope` object, which is a merge between:
+    -   the `defaultScope` prop,
+    -   resolved imports thanks to `resolveImport`,
+    -   exported values in the MDX.
+
+For instance, with the following example:
+
+```jsx
+<MDX
+    Provider={Provider}
+    defaultScope={{ variant: "blue" }}
+    code={`
+import { Button } from 'example';
+
+export const label = "Click Me!";
+
+<Button variant={variant} label={label} />
+`}
+    resolveImport={async () => ButtonVariable}
+/>
+```
+
+The `Provider` will be called with a `scope` of:
+
+```js
+{
+    Button: ButtonVariable,
+    label: "Click Me!",
+    variant: "blue",
+}
+```
 
 ### `useMDX` hook
 
@@ -198,12 +231,12 @@ const resolveImport = async (option) => {
 };
 
 const App = () => {
-    const { scope, text, isReady } = useMDX({
+    const { resolvedImports, text, isReady } = useMDX({
         code: importMDX,
         resolveImport,
     });
 
-    // scope = Object containing all the top-level variables used in the MDX code (all imports & exports, in this case there is only `Button`)
+    // resolvedImports = Object containing all the resolved imports (in this case there is only `Button`)
     // text = parsed version of the MDX code without MDX nor JSX, aka plain code that can be executed
     // isReady: boolean representing if the code sample has been fully parsed yet or if it's still getting parsed
 };
