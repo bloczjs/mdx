@@ -35,20 +35,24 @@ export const MDX: React.FunctionComponent<MDXProps> = ({
         remarkPlugins,
     });
 
-    const Runtime = React.useMemo(() => {
+    const compiled = React.useMemo(() => {
         if (!text) {
             return () => null;
         }
         const fn = new Function(text);
-        return fn(ReactRuntime).default;
+        return fn(ReactRuntime);
     }, [text]);
 
     if (!isReady) {
         return null;
     }
 
+    const { default: Runtime, ...otherExports } = compiled;
+
     return (
-        <Provider value={{ scope, text, isReady }}>
+        <Provider
+            value={{ scope: { ...scope, ...otherExports }, text, isReady }}
+        >
             <Runtime components={scope} />
         </Provider>
     );
