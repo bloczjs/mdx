@@ -164,7 +164,40 @@ See https://mdxjs.com/packages/mdx/#optionsremarkplugins for more information.
 
 If you need to have access to more information in a custom renderer (like for instance a custom code block renderer), you can provide a `Provider` to `MDX`.
 
-The `Provider` will be provided the same data what [`useMDX`](#usemdx-hook) returns: `scope`, `text`, and `isReady`.
+`Provider` will be provided an object with:
+
+-   `text` and `isReady`, like [`useMDX`](#usemdx-hook)’s returned value,
+-   a `scope` object, which is a merge between:
+    -   the `defaultScope` prop,
+    -   resolved imports thanks to `resolveImport`,
+    -   exported values in the MDX.
+
+For instance, with the following example:
+
+```jsx
+<MDX
+    Provider={Provider}
+    defaultScope={{ variant: "blue" }}
+    code={`
+import { Button } from 'example';
+
+export const label = "Click Me!";
+
+<Button variant={variant} label={label} />
+`}
+    resolveImport={async () => ButtonVariable}
+/>
+```
+
+The `Provider` will be called with a `scope` of:
+
+```js
+{
+    Button: ButtonVariable,
+    label: "Click Me!",
+    variant: "blue",
+}
+```
 
 ### `useMDX` hook
 
