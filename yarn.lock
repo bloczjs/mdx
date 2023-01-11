@@ -1406,6 +1406,7 @@ __metadata:
     "@testing-library/react": ^12.1.5
     "@testing-library/react-hooks": ^8.0.1
     "@types/estree": ^0.0.52
+    "@types/mdx": ^2.0.3
     "@types/react": 17.0.47
     ava: ^5.1.0
     microbundle: ^0.15.0
@@ -2206,6 +2207,13 @@ __metadata:
   version: 2.0.1
   resolution: "@types/mdx@npm:2.0.1"
   checksum: 521ee9f976af45859a4dd60b159e1cc09109de49ec5570fe70f34cddb0a7b5472b87c1bea743429270398207a997821dec34fd7bd63cbc2a1e5f2f6c701dd1c2
+  languageName: node
+  linkType: hard
+
+"@types/mdx@npm:^2.0.3":
+  version: 2.0.3
+  resolution: "@types/mdx@npm:2.0.3"
+  checksum: 41deb51c29535913af01d25f0e1414cfb5a6948d0e60e77e4aca895694de48bf0ac69c5a81fe2d9617d726cb253001ef82a65b683d5ef51987d15aa1931d086b
   languageName: node
   linkType: hard
 
