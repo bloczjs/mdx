@@ -8,15 +8,17 @@
 
 -   Upgrade for MDX 2 **BREAKING CHANGE**
 -   Switch to ESM only (it depends on `@mdx-js/mdx` that also switched to ESM only) **BREAKING CHANGE**
+-   Add `exports` field in `package.json`
 -   Add peer dependency on `@mdx-js/mdx` **BREAKING CHANGE**
 -   Add support for `recmaPlugins` in addition to `rehypePlugins` and `remarkPlugins` in `MDX` props
 -   `useMDX` can accept all kind of plugins
 -   Add `isReady` in `useMDX` return object
--   Bundle size was reduced from [1.6 MB](https://bundlephobia.com/package/@blocz/mdx-live@0.1.0) to [23.7 kB](https://bundlephobia.com/package/@blocz/mdx-live@0.2.0-rc.2) (-98.5%)
+-   Bundle size was reduced from [1.6 MB](https://bundlephobia.com/package/@blocz/mdx-live@0.1.0) to [21.9 kB](https://bundlephobia.com/package/@blocz/mdx-live@0.2.0) (-98.6%)
 
 ### `@blocz/mdx-plugin-detect-imports`
 
 -   Update for MDX 2 (but still in CJS, and compatible in ESM)
+-   Add `exports` field in `package.json`
 -   Can only be used in MDX async function (like `compile`) but not the sync ones (like `compileSync`)
 -   Change format of `ImportStatement` to better represent named vs default exports:
 
