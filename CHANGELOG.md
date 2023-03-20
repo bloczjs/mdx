@@ -17,10 +17,10 @@
 
 ### `@blocz/mdx-plugin-detect-imports`
 
--   Update for MDX 2 (but still in CJS, and compatible in ESM)
+-   Update for MDX 2 (but still in CJS, and compatible in ESM) **BREAKING CHANGE**
 -   Add `exports` field in `package.json`
--   Can only be used in MDX async function (like `compile`) but not the sync ones (like `compileSync`)
--   Change format of `ImportStatement` to better represent named vs default exports:
+-   Can only be used in MDX async function (like `compile`) but not the sync ones (like `compileSync`) **BREAKING CHANGE**
+-   Change format of `ImportStatement` to better represent named vs default exports (**BREAKING CHANGE**):
 
     In v0.1.0:
 
@@ -74,6 +74,28 @@ Removed because already fully covered by the recommended `@mdx-js/loader` + `@bl
 
 <details>
   <summary>See detailed changelog</summary>
+
+#### 0.2.0-rc.9
+
+-   Add types in exports in all packages. See #46
+
+#### 0.2.0-rc.8
+
+-   Fix TS issue in `@blocz/mdx-live`. See #44
+
+#### 0.2.0-rc.7
+
+-   Fix provider import source in `@blocz/mdx-live`. See #43
+
+#### 0.2.0-rc.6
+
+-   Update test/dev packages in #40
+-   Rollback unist-util-select to 4.0.0 in #41
+-   Re-include exports fields in scope in the Provider in #42
+
+#### 0.2.0-rc.5
+
+-   Re-add imported and fix value for named imports in #39
 
 #### 0.2.0-rc.4
 
