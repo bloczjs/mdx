@@ -1,10 +1,11 @@
 {
     "name": "@blocz/mdx-live",
     "version": "0.2.0-rc.8",
+    "type": "module",
     "source": "src/index.ts",
     "main": "lib/mdx-live.js",
     "module": "lib/mdx-live.js",
-    "type": "module",
+    "types": "lib/index.d.ts",
     "keywords": [
         "mdx",
         "markdown",
@@ -16,12 +17,12 @@
     ],
     "exports": {
         ".": {
+            "types": "./lib/index.d.ts",
             "import": "./lib/mdx-live.modern.js",
             "browser": "./lib/mdx-live.modern.js"
         },
         "./package.json": "./package.json"
     },
-    "types": "lib/index.d.ts",
     "repository": "git@github.com:bloczjs/mdx.git",
     "author": "Ayc0 <ayc0.benj@gmail.com>",
     "license": "MIT",
