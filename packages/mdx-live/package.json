@@ -1,6 +1,6 @@
 {
     "name": "@blocz/mdx-live",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "type": "module",
     "source": "src/index.ts",
     "main": "lib/mdx-live.js",
