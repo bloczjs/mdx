@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import * as ReactRuntime from "react/jsx-runtime.js";
+import * as ReactRuntime from "react/jsx-runtime";
 
 import { useMDX, Variables } from "./use-mdx.js";
 import type { UseMDXParams, ResolveImport } from "./use-mdx";
