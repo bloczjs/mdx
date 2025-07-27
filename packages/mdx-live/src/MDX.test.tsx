@@ -103,7 +103,7 @@ const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 test.serial("render simple MD", async (t) => {
     const { getAllByRole } = render(<MDX code={markdown} />);
-    await wait(16);
+    await wait(30);
     t.is(2, getAllByRole("heading").length);
     t.is(2, getAllByRole("separator").length);
     t.is(8, getAllByRole("listitem").length);
@@ -114,7 +114,6 @@ test.serial(
     "it enables the flag `providerImportSource` when `useMDXComponents` is passed",
     async (t) => {
         const { queryAllByRole, getAllByText } = render(
-            // @ts-expect-error MDXProvider is not compatible with React 19 types
             <MDXProvider components={{ h3: () => <p>I AM A HEADER</p> }}>
                 <MDX useMDXComponents={useMDXComponents} code={markdown} />
             </MDXProvider>,
