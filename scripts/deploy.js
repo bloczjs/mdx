@@ -24,13 +24,16 @@ addTag(version);
 push();
 
 function* listAllWorkspaces() {
-    const output = cp.spawnSync(
+    const { status, stdout: output } = cp.spawnSync(
         "pnpm",
         ["list", "-r", "--depth", "-1", "--json"],
         {
             encoding: "utf-8",
         },
-    ).stdout;
+    );
+    if (status !== 0) {
+        process.exit(status);
+    }
     const workspaces = JSON.parse(output);
 
     for (const workspace of workspaces) {
@@ -59,31 +62,57 @@ function updateAllVersions(version) {
 }
 
 function deploy(package) {
-    cp.spawnSync("yarn", ["workspace", package, "npm", "publish", ...argv], {
-        stdio: "inherit",
-    });
+    const { status } = cp.spawnSync(
+        "yarn",
+        ["workspace", package, "npm", "publish", ...argv],
+        {
+            stdio: "inherit",
+        },
+    );
+    if (status !== 0) {
+        process.exit(status);
+    }
 }
 
 function addTag(version) {
-    cp.spawnSync("git", ["tag", `v${version}`], {
+    const { status } = cp.spawnSync("git", ["tag", `v${version}`], {
         stdio: "inherit",
     });
+    if (status !== 0) {
+        process.exit(status);
+    }
 }
 
 function commit(version) {
-    cp.spawnSync("git", ["add", "."], {
+    const { status } = cp.spawnSync("git", ["add", "."], {
         stdio: "inherit",
     });
-    cp.spawnSync("git", ["commit", "-m", `v${version}`], {
-        stdio: "inherit",
-    });
+    if (status !== 0) {
+        process.exit(status);
+    }
+    const { status: status2 } = cp.spawnSync(
+        "git",
+        ["commit", "-m", `v${version}`],
+        {
+            stdio: "inherit",
+        },
+    );
+    if (status2 !== 0) {
+        process.exit(status2);
+    }
 }
 
 function push() {
-    cp.spawnSync("git", ["push"], {
+    const { status } = cp.spawnSync("git", ["push"], {
         stdio: "inherit",
     });
-    cp.spawnSync("git", ["push", "--tags"], {
+    if (status !== 0) {
+        process.exit(status);
+    }
+    const { status: status2 } = cp.spawnSync("git", ["push", "--tags"], {
         stdio: "inherit",
     });
+    if (status2 !== 0) {
+        process.exit(status2);
+    }
 }
