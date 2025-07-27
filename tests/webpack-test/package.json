@@ -16,6 +16,6 @@
         "webpack": "^5.75.0"
     },
     "devDependencies": {
-        "ava": "^5.1.0"
+        "ava": "^6.4.1"
     }
 }

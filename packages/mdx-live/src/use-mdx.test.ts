@@ -3,7 +3,7 @@ import { GlobalRegistrator } from "@happy-dom/global-registrator";
 
 GlobalRegistrator.register();
 
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook, waitFor } from "@testing-library/react";
 
 import { useMDX } from "./use-mdx.js";
 import type { UseMDXOut, ResolveImport } from "./use-mdx";
@@ -15,7 +15,9 @@ test("it properly detects imports", async (t) => {
         }
         return option.kind;
     };
-    const { result, waitFor } = renderHook(() => {
+    let renderCount = 0;
+    const { result } = renderHook(() => {
+        renderCount++;
         return useMDX({
             code: `
 import A, { B, C as D } from 'foo';
@@ -29,7 +31,11 @@ export const h = 1;
         });
     });
 
-    await waitFor(() => result.current.text !== "");
+    await waitFor(() => {
+        if (result.current.text === "") {
+            throw new Error("Text is empty");
+        }
+    });
 
     t.deepEqual(
         {
@@ -46,37 +52,43 @@ export const h = 1;
     t.snapshot(result.current.text, "Text result");
     t.true(result.current.text.includes("\nconst h = 1;\n"));
 
-    t.is(3, result.all.length); // 3 because: initial, compilation of the file, resolving of imports
+    t.is(3, renderCount); // 3 because: initial, compilation of the file, resolving of imports
 });
 
 test("it uses the most up-to-date resolveImport", async (t) => {
     let resolveImport = async () => {
         return "initial";
     };
-    const { result, waitFor, rerender, waitForValueToChange } = renderHook(() =>
-        useMDX({
+    let renderCount = 0;
+    const { result, rerender } = renderHook(() => {
+        renderCount++;
+        return useMDX({
             code: `
 import A from 'a';
 `,
             resolveImport,
-        }),
-    );
+        });
+    });
 
-    await waitFor(() => result.current.text !== "");
+    await waitFor(() => {
+        if (result.current.text === "") {
+            throw new Error("Text is empty");
+        }
+    });
 
-    t.deepEqual(
-        {
-            A: "initial",
-        } as Record<string, any>,
-        result.current.resolvedImports,
-    );
+    t.deepEqual({ A: "initial" }, result.current.resolvedImports);
 
     resolveImport = async () => {
         return "updated";
     };
     rerender();
-    t.is(4, result.all.length);
-    await waitForValueToChange(() => result.current.resolvedImports);
+    t.is(4, renderCount);
+    const initialValue = result.current.resolvedImports;
+    await waitFor(() => {
+        if (result.current.resolvedImports === initialValue) {
+            throw new Error("Resolved imports are the same");
+        }
+    });
 
     t.deepEqual(
         {
@@ -84,34 +96,42 @@ import A from 'a';
         } as Record<string, any>,
         result.current.resolvedImports,
     );
-    t.is(5, result.all.length); // switches from 4 to 5 so no useless re-renders
+    t.is(5, renderCount); // switches from 4 to 5 so no useless re-renders
 });
 
 test("it doesn’t recompile at each change, but in batches", async (t) => {
-    let code = `export const A = 'A';`;
-    const { result, rerender, waitFor } = renderHook(() =>
-        useMDX({
-            code,
-        }),
+    const allResults: UseMDXOut[] = [];
+    const { result, rerender } = renderHook(
+        ({ code }) => {
+            const result = useMDX({
+                code,
+            });
+            allResults.push({ ...result });
+            return result;
+        },
+        {
+            initialProps: {
+                code: `export const A = 'A';`,
+            },
+        },
     );
 
-    code = `export const B = 'B';`;
-    rerender();
+    rerender({ code: `export const B = 'B';` });
 
-    code = `export const C = 'C';`;
-    rerender();
+    rerender({ code: `export const C = 'C';` });
 
-    code = `export const D = 'D';`;
-    rerender();
+    rerender({ code: `export const D = 'D';` });
 
-    t.is(4, result.all.length);
+    t.is(4, allResults.length);
 
-    await waitFor(() => result.current.text.includes("const D = 'D';"));
+    await waitFor(() => {
+        if (!result.current.text.includes("const D = 'D';")) {
+            throw new Error("Text does not include D");
+        }
+    });
 
-    t.is(8, result.all.length); // only 3 renders were added: the parsing of A, the parsing of D, and the resolutions of the scope (twice)
-    t.is("", (result.all[3] as UseMDXOut).text);
-    t.true((result.all[4] as UseMDXOut).text.includes("const A = 'A'"));
-    t.true((result.all[5] as UseMDXOut).text.includes("const A = 'A'"));
-    t.true((result.all[6] as UseMDXOut).text.includes("const D = 'D'"));
-    t.true((result.all[7] as UseMDXOut).text.includes("const D = 'D'"));
+    t.is(6, allResults.length); // only 2 renders were added: the resolutions of the scope (twice), full render of A & B aren’t generating re-renders
+    t.is("", allResults[3].text);
+    t.true(allResults[4].text.includes("const D = 'D'"));
+    t.true(allResults[5].text.includes("const D = 'D'"));
 });
