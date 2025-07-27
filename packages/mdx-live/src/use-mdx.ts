@@ -3,7 +3,7 @@ import * as React from "react";
 import { compile } from "@mdx-js/mdx";
 import type { CompileOptions } from "@mdx-js/mdx";
 import type { VFile } from "vfile";
-import type { ImportDeclaration } from "estree";
+import type { Identifier, ImportDeclaration } from "estree";
 
 import { selectAll } from "unist-util-select";
 
@@ -148,7 +148,9 @@ export const useMDX = ({
                                 await resolveImport({
                                     kind: "named",
                                     path: node.source.value as string,
-                                    variable: specifier.imported.name,
+                                    // Can be either Identifier or Literal. But in practice, it can't be Literal
+                                    variable: (specifier.imported as Identifier)
+                                        .name,
                                 });
                             break;
                     }
