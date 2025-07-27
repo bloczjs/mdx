@@ -28,6 +28,8 @@ This package requires you to also install `@mdx-js/mdx`:
 
 ```bash
 yarn add @mdx-js/mdx @blocz/mdx-live
+# Or
+pnpm add @mdx-js/mdx @blocz/mdx-live
 ```
 
 ## ESM
