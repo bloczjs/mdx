@@ -21,7 +21,7 @@
 ### Install
 
 ```bash
-yarn install
+pnpm install
 ```
 
 ### Build
@@ -29,7 +29,7 @@ yarn install
 Build all packages in the correct order:
 
 ```bash
-yarn build
+pnpm build
 ```
 
 ### Test
@@ -37,7 +37,7 @@ yarn build
 Run all tests
 
 ```bash
-yarn test
+pnpm test
 ```
 
 ### Format
@@ -47,7 +47,7 @@ yarn test
 To check that the format is correct is the whole codebase
 
 ```bash
-yarn format:check
+pnpm format:check
 ```
 
 #### Fix
@@ -55,33 +55,25 @@ yarn format:check
 To auto fix all formatting issues
 
 ```bash
-yarn format:fix
+pnpm format:fix
 ```
 
 ### Deploy
-
-#### Login
-
-All of those commands depends on yarn. So you need to be logged into NPM with yarn
-
-```bash
-yarn npm login
-```
 
 #### Deploy a version
 
 To deploy a specific version
 
 ```bash
-yarn deploy -v $VERSION
-# Example: yarn deploy -v 0.2.0-beta.3
+pnpm run deploy -v $VERSION
+# Example: pnpm deploy -v 0.2.0-beta.3
 ```
 
 And if you want to add an NPM tag (like `next`)
 
 ```bash
-yarn deploy -v $VERSION --tag $TAG
-# Example: yarn deploy -v 0.2.0-beta.3 --tag next
+pnpm run deploy -v $VERSION --tag $TAG
+# Example: pnpm deploy -v 0.2.0-beta.3 --tag next
 ```
 
 ## Pull requests

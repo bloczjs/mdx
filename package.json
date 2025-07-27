@@ -1,23 +1,23 @@
 {
     "name": "@blocz/mdx",
-    "workspaces": [
-        "packages/*",
-        "tests/*"
-    ],
     "version": "0.3.0",
     "repository": "git@github.com:bloczjs/mdx.git",
     "author": "Ayc0 <ayc0.benj@gmail.com>",
     "license": "MIT",
     "private": true,
+    "volta": {
+        "node": "22.11.0",
+        "pnpm": "10.13.1"
+    },
+    "packageManager": "pnpm@10.13.1",
     "scripts": {
         "test": "./scripts/test.js",
         "build": "./scripts/build.js",
-        "deploy": "yarn build && yarn test && ./scripts/deploy.js",
+        "deploy": "pnpm build && pnpm test && ./scripts/deploy.js",
         "format:check": "prettier --check .",
         "format:fix": "prettier --write ."
     },
     "devDependencies": {
         "prettier": "^2.8.1"
-    },
-    "packageManager": "yarn@3.2.1"
+    }
 }

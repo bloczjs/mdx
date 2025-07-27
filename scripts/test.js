@@ -9,7 +9,7 @@ test("@blocz/esbuild-test");
 test("@blocz/rollup-test");
 
 function test(package) {
-    cp.spawnSync("yarn", ["workspace", package, "test"], {
+    cp.spawnSync("pnpm", ["--filter", package, "test"], {
         stdio: "inherit",
     });
 }

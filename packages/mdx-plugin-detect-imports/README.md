@@ -58,7 +58,13 @@ export const importStatements = [
 
 ## How to use
 
-`yarn add -D @blocz/mdx-plugin-detect-imports`
+Install the package
+
+```bash
+yarn add -D @blocz/mdx-plugin-detect-imports
+# or
+pnpm add -D @blocz/mdx-plugin-detect-imports
+```
 
 ### Webpack
 

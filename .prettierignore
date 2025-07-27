@@ -7,5 +7,4 @@ lib/
 
 *.log
 
-.pnp.*
-.yarn/
+pnpm-lock.yaml

@@ -5,7 +5,7 @@ const cp = require("child_process");
 build("@blocz/mdx-live");
 
 function build(package) {
-    cp.spawnSync("yarn", ["workspace", package, "build"], {
+    cp.spawnSync("pnpm", ["--filter", package, "build"], {
         stdio: "inherit",
     });
 }
