@@ -111,7 +111,7 @@ export const useMDX = ({
     }, [code, recmaPlugins, rehypePlugins, remarkPlugins]);
 
     const scopeForParsedFileRef =
-        React.useRef<WeakSet<Exclude<typeof parsedFile, undefined>>>();
+        React.useRef<WeakSet<Exclude<typeof parsedFile, undefined>>>(undefined);
     if (!scopeForParsedFileRef.current) {
         scopeForParsedFileRef.current = new WeakSet(); // Only compute it once
     }
