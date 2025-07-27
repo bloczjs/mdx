@@ -8,16 +8,16 @@ Exports statements are also executed. **WARNING:** this allows XSS so be sure to
 
 You can also provide a scope for all the variables and components used in the MDX.
 
--   [MDX 2](#mdx-2)
--   [ESM](#esm)
--   [How to use](#how-to-use)
-    -   [Simple MDX](#simple-mdx)
-    -   [With scope](#with-scope)
-    -   [With export statement](#with-export-statement)
-    -   [With import statement](#with-import-statement)
-    -   [Plugins](#plugins)
-    -   [Provider](#provider)
-    -   [`useMDX` hook](#usemdx-hook)
+- [MDX 2](#mdx-2)
+- [ESM](#esm)
+- [How to use](#how-to-use)
+    - [Simple MDX](#simple-mdx)
+    - [With scope](#with-scope)
+    - [With export statement](#with-export-statement)
+    - [With import statement](#with-import-statement)
+    - [Plugins](#plugins)
+    - [Provider](#provider)
+    - [`useMDX` hook](#usemdx-hook)
 
 ## MDX 2
 
@@ -186,11 +186,11 @@ If you need to have access to more information in a custom renderer (like for in
 
 `Provider` will be provided an object with:
 
--   `text` and `isReady`, like [`useMDX`](#usemdx-hook)’s returned value,
--   a `scope` object, which is a merge between:
-    -   the `defaultScope` prop,
-    -   resolved imports thanks to `resolveImport`,
-    -   exported values in the MDX.
+- `text` and `isReady`, like [`useMDX`](#usemdx-hook)’s returned value,
+- a `scope` object, which is a merge between:
+    - the `defaultScope` prop,
+    - resolved imports thanks to `resolveImport`,
+    - exported values in the MDX.
 
 For instance, with the following example:
 

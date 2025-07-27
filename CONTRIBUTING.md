@@ -1,20 +1,20 @@
 # How to Develop <!-- omit in toc -->
 
--   [Commands](#commands)
-    -   [Install](#install)
-    -   [Build](#build)
-    -   [Test](#test)
-    -   [Format](#format)
-        -   [Check](#check)
-        -   [Fix](#fix)
-    -   [Deploy](#deploy)
-        -   [Login](#login)
-        -   [Deploy a version](#deploy-a-version)
--   [Pull requests](#pull-requests)
--   [Branch Name Convention](#branch-name-convention)
--   [Commit Convention](#commit-convention)
-    -   [Format](#format-1)
-    -   [Version Types](#version-types)
+- [Commands](#commands)
+    - [Install](#install)
+    - [Build](#build)
+    - [Test](#test)
+    - [Format](#format)
+        - [Check](#check)
+        - [Fix](#fix)
+    - [Deploy](#deploy)
+        - [Login](#login)
+        - [Deploy a version](#deploy-a-version)
+- [Pull requests](#pull-requests)
+- [Branch Name Convention](#branch-name-convention)
+- [Commit Convention](#commit-convention)
+    - [Format](#format-1)
+    - [Version Types](#version-types)
 
 ## Commands
 
@@ -100,10 +100,10 @@ In order to determine which version type a package should be released with and t
 
 You can pick between:
 
--   `dev`
--   `patch`
--   `minor`
--   `major`
+- `dev`
+- `patch`
+- `minor`
+- `major`
 
 <!--
 
