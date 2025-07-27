@@ -11,10 +11,11 @@
     },
     "dependencies": {
         "@blocz/mdx-plugin-detect-imports": "workspace:*",
-        "@mdx-js/rollup": "^2.1.2",
-        "rollup": "^3.9.1"
+        "@mdx-js/rollup": "^3.1.0",
+        "acorn": "^6.0.0 || ^7.0.0 || ^8.0.0",
+        "rollup": "^4.46.0"
     },
     "devDependencies": {
-        "ava": "^5.1.0"
+        "ava": "^6.4.1"
     }
 }

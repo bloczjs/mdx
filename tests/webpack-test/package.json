@@ -11,11 +11,11 @@
     },
     "dependencies": {
         "@blocz/mdx-plugin-detect-imports": "workspace:*",
-        "@mdx-js/loader": "^2.1.2",
-        "memfs": "^3.4.12",
+        "@mdx-js/loader": "^3.1.0",
+        "memfs": "^4.20.0",
         "webpack": "^5.75.0"
     },
     "devDependencies": {
-        "ava": "^5.1.0"
+        "ava": "^6.4.1"
     }
 }

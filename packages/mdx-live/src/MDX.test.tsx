@@ -103,7 +103,7 @@ const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 test.serial("render simple MD", async (t) => {
     const { getAllByRole } = render(<MDX code={markdown} />);
-    await wait(0);
+    await wait(16);
     t.is(2, getAllByRole("heading").length);
     t.is(2, getAllByRole("separator").length);
     t.is(8, getAllByRole("listitem").length);
@@ -114,11 +114,12 @@ test.serial(
     "it enables the flag `providerImportSource` when `useMDXComponents` is passed",
     async (t) => {
         const { queryAllByRole, getAllByText } = render(
+            // @ts-expect-error MDXProvider is not compatible with React 19 types
             <MDXProvider components={{ h3: () => <p>I AM A HEADER</p> }}>
                 <MDX useMDXComponents={useMDXComponents} code={markdown} />
             </MDXProvider>,
         );
-        await wait(0);
+        await wait(16);
 
         t.is(0, queryAllByRole("heading").length);
         t.is(2, getAllByText("I AM A HEADER").length);
@@ -129,7 +130,7 @@ test.serial("render MDX with export statement", async (t) => {
     const { container } = render(
         <MDX code={mdxWithoutImportStatement} defaultScope={{ Button }} />,
     );
-    await wait(0);
+    await wait(16);
     t.is(
         `<button data-variant="blue">Click Me!</button>
 <div>Hello</div>
@@ -144,7 +145,7 @@ test.serial("render MDX with import statement", async (t) => {
     const { container } = render(
         <MDX code={mdxWithImportStatement} resolveImport={resolveImport} />,
     );
-    await wait(0);
+    await wait(16);
     t.is(
         `<button data-variant="blue">Click Me!</button>
 <div>Hello</div>
@@ -173,7 +174,7 @@ test.serial(
                 Provider={Provider}
             />,
         );
-        await wait(0);
+        await wait(5);
         t.is(1, calls.length);
 
         t.is(true, calls[0].value.isReady);
@@ -222,7 +223,7 @@ import A from 'a';
                 Provider={Provider}
             />,
         );
-        await wait(0);
+        await wait(16);
         t.deepEqual(
             {
                 A: "detected", // A is "detected" and not "A" like in the defaultScope
@@ -256,7 +257,7 @@ export const label = "Click Me!";
             resolveImport={resolveImport}
         />,
     );
-    await wait(0);
+    await wait(16);
     t.deepEqual(
         {
             Button: Button,
