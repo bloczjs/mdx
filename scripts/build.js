@@ -5,7 +5,10 @@ const cp = require("child_process");
 build("@blocz/mdx-live");
 
 function build(package) {
-    cp.spawnSync("pnpm", ["--filter", package, "build"], {
+    const { status } = cp.spawnSync("pnpm", ["--filter", package, "build"], {
         stdio: "inherit",
     });
+    if (status !== 0) {
+        process.exit(status);
+    }
 }

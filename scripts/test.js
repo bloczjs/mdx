@@ -9,7 +9,10 @@ test("@blocz/esbuild-test");
 test("@blocz/rollup-test");
 
 function test(package) {
-    cp.spawnSync("pnpm", ["--filter", package, "test"], {
+    const { status } = cp.spawnSync("pnpm", ["--filter", package, "test"], {
         stdio: "inherit",
     });
+    if (status !== 0) {
+        process.exit(status);
+    }
 }
