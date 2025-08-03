@@ -13,7 +13,8 @@
         "@blocz/mdx-plugin-detect-imports": "workspace:*",
         "@mdx-js/esbuild": "^3.1.0",
         "acorn": "^6.0.0 || ^7.0.0 || ^8.0.0",
-        "esbuild": "^0.25.8"
+        "esbuild": "^0.25.8",
+        "react": "^19.1.0"
     },
     "devDependencies": {
         "ava": "^6.4.1"

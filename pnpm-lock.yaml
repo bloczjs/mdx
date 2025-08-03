@@ -94,6 +94,9 @@ importers:
       esbuild:
         specifier: ^0.25.8
         version: 0.25.8
+      react:
+        specifier: ^19.1.0
+        version: 19.1.0
     devDependencies:
       ava:
         specifier: ^6.4.1
@@ -123,6 +126,9 @@ importers:
       acorn:
         specifier: ^6.0.0 || ^7.0.0 || ^8.0.0
         version: 8.15.0
+      react:
+        specifier: ^19.1.0
+        version: 19.1.0
       rollup:
         specifier: ^4.46.0
         version: 4.46.0
@@ -139,6 +145,9 @@ importers:
       '@mdx-js/loader':
         specifier: ^3.1.0
         version: 3.1.0(acorn@8.15.0)(webpack@5.100.2)
+      react:
+        specifier: ^19.1.0
+        version: 19.1.0
       webpack:
         specifier: ^5.75.0
         version: 5.100.2
