@@ -114,7 +114,6 @@ test.serial(
     "it enables the flag `providerImportSource` when `useMDXComponents` is passed",
     async (t) => {
         const { queryAllByRole, getAllByText } = render(
-            // @ts-expect-error MDXProvider is not compatible with React 19 types
             <MDXProvider components={{ h3: () => <p>I AM A HEADER</p> }}>
                 <MDX useMDXComponents={useMDXComponents} code={markdown} />
             </MDXProvider>,
