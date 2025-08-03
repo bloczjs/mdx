@@ -103,7 +103,7 @@ const wait = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
 test.serial("render simple MD", async (t) => {
     const { getAllByRole } = render(<MDX code={markdown} />);
-    await wait(16);
+    await wait(30);
     t.is(2, getAllByRole("heading").length);
     t.is(2, getAllByRole("separator").length);
     t.is(8, getAllByRole("listitem").length);
@@ -118,7 +118,7 @@ test.serial(
                 <MDX useMDXComponents={useMDXComponents} code={markdown} />
             </MDXProvider>,
         );
-        await wait(16);
+        await wait(30);
 
         t.is(0, queryAllByRole("heading").length);
         t.is(2, getAllByText("I AM A HEADER").length);
@@ -129,7 +129,7 @@ test.serial("render MDX with export statement", async (t) => {
     const { container } = render(
         <MDX code={mdxWithoutImportStatement} defaultScope={{ Button }} />,
     );
-    await wait(16);
+    await wait(30);
     t.is(
         `<button data-variant="blue">Click Me!</button>
 <div>Hello</div>
@@ -144,7 +144,7 @@ test.serial("render MDX with import statement", async (t) => {
     const { container } = render(
         <MDX code={mdxWithImportStatement} resolveImport={resolveImport} />,
     );
-    await wait(16);
+    await wait(30);
     t.is(
         `<button data-variant="blue">Click Me!</button>
 <div>Hello</div>
@@ -222,7 +222,7 @@ import A from 'a';
                 Provider={Provider}
             />,
         );
-        await wait(16);
+        await wait(30);
         t.deepEqual(
             {
                 A: "detected", // A is "detected" and not "A" like in the defaultScope
@@ -256,7 +256,7 @@ export const label = "Click Me!";
             resolveImport={resolveImport}
         />,
     );
-    await wait(16);
+    await wait(30);
     t.deepEqual(
         {
             Button: Button,
