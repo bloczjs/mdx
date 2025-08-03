@@ -49,11 +49,17 @@ test("it works with webpack", async (t) => {
         });
 
         await new Promise((res, rej) => {
-            compiler.run(async (err) => {
+            compiler.run(async (err, stats) => {
                 if (err) {
                     rej(err);
                     return;
                 }
+                if (stats.hasErrors()) {
+                    const info = stats.toJson();
+                    rej(info.errors);
+                    return;
+                }
+
                 const content = await fs.readFile(
                     path.join(tmpFolder.folderPath, "out.js"),
                     "utf-8",
@@ -124,11 +130,17 @@ test("it works with webpack and a custom name", async (t) => {
         });
 
         await new Promise((res, rej) => {
-            compiler.run(async (err) => {
+            compiler.run(async (err, stats) => {
                 if (err) {
                     rej(err);
                     return;
                 }
+                if (stats.hasErrors()) {
+                    const info = stats.toJson();
+                    rej(info.errors);
+                    return;
+                }
+
                 const content = await fs.readFile(
                     path.join(tmpFolder.folderPath, "out.js"),
                     "utf-8",
@@ -194,11 +206,17 @@ test("it works with webpack and require.resolve", async (t) => {
         });
 
         await new Promise((res, rej) => {
-            compiler.run(async (err) => {
+            compiler.run(async (err, stats) => {
                 if (err) {
                     rej(err);
                     return;
                 }
+                if (stats.hasErrors()) {
+                    const info = stats.toJson();
+                    rej(info.errors);
+                    return;
+                }
+
                 const content = await fs.readFile(
                     path.join(tmpFolder.folderPath, "out.js"),
                     "utf-8",
