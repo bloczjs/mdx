@@ -1,198 +1,268 @@
+const fs = require("node:fs/promises");
+const path = require("node:path");
+const os = require("node:os");
 const test = require("ava");
-const { createFsFromVolume, Volume } = require("memfs");
 const webpack = require("webpack");
 const detectImportsPlugin = require("@blocz/mdx-plugin-detect-imports");
 
-test("it works with webpack", (t) => {
-    const fs = createFsFromVolume(new Volume());
+const makeTemporary = async () => {
+    const folderPath = await fs.mkdtemp(path.join(os.tmpdir(), "blocz-mdx-"));
+    const clear = async () => {
+        await fs.rm(folderPath, { recursive: true });
+    };
+    return {
+        folderPath,
+        clear,
+    };
+};
 
-    const compiler = webpack({
-        entry: "./src/entry.mdx",
-        output: {
-            filename: "out.js",
-            path: "/",
-        },
-        target: "web",
-        mode: "production",
-        // Disable tree shaking
-        optimization: {
-            usedExports: false,
-        },
-        module: {
-            rules: [
-                {
-                    test: /\.mdx?$/,
-                    use: [
-                        {
-                            loader: "@mdx-js/loader",
-                            options: {
-                                remarkPlugins: [detectImportsPlugin],
-                            },
-                        },
-                    ],
+test("it works with webpack", async (t) => {
+    const tmpFolder = await makeTemporary();
+    try {
+        const compiler = webpack({
+            entry: "./src/entry.mdx",
+            output: {
+                filename: "out.js",
+                path: tmpFolder.folderPath,
+            },
+            target: "web",
+            mode: "production",
+            // Disable tree shaking
+            optimization: {
+                usedExports: false,
+            },
+            resolve: {
+                alias: {
+                    // Injected by `@mdx-js/mdx` during compilation
+                    "react/jsx-runtime": require.resolve("react/jsx-runtime"),
                 },
-            ],
-        },
-    });
-    compiler.outputFileSystem = fs;
+            },
+            module: {
+                rules: [
+                    {
+                        test: /\.mdx?$/,
+                        use: [
+                            {
+                                loader: "@mdx-js/loader",
+                                options: {
+                                    remarkPlugins: [detectImportsPlugin],
+                                },
+                            },
+                        ],
+                    },
+                ],
+            },
+        });
 
-    return new Promise((res, rej) => {
-        compiler.run((err) => {
-            if (err) {
-                rej(err);
-                return;
-            }
-            const content = fs.readFileSync("/out.js", "utf-8");
-            compiler.close((closeErr) => {
-                if (closeErr) {
-                    rej(closeErr);
+        await new Promise((res, rej) => {
+            compiler.run(async (err, stats) => {
+                if (err) {
+                    rej(err);
                     return;
                 }
-                t.truthy(content.includes('.h2,{children:"Hello MDX"})'));
-                t.truthy(content.includes('.li,{children:"First item"})'));
-                t.truthy(content.includes('.li,{children:"Second item"})'));
-                t.truthy(
-                    content.includes('.Button,{variant:"blue",label:"Label"})'),
+                if (stats.hasErrors()) {
+                    const info = stats.toJson();
+                    rej(info.errors);
+                    return;
+                }
+
+                const content = await fs.readFile(
+                    path.join(tmpFolder.folderPath, "out.js"),
+                    "utf-8",
                 );
-                t.truthy(content.includes("importStatements"));
-                t.truthy(
-                    content.includes(
-                        '[{module:"./elements",imports:[{kind:"named",imported:"Tabs",local:"Tabs",value:t.Tabs},{kind:"named",imported:"Button",local:"ButtonElement",value:t.Button}]}]',
-                    ),
-                );
-                res();
+                compiler.close((closeErr) => {
+                    if (closeErr) {
+                        rej(closeErr);
+                        return;
+                    }
+                    t.truthy(content.includes('.h2,{children:"Hello MDX"})'));
+                    t.truthy(content.includes('.li,{children:"First item"})'));
+                    t.truthy(content.includes('.li,{children:"Second item"})'));
+                    t.truthy(
+                        content.includes(
+                            '.Button,{variant:"blue",label:"Label"})',
+                        ),
+                    );
+                    t.truthy(content.includes("importStatements"));
+                    t.truthy(
+                        content.includes(
+                            '[{module:"./elements",imports:[{kind:"named",imported:"Tabs",local:"Tabs",value:t.Tabs},{kind:"named",imported:"Button",local:"ButtonElement",value:t.Button}]}]',
+                        ),
+                    );
+                    res();
+                });
             });
         });
-    });
+    } finally {
+        await tmpFolder.clear();
+    }
 });
 
-test("it works with webpack and a custom name", (t) => {
-    const fs = createFsFromVolume(new Volume());
-
-    const compiler = webpack({
-        entry: "./src/entry.mdx",
-        output: {
-            filename: "out.js",
-            path: "/",
-        },
-        target: "web",
-        mode: "production",
-        // Disable tree shaking
-        optimization: {
-            usedExports: false,
-        },
-        module: {
-            rules: [
-                {
-                    test: /\.mdx?$/,
-                    use: [
-                        {
-                            loader: "@mdx-js/loader",
-                            options: {
-                                remarkPlugins: [
-                                    [
-                                        detectImportsPlugin,
-                                        { exportName: "otherName" },
+test("it works with webpack and a custom name", async (t) => {
+    const tmpFolder = await makeTemporary();
+    try {
+        const compiler = webpack({
+            entry: "./src/entry.mdx",
+            output: {
+                filename: "out.js",
+                path: tmpFolder.folderPath,
+            },
+            target: "web",
+            mode: "production",
+            // Disable tree shaking
+            optimization: {
+                usedExports: false,
+            },
+            resolve: {
+                alias: {
+                    // Injected by `@mdx-js/mdx` during compilation
+                    "react/jsx-runtime": require.resolve("react/jsx-runtime"),
+                },
+            },
+            module: {
+                rules: [
+                    {
+                        test: /\.mdx?$/,
+                        use: [
+                            {
+                                loader: "@mdx-js/loader",
+                                options: {
+                                    remarkPlugins: [
+                                        [
+                                            detectImportsPlugin,
+                                            { exportName: "otherName" },
+                                        ],
                                     ],
-                                ],
+                                },
                             },
-                        },
-                    ],
-                },
-            ],
-        },
-    });
-    compiler.outputFileSystem = fs;
+                        ],
+                    },
+                ],
+            },
+        });
 
-    return new Promise((res, rej) => {
-        compiler.run((err) => {
-            if (err) {
-                rej(err);
-                return;
-            }
-            const content = fs.readFileSync("/out.js", "utf-8");
-            compiler.close((closeErr) => {
-                if (closeErr) {
-                    rej(closeErr);
+        await new Promise((res, rej) => {
+            compiler.run(async (err, stats) => {
+                if (err) {
+                    rej(err);
                     return;
                 }
-                t.truthy(content.includes('.h2,{children:"Hello MDX"})'));
-                t.truthy(content.includes('.li,{children:"First item"})'));
-                t.truthy(content.includes('.li,{children:"Second item"})'));
-                t.truthy(
-                    content.includes('.Button,{variant:"blue",label:"Label"})'),
+                if (stats.hasErrors()) {
+                    const info = stats.toJson();
+                    rej(info.errors);
+                    return;
+                }
+
+                const content = await fs.readFile(
+                    path.join(tmpFolder.folderPath, "out.js"),
+                    "utf-8",
                 );
-                t.truthy(content.includes("otherName"));
-                t.truthy(
-                    content.includes(
-                        '[{module:"./elements",imports:[{kind:"named",imported:"Tabs",local:"Tabs",value:t.Tabs},{kind:"named",imported:"Button",local:"ButtonElement",value:t.Button}]}]',
-                    ),
-                );
-                res();
+                compiler.close((closeErr) => {
+                    if (closeErr) {
+                        rej(closeErr);
+                        return;
+                    }
+                    t.truthy(content.includes('.h2,{children:"Hello MDX"})'));
+                    t.truthy(content.includes('.li,{children:"First item"})'));
+                    t.truthy(content.includes('.li,{children:"Second item"})'));
+                    t.truthy(
+                        content.includes(
+                            '.Button,{variant:"blue",label:"Label"})',
+                        ),
+                    );
+                    t.truthy(content.includes("otherName"));
+                    t.truthy(
+                        content.includes(
+                            '[{module:"./elements",imports:[{kind:"named",imported:"Tabs",local:"Tabs",value:t.Tabs},{kind:"named",imported:"Button",local:"ButtonElement",value:t.Button}]}]',
+                        ),
+                    );
+                    res();
+                });
             });
         });
-    });
+    } finally {
+        await tmpFolder.clear();
+    }
 });
 
-test("it works with webpack and require.resolve", (t) => {
-    const fs = createFsFromVolume(new Volume());
-
-    const compiler = webpack({
-        entry: "./src/entry.mdx",
-        output: {
-            filename: "out.js",
-            path: "/",
-        },
-        target: "web",
-        mode: "production",
-        // Disable tree shaking
-        optimization: {
-            usedExports: false,
-        },
-        module: {
-            rules: [
-                {
-                    test: /\.mdx?$/,
-                    use: [
-                        {
-                            loader: require.resolve("@mdx-js/loader"),
-                            options: {
-                                remarkPlugins: [detectImportsPlugin],
-                            },
-                        },
-                    ],
+test("it works with webpack and require.resolve", async (t) => {
+    const tmpFolder = await makeTemporary();
+    try {
+        const compiler = webpack({
+            entry: "./src/entry.mdx",
+            output: {
+                filename: "out.js",
+                path: tmpFolder.folderPath,
+            },
+            target: "web",
+            mode: "production",
+            // Disable tree shaking
+            optimization: {
+                usedExports: false,
+            },
+            resolve: {
+                alias: {
+                    // Injected by `@mdx-js/mdx` during compilation
+                    "react/jsx-runtime": require.resolve("react/jsx-runtime"),
                 },
-            ],
-        },
-    });
-    compiler.outputFileSystem = fs;
+            },
+            module: {
+                rules: [
+                    {
+                        test: /\.mdx?$/,
+                        use: [
+                            {
+                                loader: require.resolve("@mdx-js/loader"),
+                                options: {
+                                    remarkPlugins: [detectImportsPlugin],
+                                },
+                            },
+                        ],
+                    },
+                ],
+            },
+        });
 
-    return new Promise((res, rej) => {
-        compiler.run((err) => {
-            if (err) {
-                rej(err);
-                return;
-            }
-            const content = fs.readFileSync("/out.js", "utf-8");
-            compiler.close((closeErr) => {
-                if (closeErr) {
-                    rej(closeErr);
+        await new Promise((res, rej) => {
+            compiler.run(async (err, stats) => {
+                if (err) {
+                    rej(err);
                     return;
                 }
-                t.truthy(content.includes('.h2,{children:"Hello MDX"})'));
-                t.truthy(content.includes('.li,{children:"First item"})'));
-                t.truthy(content.includes('.li,{children:"Second item"})'));
-                t.truthy(
-                    content.includes('.Button,{variant:"blue",label:"Label"})'),
+                if (stats.hasErrors()) {
+                    const info = stats.toJson();
+                    rej(info.errors);
+                    return;
+                }
+
+                const content = await fs.readFile(
+                    path.join(tmpFolder.folderPath, "out.js"),
+                    "utf-8",
                 );
-                t.truthy(content.includes("importStatements"));
-                t.truthy(
-                    content.includes(
-                        '[{module:"./elements",imports:[{kind:"named",imported:"Tabs",local:"Tabs",value:t.Tabs},{kind:"named",imported:"Button",local:"ButtonElement",value:t.Button}]}]',
-                    ),
-                );
-                res();
+                compiler.close((closeErr) => {
+                    if (closeErr) {
+                        rej(closeErr);
+                        return;
+                    }
+                    t.truthy(content.includes('.h2,{children:"Hello MDX"})'));
+                    t.truthy(content.includes('.li,{children:"First item"})'));
+                    t.truthy(content.includes('.li,{children:"Second item"})'));
+                    t.truthy(
+                        content.includes(
+                            '.Button,{variant:"blue",label:"Label"})',
+                        ),
+                    );
+                    t.truthy(content.includes("importStatements"));
+                    t.truthy(
+                        content.includes(
+                            '[{module:"./elements",imports:[{kind:"named",imported:"Tabs",local:"Tabs",value:t.Tabs},{kind:"named",imported:"Button",local:"ButtonElement",value:t.Button}]}]',
+                        ),
+                    );
+                    res();
+                });
             });
         });
-    });
+    } finally {
+        await tmpFolder.clear();
+    }
 });
