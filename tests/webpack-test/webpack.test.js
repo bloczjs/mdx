@@ -31,12 +31,6 @@ test("it works with webpack", async (t) => {
             optimization: {
                 usedExports: false,
             },
-            resolve: {
-                alias: {
-                    // Injected by `@mdx-js/mdx` during compilation
-                    "react/jsx-runtime": require.resolve("react/jsx-runtime"),
-                },
-            },
             module: {
                 rules: [
                     {
@@ -112,12 +106,6 @@ test("it works with webpack and a custom name", async (t) => {
             // Disable tree shaking
             optimization: {
                 usedExports: false,
-            },
-            resolve: {
-                alias: {
-                    // Injected by `@mdx-js/mdx` during compilation
-                    "react/jsx-runtime": require.resolve("react/jsx-runtime"),
-                },
             },
             module: {
                 rules: [
@@ -199,12 +187,6 @@ test("it works with webpack and require.resolve", async (t) => {
             // Disable tree shaking
             optimization: {
                 usedExports: false,
-            },
-            resolve: {
-                alias: {
-                    // Injected by `@mdx-js/mdx` during compilation
-                    "react/jsx-runtime": require.resolve("react/jsx-runtime"),
-                },
             },
             module: {
                 rules: [
