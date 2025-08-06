@@ -227,7 +227,7 @@ import A from 'a';
             {
                 A: "detected", // A is "detected" and not "A" like in the defaultScope
                 b: "b",
-            } as Record<string, any>,
+            },
             calls[0].value.scope,
         );
     },
@@ -262,7 +262,7 @@ export const label = "Click Me!";
             Button: Button,
             label: "Click Me!",
             variant: "blue",
-        } as Record<string, any>,
+        },
         calls[0].value.scope,
     );
 });
