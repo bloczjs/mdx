@@ -5,12 +5,12 @@ export interface ImportStatement {
               kind: "named";
               imported: string;
               local: string;
-              value: any;
+              value: unknown;
           }
         | {
               kind: "namespace" | "default";
               local: string;
-              value: any;
+              value: unknown;
           }
     >;
 }

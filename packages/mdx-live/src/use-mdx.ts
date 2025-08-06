@@ -8,14 +8,14 @@ import type { Identifier, ImportDeclaration } from "estree";
 import { selectAll } from "unist-util-select";
 
 export interface Variables {
-    [key: string]: any;
+    [key: string]: unknown;
 }
 
 export type ResolveImport = (
     option:
         | { kind: "named"; path: string; variable: string }
         | { kind: "namespace" | "default"; path: string },
-) => Promise<any>;
+) => Promise<unknown>;
 
 export interface UseMDXParams {
     code: string;
