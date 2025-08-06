@@ -1,16 +1,16 @@
 # Changelog
 
-## v0.3
-
-### 0.3.0
+## Unreleased
 
 ### `@blocz/mdx-live`
 
+- Switch `any` for `unknown` **BREAKING CHANGE**
 - Upgrade for MDX 3 **BREAKING CHANGE**
 - Add support & test for React 19
 
 ### `@blocz/mdx-plugin-detect-imports`
 
+- Switch `any` for `unknown` **BREAKING CHANGE**
 - Switch to ESM only (it depends on `@mdx-js/mdx` that also switched to ESM only) **BREAKING CHANGE**
 - Drop support for Node 16 + Node 18 + Node 20, and enforce Node 22 & Node 24 **BREAKING CHANGE**
 
@@ -18,19 +18,14 @@
 
 - Update to pnpm
 
-**Full changelog**: https://github.com/bloczjs/mdx/compare/v0.2.0...v0.3.0
+## v0.3
 
-<details>
-  <summary>See detailed changelog</summary>
+### 0.3.0
 
-#### 0.3.0-rc.1
+#### `@blocz/mdx-live`
 
-- Update to pnpm. See #49
-- Update to MDX 3 + Full ESM + React 19. See #50
-
-**Changelog**: https://github.com/bloczjs/mdx/compare/v0.3.0...0.3.0-rc.1
-
-</details>
+- [react/jsx-runtime] remove extension from path for ESM React 18
+- Bump for React 18
 
 ## v0.2
 

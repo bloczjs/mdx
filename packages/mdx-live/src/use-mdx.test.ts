@@ -45,7 +45,7 @@ export const h = 1;
             E: "namespace",
             F: "default",
             G: "default",
-        } as Record<string, any>,
+        },
         result.current.resolvedImports,
     );
 
@@ -93,7 +93,7 @@ import A from 'a';
     t.deepEqual(
         {
             A: "updated",
-        } as Record<string, any>,
+        },
         result.current.resolvedImports,
     );
     t.is(5, renderCount); // switches from 4 to 5 so no useless re-renders
