@@ -4,3 +4,7 @@ packages:
 
 onlyBuiltDependencies:
     - esbuild
+
+overrides:
+    # To allow being compatible with the latest TS version
+    rollup-plugin-typescript2: "0.37.0"
