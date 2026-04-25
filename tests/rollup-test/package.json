@@ -13,7 +13,7 @@
         "@blocz/mdx-plugin-detect-imports": "workspace:*",
         "@mdx-js/rollup": "^3.1.0",
         "acorn": "^8.16.0",
-        "react": "^19.2.4",
+        "react": "^19.2.5",
         "rollup": "^4.60.1"
     },
     "devDependencies": {
