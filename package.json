@@ -6,7 +6,7 @@
     "license": "MIT",
     "private": true,
     "volta": {
-        "node": "22.17.1",
+        "node": "22.22.2",
         "pnpm": "11.0.9"
     },
     "packageManager": "pnpm@11.0.9",
