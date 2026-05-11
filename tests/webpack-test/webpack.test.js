@@ -1,7 +1,7 @@
 const fs = require("node:fs/promises");
 const path = require("node:path");
 const os = require("node:os");
-const test = require("ava");
+const { default: test } = require("ava");
 const webpack = require("webpack");
 const detectImportsPlugin = require("@blocz/mdx-plugin-detect-imports");
 
