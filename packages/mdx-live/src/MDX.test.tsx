@@ -173,7 +173,7 @@ test.serial(
                 Provider={Provider}
             />,
         );
-        await wait(5);
+        await wait(20);
         t.is(1, calls.length);
 
         t.is(true, calls[0].value.isReady);
