@@ -2,8 +2,8 @@ packages:
     - packages/*
     - tests/*
 
-onlyBuiltDependencies:
-    - esbuild
+allowBuilds:
+    esbuild: true
 
 overrides:
     # To allow being compatible with the latest TS version
