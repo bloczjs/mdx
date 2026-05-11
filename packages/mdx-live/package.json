@@ -58,12 +58,12 @@
         "vfile": "^6.0.3"
     },
     "ava": {
-        "extensions": {
-            "ts": "module",
-            "tsx": "module",
-            "mjs": true,
-            "cjs": true
-        },
+        "extensions": [
+            "ts",
+            "tsx",
+            "mjs",
+            "cjs"
+        ],
         "nodeArguments": [
             "--loader=ts-node/esm/transpile-only"
         ]
