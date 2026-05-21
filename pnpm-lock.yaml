@@ -46,8 +46,8 @@ importers:
         specifier: 19.2.14
         version: 19.2.14
       ava:
-        specifier: ^8.0.0
-        version: 8.0.0(rollup@2.80.0)
+        specifier: ^8.0.1
+        version: 8.0.1(rollup@2.80.0)
       microbundle:
         specifier: ^0.15.0
         version: 0.15.1(ts-node@10.9.2(@types/node@25.6.2)(typescript@4.9.5))
@@ -80,8 +80,8 @@ importers:
         specifier: ^3.1.1
         version: 3.1.1
       ava:
-        specifier: ^8.0.0
-        version: 8.0.0(rollup@4.60.4)
+        specifier: ^8.0.1
+        version: 8.0.1(rollup@4.60.4)
 
   tests/esbuild-test:
     dependencies:
@@ -102,8 +102,8 @@ importers:
         version: 19.2.6
     devDependencies:
       ava:
-        specifier: ^8.0.0
-        version: 8.0.0(rollup@4.60.4)
+        specifier: ^8.0.1
+        version: 8.0.1(rollup@4.60.4)
 
   tests/mdx-js-test:
     dependencies:
@@ -115,8 +115,8 @@ importers:
         version: 3.1.1
     devDependencies:
       ava:
-        specifier: ^8.0.0
-        version: 8.0.0(rollup@4.60.4)
+        specifier: ^8.0.1
+        version: 8.0.1(rollup@4.60.4)
 
   tests/rollup-test:
     dependencies:
@@ -137,8 +137,8 @@ importers:
         version: 4.60.4
     devDependencies:
       ava:
-        specifier: ^8.0.0
-        version: 8.0.0(rollup@4.60.4)
+        specifier: ^8.0.1
+        version: 8.0.1(rollup@4.60.4)
 
   tests/webpack-test:
     dependencies:
@@ -156,8 +156,8 @@ importers:
         version: 5.106.2
     devDependencies:
       ava:
-        specifier: ^8.0.0
-        version: 8.0.0(rollup@4.60.4)
+        specifier: ^8.0.1
+        version: 8.0.1(rollup@4.60.4)
 
 packages:
 
@@ -730,6 +730,10 @@ packages:
   '@cspotcode/source-map-support@0.8.1':
     resolution: {integrity: sha512-IchNf6dN4tHoMFIn/7OE8LWZ19Y6q/67Bmf6vnGREv8RSbBVb9LPJxEcnwrcwX6ixSvaiGoomAUvu4YSxXrVgw==}
     engines: {node: '>=12'}
+
+  '@cto.af/wtf8@0.0.5':
+    resolution: {integrity: sha512-LfUFi+Vv4eDzj+XAtR89e3wwjXA/NZjUSwU5NhwbBrLecxPaBYFy3exCuc1j+D4UZeOVdqlsl8G7LmOt18V0tg==}
+    engines: {node: '>=20'}
 
   '@esbuild/aix-ppc64@0.28.0':
     resolution: {integrity: sha512-lhRUCeuOyJQURhTxl4WkpFTjIsbDayJHih5kZC1giwE+MhIzAb7mEsQMqMf18rHLsrb5qI1tafG20mLxEWcWlA==}
@@ -1442,9 +1446,9 @@ packages:
     peerDependencies:
       postcss: ^8.1.0
 
-  ava@8.0.0:
-    resolution: {integrity: sha512-KMUyT3LcnZ/5ipDAqnTGn6PQUvr1Jk4dex3v7ieQrGaMlAblfIpMLwK56HfPcObvJEzyhCWXfZjbM98FeAy0oQ==}
-    engines: {node: ^22.20 || ^24.12 || >=25}
+  ava@8.0.1:
+    resolution: {integrity: sha512-YlwwL5HX2EJRE75e2LR8nio8lKAJ702sFbv0QYnhzngAjyo9wB+Xg4JZh5f432khlWfVD5OQ93rrRopEXJptpg==}
+    engines: {node: ^22.20 || ^24.12 || >=26}
     hasBin: true
     peerDependencies:
       '@ava/typescript': '*'
@@ -1567,8 +1571,8 @@ packages:
   caniuse-lite@1.0.30001792:
     resolution: {integrity: sha512-hVLMUZFgR4JJ6ACt1uEESvQN1/dBVqPAKY0hgrV70eN3391K6juAfTjKZLKvOMsx8PxA7gsY1/tLMMTcfFLLpw==}
 
-  cbor@10.0.12:
-    resolution: {integrity: sha512-exQDevYd7ZQLP4moMQcZkKCVZsXLAtUSflObr3xTh4xzFIv/xBCdvCd6L259kQOUP2kcTC0jvC6PpZIf/WmRXA==}
+  cbor2@2.3.0:
+    resolution: {integrity: sha512-76WB3hq8BoaGkMkBVJ27fW5LJU+qqDLEpgRNCG/SYKhODWXpVPOTD4UcUto3IEzYLA52nsvbhb0wabhHDn3qXg==}
     engines: {node: '>=20'}
 
   ccount@2.0.1:
@@ -2490,8 +2494,8 @@ packages:
   longest-streak@3.1.0:
     resolution: {integrity: sha512-9Ri+o0JYgehTaVBBDoMqIl8GXtbWg711O3srftcHhZ0dqnETqLaoIK0x17fUw9rFSlK/0NlsKe0Ahhyl5pXE2g==}
 
-  lru-cache@11.3.6:
-    resolution: {integrity: sha512-Gf/KoL3C/MlI7Bt0PGI9I+TeTC/I6r/csU58N4BSNc4lppLBeKsOdFYkK+dX0ABDUMJNfCHTyPpzwwO21Awd3A==}
+  lru-cache@11.5.0:
+    resolution: {integrity: sha512-5YgH9UJd7wVb9hIouI2adWpgqrrICkt070Dnj8EUY1+B4B2P9eRLPAkAAo6NICA7CEhOIeBHl46u9zSNpNu7zA==}
     engines: {node: 20 || >=22}
 
   lru-cache@5.1.1:
@@ -2721,10 +2725,6 @@ packages:
 
   node-releases@2.0.38:
     resolution: {integrity: sha512-3qT/88Y3FbH/Kx4szpQQ4HzUbVrHPKTLVpVocKiLfoYvw9XSGOX2FmD2d6DrXbVYyAQTF2HeF6My8jmzx7/CRw==}
-
-  nofilter@3.1.0:
-    resolution: {integrity: sha512-l2NNj07e9afPnhAhvgVrCD/oy2Ai1yfLpuo3EpiO1jFTsB4sFz6oIfAfSZyQzVpkZQ9xS8ZS5g1jCBgq4Hwo0g==}
-    engines: {node: '>=12.19'}
 
   nopt@8.1.0:
     resolution: {integrity: sha512-ieGu42u/Qsa4TFktmaKEwM6MQH0pOWnaB3htzh0JRtx84+Mebc0cbZYN5bC+6WTZ4+77xrL9Pn5m7CV6VIkV7A==}
@@ -4526,6 +4526,8 @@ snapshots:
     dependencies:
       '@jridgewell/trace-mapping': 0.3.9
 
+  '@cto.af/wtf8@0.0.5': {}
+
   '@esbuild/aix-ppc64@0.28.0':
     optional: true
 
@@ -5204,7 +5206,7 @@ snapshots:
       postcss: 8.5.14
       postcss-value-parser: 4.2.0
 
-  ava@8.0.0(rollup@2.80.0):
+  ava@8.0.1(rollup@2.80.0):
     dependencies:
       '@vercel/nft': 1.5.0(rollup@2.80.0)
       acorn: 8.16.0
@@ -5213,7 +5215,7 @@ snapshots:
       arrgv: 1.0.2
       arrify: 3.0.0
       callsites: 4.2.0
-      cbor: 10.0.12
+      cbor2: 2.3.0
       chalk: 5.6.2
       chunkd: 2.0.1
       ci-info: 4.4.0
@@ -5251,7 +5253,7 @@ snapshots:
       - rollup
       - supports-color
 
-  ava@8.0.0(rollup@4.60.4):
+  ava@8.0.1(rollup@4.60.4):
     dependencies:
       '@vercel/nft': 1.5.0(rollup@4.60.4)
       acorn: 8.16.0
@@ -5260,7 +5262,7 @@ snapshots:
       arrgv: 1.0.2
       arrify: 3.0.0
       callsites: 4.2.0
-      cbor: 10.0.12
+      cbor2: 2.3.0
       chalk: 5.6.2
       chunkd: 2.0.1
       ci-info: 4.4.0
@@ -5420,9 +5422,9 @@ snapshots:
 
   caniuse-lite@1.0.30001792: {}
 
-  cbor@10.0.12:
+  cbor2@2.3.0:
     dependencies:
-      nofilter: 3.1.0
+      '@cto.af/wtf8': 0.0.5
 
   ccount@2.0.1: {}
 
@@ -6443,7 +6445,7 @@ snapshots:
 
   longest-streak@3.1.0: {}
 
-  lru-cache@11.3.6: {}
+  lru-cache@11.5.0: {}
 
   lru-cache@5.1.1:
     dependencies:
@@ -6888,8 +6890,6 @@ snapshots:
 
   node-releases@2.0.38: {}
 
-  nofilter@3.1.0: {}
-
   nopt@8.1.0:
     dependencies:
       abbrev: 3.0.1
@@ -6992,7 +6992,7 @@ snapshots:
 
   path-scurry@2.0.2:
     dependencies:
-      lru-cache: 11.3.6
+      lru-cache: 11.5.0
       minipass: 7.1.3
 
   path-type@4.0.0: {}
