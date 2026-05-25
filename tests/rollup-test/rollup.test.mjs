@@ -1,4 +1,5 @@
-import test from "ava";
+import test from "node:test";
+import assert from "node:assert/strict";
 
 import { rollup } from "rollup";
 import mdx from "@mdx-js/rollup";
@@ -29,16 +30,16 @@ const buildEntry = async (mdxOptions) => {
     }
 };
 
-test("it works with rollup", async (t) => {
+test("it works with rollup", async () => {
     const content = await buildEntry({
         remarkPlugins: [detectImportsPlugin],
     });
 
-    t.truthy(content.match(/\.h2, {\s*children: "Hello MDX"/));
-    t.truthy(content.match(/\.li, {\s*children: "First item"/));
-    t.truthy(content.match(/\.li, {\s*children: "Second item"/));
-    t.truthy(content.match(/Button, {\s*variant: "blue",\s*label: "Label"/));
-    t.truthy(
+    assert.ok(content.match(/\.h2, {\s*children: "Hello MDX"/));
+    assert.ok(content.match(/\.li, {\s*children: "First item"/));
+    assert.ok(content.match(/\.li, {\s*children: "Second item"/));
+    assert.ok(content.match(/Button, {\s*variant: "blue",\s*label: "Label"/));
+    assert.ok(
         content.includes(
             `const importStatements = [{
   module: "./elements",
@@ -58,16 +59,16 @@ test("it works with rollup", async (t) => {
     );
 });
 
-test("it works with rollup and a custom name", async (t) => {
+test("it works with rollup and a custom name", async () => {
     const content = await buildEntry({
         remarkPlugins: [[detectImportsPlugin, { exportName: "otherName" }]],
     });
 
-    t.truthy(content.match(/\.h2, {\s*children: "Hello MDX"/));
-    t.truthy(content.match(/\.li, {\s*children: "First item"/));
-    t.truthy(content.match(/\.li, {\s*children: "Second item"/));
-    t.truthy(content.match(/Button, {\s*variant: "blue",\s*label: "Label"/));
-    t.truthy(
+    assert.ok(content.match(/\.h2, {\s*children: "Hello MDX"/));
+    assert.ok(content.match(/\.li, {\s*children: "First item"/));
+    assert.ok(content.match(/\.li, {\s*children: "Second item"/));
+    assert.ok(content.match(/Button, {\s*variant: "blue",\s*label: "Label"/));
+    assert.ok(
         content.includes(
             `const otherName = [{
   module: "./elements",

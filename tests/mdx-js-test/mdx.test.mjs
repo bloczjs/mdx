@@ -1,9 +1,10 @@
-import test from "ava";
+import test from "node:test";
+import assert from "node:assert/strict";
 import { compile } from "@mdx-js/mdx";
 
 import detectImportsPlugin from "@blocz/mdx-plugin-detect-imports";
 
-test("it works with @mdx-js/mdx", async (t) => {
+test("it works with @mdx-js/mdx", async () => {
     const file = `import { Tabs, Button as ButtonElement } from "./elements";
 
 ## Hello MDX
@@ -17,7 +18,7 @@ test("it works with @mdx-js/mdx", async (t) => {
         remarkPlugins: [detectImportsPlugin],
     });
 
-    t.truthy(
+    assert.ok(
         vFile.value.includes(
             `export const importStatements = [{
   module: "./elements",
@@ -38,7 +39,7 @@ test("it works with @mdx-js/mdx", async (t) => {
     );
 });
 
-test("it works with @mdx-js/mdx and a custom name", async (t) => {
+test("it works with @mdx-js/mdx and a custom name", async () => {
     const file = `import { Tabs, Button as ButtonElement } from "./elements";
 
 ## Hello MDX
@@ -52,7 +53,7 @@ test("it works with @mdx-js/mdx and a custom name", async (t) => {
         remarkPlugins: [[detectImportsPlugin, { exportName: "otherName" }]],
     });
 
-    t.truthy(
+    assert.ok(
         vFile.value.includes(
             `export const otherName = [{
   module: "./elements",

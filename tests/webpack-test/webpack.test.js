@@ -1,7 +1,8 @@
 const fs = require("node:fs/promises");
 const path = require("node:path");
 const os = require("node:os");
-const { default: test } = require("ava");
+const test = require("node:test");
+const assert = require("node:assert/strict");
 const webpack = require("webpack");
 const detectImportsPlugin = require("@blocz/mdx-plugin-detect-imports");
 
@@ -16,7 +17,7 @@ const makeTemporary = async () => {
     };
 };
 
-test("it works with webpack", async (t) => {
+test("it works with webpack", async () => {
     const tmpFolder = await makeTemporary();
     try {
         const compiler = webpack({
@@ -69,16 +70,18 @@ test("it works with webpack", async (t) => {
                         rej(closeErr);
                         return;
                     }
-                    t.truthy(content.includes('.h2,{children:"Hello MDX"})'));
-                    t.truthy(content.includes('.li,{children:"First item"})'));
-                    t.truthy(content.includes('.li,{children:"Second item"})'));
-                    t.truthy(
+                    assert.ok(content.includes('.h2,{children:"Hello MDX"})'));
+                    assert.ok(content.includes('.li,{children:"First item"})'));
+                    assert.ok(
+                        content.includes('.li,{children:"Second item"})'),
+                    );
+                    assert.ok(
                         content.includes(
                             '.Button,{variant:"blue",label:"Label"})',
                         ),
                     );
-                    t.truthy(content.includes("importStatements"));
-                    t.truthy(
+                    assert.ok(content.includes("importStatements"));
+                    assert.ok(
                         content.includes(
                             '[{module:"./elements",imports:[{kind:"named",imported:"Tabs",local:"Tabs",value:t.Tabs},{kind:"named",imported:"Button",local:"ButtonElement",value:t.Button}]}]',
                         ),
@@ -92,7 +95,7 @@ test("it works with webpack", async (t) => {
     }
 });
 
-test("it works with webpack and a custom name", async (t) => {
+test("it works with webpack and a custom name", async () => {
     const tmpFolder = await makeTemporary();
     try {
         const compiler = webpack({
@@ -150,16 +153,18 @@ test("it works with webpack and a custom name", async (t) => {
                         rej(closeErr);
                         return;
                     }
-                    t.truthy(content.includes('.h2,{children:"Hello MDX"})'));
-                    t.truthy(content.includes('.li,{children:"First item"})'));
-                    t.truthy(content.includes('.li,{children:"Second item"})'));
-                    t.truthy(
+                    assert.ok(content.includes('.h2,{children:"Hello MDX"})'));
+                    assert.ok(content.includes('.li,{children:"First item"})'));
+                    assert.ok(
+                        content.includes('.li,{children:"Second item"})'),
+                    );
+                    assert.ok(
                         content.includes(
                             '.Button,{variant:"blue",label:"Label"})',
                         ),
                     );
-                    t.truthy(content.includes("otherName"));
-                    t.truthy(
+                    assert.ok(content.includes("otherName"));
+                    assert.ok(
                         content.includes(
                             '[{module:"./elements",imports:[{kind:"named",imported:"Tabs",local:"Tabs",value:t.Tabs},{kind:"named",imported:"Button",local:"ButtonElement",value:t.Button}]}]',
                         ),
@@ -173,7 +178,7 @@ test("it works with webpack and a custom name", async (t) => {
     }
 });
 
-test("it works with webpack and require.resolve", async (t) => {
+test("it works with webpack and require.resolve", async () => {
     const tmpFolder = await makeTemporary();
     try {
         const compiler = webpack({
@@ -226,16 +231,18 @@ test("it works with webpack and require.resolve", async (t) => {
                         rej(closeErr);
                         return;
                     }
-                    t.truthy(content.includes('.h2,{children:"Hello MDX"})'));
-                    t.truthy(content.includes('.li,{children:"First item"})'));
-                    t.truthy(content.includes('.li,{children:"Second item"})'));
-                    t.truthy(
+                    assert.ok(content.includes('.h2,{children:"Hello MDX"})'));
+                    assert.ok(content.includes('.li,{children:"First item"})'));
+                    assert.ok(
+                        content.includes('.li,{children:"Second item"})'),
+                    );
+                    assert.ok(
                         content.includes(
                             '.Button,{variant:"blue",label:"Label"})',
                         ),
                     );
-                    t.truthy(content.includes("importStatements"));
-                    t.truthy(
+                    assert.ok(content.includes("importStatements"));
+                    assert.ok(
                         content.includes(
                             '[{module:"./elements",imports:[{kind:"named",imported:"Tabs",local:"Tabs",value:t.Tabs},{kind:"named",imported:"Button",local:"ButtonElement",value:t.Button}]}]',
                         ),

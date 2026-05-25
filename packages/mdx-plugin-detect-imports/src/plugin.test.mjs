@@ -1,6 +1,9 @@
+import test from "node:test";
+import assert from "node:assert/strict";
 import { compile } from "@mdx-js/mdx";
 import plugin from "@blocz/mdx-plugin-detect-imports";
-import test from "ava";
+
+import { snapshotInjectsRightImportStatements } from "./plugin.test.snap.mjs";
 
 const mdxText = `
 import hello, { useFunction } from '@blocz/lib';
@@ -81,22 +84,22 @@ export const importStatements = [{
 }];
 `;
 
-test("injects the right importStatements variable", async (t) => {
+test("injects the right importStatements variable", async () => {
     const jsx = (
         await compile(mdxText, {
             remarkPlugins: [plugin],
         })
     ).value;
-    t.snapshot(jsx);
-    t.truthy(jsx.includes(defaultImportStatements));
+    assert.equal(jsx, snapshotInjectsRightImportStatements);
+    assert.ok(jsx.includes(defaultImportStatements));
 });
-test("allows for otherNames than 'importStatements'", async (t) => {
+test("allows for otherNames than 'importStatements'", async () => {
     const jsx = (
         await compile(mdxText, {
             remarkPlugins: [[plugin, { exportName: "otherName" }]],
         })
     ).value;
-    t.truthy(
+    assert.ok(
         jsx.includes(
             defaultImportStatements.replace("importStatements", "otherName"),
         ),

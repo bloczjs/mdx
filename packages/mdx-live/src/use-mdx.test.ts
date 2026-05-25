@@ -1,4 +1,5 @@
-import test from "ava";
+import test from "node:test";
+import assert from "node:assert/strict";
 import { GlobalRegistrator } from "@happy-dom/global-registrator";
 
 GlobalRegistrator.register();
@@ -7,8 +8,9 @@ import { renderHook, waitFor } from "@testing-library/react";
 
 import { useMDX } from "./use-mdx.js";
 import type { UseMDXOut, ResolveImport } from "./use-mdx";
+import { snapshotDetectsImports } from "./use-mdx.test.snap.js";
 
-test("it properly detects imports", async (t) => {
+test("it properly detects imports", async () => {
     const resolveImport: ResolveImport = async (option) => {
         if (option.kind === "named") {
             return `named-${option.variable}`;
@@ -37,25 +39,22 @@ export const h = 1;
         }
     });
 
-    t.deepEqual(
-        {
-            A: "default",
-            B: "named-B",
-            D: "named-C",
-            E: "namespace",
-            F: "default",
-            G: "default",
-        },
-        result.current.resolvedImports,
-    );
+    assert.deepEqual(result.current.resolvedImports, {
+        A: "default",
+        B: "named-B",
+        D: "named-C",
+        E: "namespace",
+        F: "default",
+        G: "default",
+    });
 
-    t.snapshot(result.current.text, "Text result");
-    t.true(result.current.text.includes("\nconst h = 1;\n"));
+    assert.equal(result.current.text, snapshotDetectsImports);
+    assert.ok(result.current.text.includes("\nconst h = 1;\n"));
 
-    t.is(3, renderCount); // 3 because: initial, compilation of the file, resolving of imports
+    assert.equal(renderCount, 3); // 3 because: initial, compilation of the file, resolving of imports
 });
 
-test("it uses the most up-to-date resolveImport", async (t) => {
+test("it uses the most up-to-date resolveImport", async () => {
     let resolveImport = async () => {
         return "initial";
     };
@@ -76,13 +75,13 @@ import A from 'a';
         }
     });
 
-    t.deepEqual({ A: "initial" }, result.current.resolvedImports);
+    assert.deepEqual(result.current.resolvedImports, { A: "initial" });
 
     resolveImport = async () => {
         return "updated";
     };
     rerender();
-    t.is(4, renderCount);
+    assert.equal(renderCount, 4);
     const initialValue = result.current.resolvedImports;
     await waitFor(() => {
         if (result.current.resolvedImports === initialValue) {
@@ -90,16 +89,13 @@ import A from 'a';
         }
     });
 
-    t.deepEqual(
-        {
-            A: "updated",
-        },
-        result.current.resolvedImports,
-    );
-    t.is(5, renderCount); // switches from 4 to 5 so no useless re-renders
+    assert.deepEqual(result.current.resolvedImports, {
+        A: "updated",
+    });
+    assert.equal(renderCount, 5); // switches from 4 to 5 so no useless re-renders
 });
 
-test("it doesn’t recompile at each change, but in batches", async (t) => {
+test("it doesn’t recompile at each change, but in batches", async () => {
     const allResults: UseMDXOut[] = [];
     const { result, rerender } = renderHook(
         ({ code }) => {
@@ -122,7 +118,7 @@ test("it doesn’t recompile at each change, but in batches", async (t) => {
 
     rerender({ code: `export const D = 'D';` });
 
-    t.is(4, allResults.length);
+    assert.equal(allResults.length, 4);
 
     await waitFor(() => {
         if (!result.current.text.includes("const D = 'D';")) {
@@ -130,8 +126,8 @@ test("it doesn’t recompile at each change, but in batches", async (t) => {
         }
     });
 
-    t.is(6, allResults.length); // only 2 renders were added: the resolutions of the scope (twice), full render of A & B aren’t generating re-renders
-    t.is("", allResults[3].text);
-    t.true(allResults[4].text.includes("const D = 'D'"));
-    t.true(allResults[5].text.includes("const D = 'D'"));
+    assert.equal(allResults.length, 6); // only 2 renders were added: the resolutions of the scope (twice), full render of A & B aren’t generating re-renders
+    assert.equal(allResults[3].text, "");
+    assert.ok(allResults[4].text.includes("const D = 'D'"));
+    assert.ok(allResults[5].text.includes("const D = 'D'"));
 });

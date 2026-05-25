@@ -7,15 +7,12 @@
     "sideEffects": false,
     "type": "commonjs",
     "scripts": {
-        "test": "ava"
+        "test": "node --test --test-reporter spec"
     },
     "dependencies": {
         "@blocz/mdx-plugin-detect-imports": "workspace:*",
         "@mdx-js/loader": "^3.1.1",
         "react": "^19.2.6",
         "webpack": "^5.107.1"
-    },
-    "devDependencies": {
-        "ava": "^8.0.1"
     }
 }

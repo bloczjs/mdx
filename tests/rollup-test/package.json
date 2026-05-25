@@ -7,7 +7,7 @@
     "sideEffects": false,
     "type": "commonjs",
     "scripts": {
-        "test": "ava"
+        "test": "node --test --test-reporter spec"
     },
     "dependencies": {
         "@blocz/mdx-plugin-detect-imports": "workspace:*",
@@ -15,8 +15,5 @@
         "acorn": "^8.16.0",
         "react": "^19.2.6",
         "rollup": "^4.60.4"
-    },
-    "devDependencies": {
-        "ava": "^8.0.1"
     }
 }

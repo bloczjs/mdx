@@ -29,7 +29,7 @@
         "access": "public"
     },
     "scripts": {
-        "test": "ava"
+        "test": "node --test --test-reporter spec"
     },
     "dependencies": {
         "acorn": "^8.16.0",
@@ -37,7 +37,6 @@
         "unist-util-select": "^5.1.0"
     },
     "devDependencies": {
-        "@mdx-js/mdx": "^3.1.1",
-        "ava": "^8.0.1"
+        "@mdx-js/mdx": "^3.1.1"
     }
 }
