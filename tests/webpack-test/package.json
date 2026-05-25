@@ -7,7 +7,7 @@
     "sideEffects": false,
     "type": "commonjs",
     "scripts": {
-        "test": "node --test"
+        "test": "node --test --test-reporter spec"
     },
     "dependencies": {
         "@blocz/mdx-plugin-detect-imports": "workspace:*",
