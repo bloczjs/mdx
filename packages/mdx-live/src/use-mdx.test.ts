@@ -8,6 +8,7 @@ import { renderHook, waitFor } from "@testing-library/react";
 
 import { useMDX } from "./use-mdx.js";
 import type { UseMDXOut, ResolveImport } from "./use-mdx";
+import { snapshotDetectsImports } from "./use-mdx.test.snap.js";
 
 test("it properly detects imports", async () => {
     const resolveImport: ResolveImport = async (option) => {
@@ -47,6 +48,7 @@ export const h = 1;
         G: "default",
     });
 
+    assert.equal(result.current.text, snapshotDetectsImports);
     assert.ok(result.current.text.includes("\nconst h = 1;\n"));
 
     assert.equal(renderCount, 3); // 3 because: initial, compilation of the file, resolving of imports
