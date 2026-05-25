@@ -1,8 +1,9 @@
-const { default: test } = require("ava");
+const test = require("node:test");
+const assert = require("node:assert/strict");
 
-test("@blocz/mdx-live works with CJS", async (t) => {
+test("@blocz/mdx-live works with CJS", async () => {
     const { MDX, useMDX } = await import("@blocz/mdx-live");
 
-    t.truthy(MDX);
-    t.truthy(useMDX);
+    assert.ok(MDX);
+    assert.ok(useMDX);
 });

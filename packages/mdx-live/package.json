@@ -32,7 +32,7 @@
     },
     "scripts": {
         "build": "rm -rf lib/ && microbundle -f modern,esm",
-        "test": "ava"
+        "test": "node --loader=ts-node/esm/transpile-only --test 'src/*.test.*'"
     },
     "dependencies": {
         "@types/mdx": "^2.0.3",
@@ -50,22 +50,10 @@
         "@testing-library/react": "^16.3.2",
         "@types/estree": "^1.0.9",
         "@types/react": "19.2.15",
-        "ava": "^8.0.1",
         "microbundle": "^0.15.0",
         "react": "^19.2.6",
         "react-dom": "^19.2.6",
         "ts-node": "^10.9.1",
         "vfile": "^6.0.3"
-    },
-    "ava": {
-        "extensions": [
-            "ts",
-            "tsx",
-            "mjs",
-            "cjs"
-        ],
-        "nodeArguments": [
-            "--loader=ts-node/esm/transpile-only"
-        ]
     }
 }
