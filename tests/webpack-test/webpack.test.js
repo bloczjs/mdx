@@ -72,7 +72,9 @@ test("it works with webpack", async () => {
                     }
                     assert.ok(content.includes('.h2,{children:"Hello MDX"})'));
                     assert.ok(content.includes('.li,{children:"First item"})'));
-                    assert.ok(content.includes('.li,{children:"Second item"})'));
+                    assert.ok(
+                        content.includes('.li,{children:"Second item"})'),
+                    );
                     assert.ok(
                         content.includes(
                             '.Button,{variant:"blue",label:"Label"})',
@@ -153,7 +155,9 @@ test("it works with webpack and a custom name", async () => {
                     }
                     assert.ok(content.includes('.h2,{children:"Hello MDX"})'));
                     assert.ok(content.includes('.li,{children:"First item"})'));
-                    assert.ok(content.includes('.li,{children:"Second item"})'));
+                    assert.ok(
+                        content.includes('.li,{children:"Second item"})'),
+                    );
                     assert.ok(
                         content.includes(
                             '.Button,{variant:"blue",label:"Label"})',
@@ -229,7 +233,9 @@ test("it works with webpack and require.resolve", async () => {
                     }
                     assert.ok(content.includes('.h2,{children:"Hello MDX"})'));
                     assert.ok(content.includes('.li,{children:"First item"})'));
-                    assert.ok(content.includes('.li,{children:"Second item"})'));
+                    assert.ok(
+                        content.includes('.li,{children:"Second item"})'),
+                    );
                     assert.ok(
                         content.includes(
                             '.Button,{variant:"blue",label:"Label"})',

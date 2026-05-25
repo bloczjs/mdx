@@ -25,7 +25,9 @@ test("it works with esbuild", async () => {
     assert.ok(content.includes('.h2,{children:"Hello MDX"})'));
     assert.ok(content.includes('.li,{children:"First item"})'));
     assert.ok(content.includes('.li,{children:"Second item"})'));
-    assert.ok(content.includes('ButtonElement,{variant:"blue",label:"Label"})'));
+    assert.ok(
+        content.includes('ButtonElement,{variant:"blue",label:"Label"})'),
+    );
     assert.ok(
         content.includes(
             `const importStatements=[{module:"./elements",imports:[{kind:"named",imported:"Tabs",local:"Tabs",value:Tabs},{kind:"named",imported:"Button",local:"ButtonElement",value:ButtonElement}]}];`,
@@ -54,7 +56,9 @@ test("it works with esbuild and a custom name", async () => {
     assert.ok(content.includes('.h2,{children:"Hello MDX"})'));
     assert.ok(content.includes('.li,{children:"First item"})'));
     assert.ok(content.includes('.li,{children:"Second item"})'));
-    assert.ok(content.includes('ButtonElement,{variant:"blue",label:"Label"})'));
+    assert.ok(
+        content.includes('ButtonElement,{variant:"blue",label:"Label"})'),
+    );
     assert.ok(
         content.includes(
             `const otherName=[{module:"./elements",imports:[{kind:"named",imported:"Tabs",local:"Tabs",value:Tabs},{kind:"named",imported:"Button",local:"ButtonElement",value:ButtonElement}]}];`,
