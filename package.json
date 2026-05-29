@@ -7,9 +7,9 @@
     "private": true,
     "volta": {
         "node": "22.22.2",
-        "pnpm": "11.0.9"
+        "pnpm": "11.5.0"
     },
-    "packageManager": "pnpm@11.0.9",
+    "packageManager": "pnpm@11.5.0",
     "scripts": {
         "test": "pnpm -r test",
         "build": "pnpm -r build",
