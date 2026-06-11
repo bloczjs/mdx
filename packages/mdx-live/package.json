@@ -35,7 +35,7 @@
         "test": "node --experimental-loader=ts-node/esm/transpile-only --test --test-reporter spec 'src/*.test.{ts,tsx,mjs,cjs}'"
     },
     "dependencies": {
-        "@types/mdx": "^2.0.3",
+        "@types/mdx": "^2.0.14",
         "unist-util-select": "^5.1.0"
     },
     "peerDependencies": {
