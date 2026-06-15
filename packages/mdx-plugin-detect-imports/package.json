@@ -13,7 +13,15 @@
         },
         "./package.json": "./package.json"
     },
-    "repository": "git@github.com:bloczjs/mdx.git",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/bloczjs/mdx.git",
+        "directory": "packages/mdx-plugin-detect-imports"
+    },
+    "bugs": {
+        "url": "https://github.com/bloczjs/mdx/issues"
+    },
+    "homepage": "https://github.com/bloczjs/mdx/tree/main/packages/mdx-plugin-detect-imports",
     "author": "Ayc0 <ayc0.benj@gmail.com>",
     "license": "MIT",
     "sideEffects": false,
