@@ -12,7 +12,7 @@
     "dependencies": {
         "@blocz/mdx-plugin-detect-imports": "workspace:*",
         "@mdx-js/esbuild": "^3.1.1",
-        "acorn": "^8.16.0",
+        "acorn": "^8.17.0",
         "esbuild": "^0.28.1",
         "react": "^19.2.7"
     }
