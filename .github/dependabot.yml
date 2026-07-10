@@ -18,6 +18,17 @@ updates:
                   - "react-dom"
                   - "@types/react"
                   - "@types/react-dom"
+          tooling:
+              patterns:
+                  - "prettier"
+          integrations:
+              patterns:
+                  - "@mdx-js/esbuild"
+                  - "esbuild"
+                  - "@mdx-js/rollup"
+                  - "rollup"
+                  - "@mdx-js/loader"
+                  - "webpack"
 
     - package-ecosystem: "github-actions"
       directory: "/"
