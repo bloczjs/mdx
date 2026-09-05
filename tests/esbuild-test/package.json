@@ -13,7 +13,7 @@
         "@blocz/mdx-plugin-detect-imports": "workspace:*",
         "@mdx-js/esbuild": "^3.1.1",
         "acorn": "^8.17.0",
-        "esbuild": "^0.28.1",
+        "esbuild": "^0.28.2",
         "react": "^19.2.8"
     }
 }
