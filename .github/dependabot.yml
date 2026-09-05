@@ -21,6 +21,9 @@ updates:
           tooling:
               patterns:
                   - "prettier"
+                  - "@happy-dom/global-registrator"
+                  - "@testing-library/react"
+                  - "acorn"
           integrations:
               patterns:
                   - "@mdx-js/esbuild"
