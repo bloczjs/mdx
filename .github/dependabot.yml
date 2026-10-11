@@ -22,7 +22,7 @@ updates:
               patterns:
                   - "prettier"
                   - "@happy-dom/global-registrator"
-                  - "@testing-library/react"
+                  - "@testing-library/*"
                   - "acorn"
           integrations:
               patterns:
