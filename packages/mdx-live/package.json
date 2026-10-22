@@ -51,8 +51,8 @@
         "@types/estree": "^1.0.9",
         "@types/react": "19.3.0",
         "microbundle": "^0.15.0",
-        "react": "^19.3.0",
-        "react-dom": "^19.3.0",
+        "react": "^19.3.1",
+        "react-dom": "^19.3.1",
         "ts-node": "^10.9.1",
         "vfile": "^6.0.3"
     }
